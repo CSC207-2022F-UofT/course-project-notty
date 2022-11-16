@@ -1,23 +1,25 @@
 package notes;
 
 import gateway.DBConnection;
-import notes.Menu;
+import gateway.NoteDataAccess;
+
 import javax.swing.*;
-import java.awt.*;
 
 public class Main {
+    //data access level (connection)
     static DBConnection database;
+    //data access level (note operations)
+    static NoteDataAccess noteDataAccess;
+    //use case interaction
+    static EditCreateUseCase editCreateUseCase;
     static JFrame mainFrame;
     private static JLayeredPane lp;
-    public static int mainWidth = 700;
-    public static int mainHeight = 500;
-    static Menu menu;
-    static NewNotePanel nNotePanel;
-    static NotePanel notePanel;
-
-    public static void main(String[] args) {
-        mainFrame=new JFrame();
-        lp=new JLayeredPane();
+    public final static int mainWidth = 340;
+    public final static int mainHeight = 500;
+    static ListNotesPanel listNotes;
+    static EditCreateNotePanel nNotePanel;
+    public static void init()
+    {
         mainFrame.setTitle("Notty");
         mainFrame.setSize(mainWidth,mainHeight);
         mainFrame.setVisible(true);
@@ -25,13 +27,22 @@ public class Main {
         mainFrame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         mainFrame.add(lp);
         lp.setLayout(null);
-        menu=new Menu(true);
-        nNotePanel=new NewNotePanel(false);
-        database=new DBConnection();
-        nNotePanel.setBlocks(Note.loadDatas("notes"));
-        notePanel=new NotePanel(false);
-        lp.add(menu.getPanel(),1);
+        nNotePanel.setBlocks(noteDataAccess.getAll());
+        lp.add(listNotes.getPanel(),1);
         lp.add(nNotePanel.getPanel(),2);
-        // lp.add(notePanel.getPanel(), 3);
+    }
+    public static void instanceInit()
+    {
+        mainFrame=new JFrame();
+        lp=new JLayeredPane();
+        listNotes =new ListNotesPanel(true);
+        noteDataAccess = new NoteDataAccess();
+        editCreateUseCase = new EditCreateUseCase();
+        database=new DBConnection();
+        nNotePanel=new EditCreateNotePanel(false, noteDataAccess, editCreateUseCase);
+    }
+    public static void main(String[] args) {
+        instanceInit();
+        init();
     }
 }

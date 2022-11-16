@@ -3,7 +3,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class Menu implements ActionListener{
+public class ListNotesPanel implements ActionListener{
     private JPanel panel;
     private JPanel noteBlockPanel;
     private JScrollPane sp;
@@ -35,18 +35,15 @@ public class Menu implements ActionListener{
         buttons[0].addActionListener(this);
     }
 
-    public Menu(boolean visibility){
+    public ListNotesPanel(boolean visibility){
         init();
         panel.setVisible(visibility);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().equals(buttons[0])){//new Note Button
-            panel.setVisible(false);
-            Main.nNotePanel.getPanel().setVisible(true);
-        }
-
+        panel.setVisible(false);
+        Main.nNotePanel.getPanel().setVisible(true);
     }
     public JPanel getPanel(){
         return this.panel;
