@@ -10,11 +10,9 @@ import java.util.ArrayList;
 public class EditCreateNotePanel{
 
     //data access layer
-    public static INoteDataAccess noteDataAccess;
     private ActionListener actionListener;
     public static JPanel panel;
     public static Note block;
-    public static ArrayList<Note> blocks;
     public static JButton[] buttons;
     public static int buttonSize=2;
     public static JTextField[] fields;
@@ -34,7 +32,6 @@ public class EditCreateNotePanel{
         panel.setLayout(null);
         buttons=new JButton[buttonSize];
         fields=new JTextField[fieldSize];
-        blocks=new ArrayList<Note>();
     }
     public void addTextField(String prefilled, javax.swing.JPanel panel,javax.swing.JTextField[] fields,int index,int x,int y,int width,int height ){
         fields[index]=new javax.swing.JTextField(prefilled);
@@ -49,10 +46,9 @@ public class EditCreateNotePanel{
         button[index].addActionListener(al);
         panel.revalidate();
     }
-    public EditCreateNotePanel(boolean visibility, INoteDataAccess noteDataAccess, ActionListener actionListener){
+    public EditCreateNotePanel(boolean visibility, ActionListener actionListener){
         init();
         this.actionListener = actionListener;
-        EditCreateNotePanel.noteDataAccess = noteDataAccess;
         panel.setVisible(visibility);
         JLabel label=new JLabel("Title");
         panel.add(label);
@@ -75,48 +71,6 @@ public class EditCreateNotePanel{
         filledTitle = "";
     }
 
-
-    public void setBlocks(ArrayList<Note> blocks) {
-        EditCreateNotePanel.blocks =blocks;
-        for (int i = 0; i< EditCreateNotePanel.blocks.size(); ++i)
-        {
-            addNote( blocks.get(i).getTitle(), blocks.get(i).getDescription() );
-        }
-    }
-    public static void addNote(String title, String desc)
-    {
-        JTextField field = new JTextField();
-        field.setText(title);
-        field.setEditable(false);
-        field.setVisible(true);
-        Main.listNotes.getNoteBlockPanel().add(field);
-        JTextField field1 = new JTextField();
-        field1.setText(desc);
-        field1.setEditable(false);
-        field1.setVisible(true);
-        Main.listNotes.getNoteBlockPanel().add(field1);
-        JButton button = new JButton("Edit");
-
-        button.setVisible(true);
-        Main.listNotes.getNoteBlockPanel().add(button);
-        JButton button1 = new JButton("Delete");
-        button1.setVisible(true);
-        button.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                removeNoteFromView(field,field1,button,button1,title);
-                Main.nNotePanel.setFilledDes(desc);
-                Main.nNotePanel.setFilledTitle(title);
-                Main.listNotes.getPanel().setVisible(false);
-                Main.nNotePanel.getPanel().setVisible(true);
-            }
-        });
-        button1.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                removeNoteFromView(field,field1,button,button1,title);
-            }
-        });
-        Main.listNotes.getNoteBlockPanel().add(button1);
-    }
     public JPanel getPanel() {
         fields[1].setText(filledDes);
         fields[0].setText(filledTitle);
@@ -132,15 +86,5 @@ public class EditCreateNotePanel{
         filledTitle = "";
         return panel;
     }
-    public static void removeNoteFromView(JTextField field, JTextField field1, JButton button, JButton button1, String title)
-    {
-        Main.listNotes.getNoteBlockPanel().remove(field);
-        Main.listNotes.getNoteBlockPanel().remove(field1);
-        Main.listNotes.getNoteBlockPanel().remove(button);
-        Main.listNotes.getNoteBlockPanel().remove(button1);
-        noteDataAccess.delete(title);
-        blocks.removeIf(note -> note.getTitle().equals(title));
-        Main.listNotes.getNoteBlockPanel().revalidate();
-        Main.listNotes.getNoteBlockPanel().repaint();
-    }
+
 }

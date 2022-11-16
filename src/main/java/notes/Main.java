@@ -12,6 +12,7 @@ public class Main {
     static NoteDataAccess noteDataAccess;
     //use case interaction
     static EditCreateUseCase editCreateUseCase;
+    static NewNoteUseCase newNoteUseCase;
     static JFrame mainFrame;
     private static JLayeredPane lp;
     public final static int mainWidth = 340;
@@ -27,7 +28,7 @@ public class Main {
         mainFrame.setDefaultCloseOperation(javax.swing.JFrame.EXIT_ON_CLOSE);
         mainFrame.add(lp);
         lp.setLayout(null);
-        nNotePanel.setBlocks(noteDataAccess.getAll());
+        listNotes.setBlocks(noteDataAccess.getAll());
         lp.add(listNotes.getPanel(),1);
         lp.add(nNotePanel.getPanel(),2);
     }
@@ -35,11 +36,12 @@ public class Main {
     {
         mainFrame=new JFrame();
         lp=new JLayeredPane();
-        listNotes =new ListNotesPanel(true);
         noteDataAccess = new NoteDataAccess();
         editCreateUseCase = new EditCreateUseCase();
+        newNoteUseCase = new NewNoteUseCase();
         database=new DBConnection();
-        nNotePanel=new EditCreateNotePanel(false, noteDataAccess, editCreateUseCase);
+        listNotes =new ListNotesPanel(true, noteDataAccess, newNoteUseCase);
+        nNotePanel=new EditCreateNotePanel(false, editCreateUseCase);
     }
     public static void main(String[] args) {
         instanceInit();

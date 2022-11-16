@@ -1,22 +1,86 @@
 package notes;
+import gateway.INoteDataAccess;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class ListNotesPanel implements ActionListener{
-    private JPanel panel;
+import java.util.ArrayList;
+
+public class ListNotesPanel {
+    public static JPanel panel;
     private JPanel noteBlockPanel;
     private JScrollPane sp;
     private JButton[] buttons;
     private int buttonsSize=1;
     private JLabel[] labels;
     private int labelSize=1;
+    public static INoteDataAccess noteDataAccess;
+    public ActionListener actionListener;
+    public static ArrayList<Note> blocks;
+    public ListNotesPanel(boolean visibility, INoteDataAccess noteDataAccess, ActionListener actionListener){
+        this.actionListener = actionListener;
+        init();
+        panel.setVisible(visibility);
+        ListNotesPanel.noteDataAccess = noteDataAccess;
+    }
+    public void setBlocks(ArrayList<Note> blocks) {
+        ListNotesPanel.blocks =blocks;
+        for (int i = 0; i< ListNotesPanel.blocks.size(); ++i)
+        {
+            addNote( blocks.get(i).getTitle(), blocks.get(i).getDescription() );
+        }
+    }
+    public static void addNote(String title, String desc)
+    {
+        JTextField field = new JTextField();
+        field.setText(title);
+        field.setEditable(false);
+        field.setVisible(true);
+        Main.listNotes.getNoteBlockPanel().add(field);
+        JTextField field1 = new JTextField();
+        field1.setText(desc);
+        field1.setEditable(false);
+        field1.setVisible(true);
+        Main.listNotes.getNoteBlockPanel().add(field1);
+        JButton button = new JButton("Edit");
 
+        button.setVisible(true);
+        Main.listNotes.getNoteBlockPanel().add(button);
+        JButton button1 = new JButton("Delete");
+        button1.setVisible(true);
+        button.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                removeNoteFromView(field,field1,button,button1,title);
+                Main.nNotePanel.setFilledDes(desc);
+                Main.nNotePanel.setFilledTitle(title);
+                Main.listNotes.getPanel().setVisible(false);
+                Main.nNotePanel.getPanel().setVisible(true);
+            }
+        });
+        button1.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                removeNoteFromView(field,field1,button,button1,title);
+            }
+        });
+        Main.listNotes.getNoteBlockPanel().add(button1);
+    }
+    public static void removeNoteFromView(JTextField field, JTextField field1, JButton button, JButton button1, String title)
+    {
+        Main.listNotes.getNoteBlockPanel().remove(field);
+        Main.listNotes.getNoteBlockPanel().remove(field1);
+        Main.listNotes.getNoteBlockPanel().remove(button);
+        Main.listNotes.getNoteBlockPanel().remove(button1);
+        noteDataAccess.delete(title);
+        blocks.removeIf(note -> note.getTitle().equals(title));
+        Main.listNotes.getNoteBlockPanel().revalidate();
+        Main.listNotes.getNoteBlockPanel().repaint();
+    }
     public void init(){
+        blocks=new ArrayList<Note>();
         panel=new JPanel();
         panel.setSize(new Dimension(Main.mainWidth, Main.mainHeight));
         panel.setLayout(null);
-        //NOTE PANEL
         noteBlockPanel=new JPanel();
         noteBlockPanel.setLayout(new BoxLayout(noteBlockPanel, BoxLayout.Y_AXIS));
         noteBlockPanel.setVisible(true);
@@ -32,19 +96,9 @@ public class ListNotesPanel implements ActionListener{
         buttons[0].setLayout(null);
         buttons[0].setVisible(true);
         buttons[0].setBounds(19, 19, 117, 42);
-        buttons[0].addActionListener(this);
+        buttons[0].addActionListener(this.actionListener);
     }
 
-    public ListNotesPanel(boolean visibility){
-        init();
-        panel.setVisible(visibility);
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        panel.setVisible(false);
-        Main.nNotePanel.getPanel().setVisible(true);
-    }
     public JPanel getPanel(){
         return this.panel;
     }
