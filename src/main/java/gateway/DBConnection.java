@@ -49,7 +49,7 @@ public class DBConnection {
         String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
                 + "id integer PRIMARY KEY,\n"
                 + "title text NOT NULL,\n"
-                + "date text NOT NULL\n"
+                + "datee text NOT NULL\n"
                 + ");";
         try {
             conn= connect();
