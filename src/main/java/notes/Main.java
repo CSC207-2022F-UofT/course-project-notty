@@ -13,6 +13,7 @@ public class Main {
     //use case interaction
     static EditCreateUseCase editCreateUseCase;
     static NewNoteUseCase newNoteUseCase;
+    static PinUseCase newPinUseCase;
     static JFrame mainFrame;
     private static JLayeredPane lp;
     public final static int mainWidth = 340;
@@ -30,7 +31,7 @@ public class Main {
         lp.setLayout(null);
         listNotes.setBlocks(noteDataAccess.getAll());
         lp.add(listNotes.getPanel(),1);
-        lp.add(nNotePanel.getPanel(),2);
+        lp.add(nNotePanel.getPanel(), 2);
     }
     public static void instanceInit()
     {

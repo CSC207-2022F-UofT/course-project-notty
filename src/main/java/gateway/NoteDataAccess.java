@@ -10,7 +10,7 @@ public class NoteDataAccess implements INoteDataAccess{
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "INSERT INTO notes(title,description) VALUES(?,?)";
+        String sql= "INSERT INTO notes(title, description, isPinned, dateTime) VALUES(?, ?, ?, ?)";
 
         try {
             conn= DBConnection.connect();
@@ -18,6 +18,8 @@ public class NoteDataAccess implements INoteDataAccess{
 
             pstmt.setString(1, note.getTitle());
             pstmt.setString(2, note.getDescription());
+            pstmt.setBoolean(3, note.isPinned());
+            pstmt.setString(4, note.getDateTime());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -89,7 +91,7 @@ public class NoteDataAccess implements INoteDataAccess{
         Connection conn=null;
         Statement st=null;
         ResultSet rs=null;
-        String sql= "SELECT id, title, description FROM notes";
+        String sql = "SELECT id, title, description FROM notes";
         try {
             conn=DBConnection.connect();
             st=conn.createStatement();
@@ -112,4 +114,31 @@ public class NoteDataAccess implements INoteDataAccess{
         return blocks;
     }
 
+    public void pin(Note note) {
+        Connection conn=null;
+        PreparedStatement pstmt=null;
+        String sql= "UPDATE notes SET " +
+                "title = ?," +
+                "isPinned = ?," +
+                " WHERE title = ?";
+
+        try {
+            conn= DBConnection.connect();
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1, note.getTitle());
+            pstmt.setBoolean(2, note.pin());
+            pstmt.setString(3, note.getTitle());
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                if(pstmt!=null) pstmt.close();
+                if(conn!=null)  conn.close();
+            } catch (SQLException e) {
+                e.getMessage();
+            }
+        }
+    }
 }
