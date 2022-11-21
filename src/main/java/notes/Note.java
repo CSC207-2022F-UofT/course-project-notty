@@ -1,58 +1,25 @@
 package notes;
-
 import gateway.DBConnection;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import javax.swing.*;
+import java.awt.*;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class Note {
-    public void insert(String title, String description) {
-        Connection conn=null;
-        PreparedStatement pstmt=null;
-        String sql= "INSERT INTO notes(title,description) VALUES(?,?)";
-
-        try {
-            conn= DBConnection.connect();
-            pstmt=conn.prepareStatement(sql);
-
-            pstmt.setString(1, title);
-            pstmt.setString(2, description);
-
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }finally {
-            try {
-                if(pstmt!=null) pstmt.close();
-                if(conn!=null)  conn.close();
-            } catch (SQLException e) {
-                e.getMessage();
-            }
-        }
+    private String title;
+    private String description;
+    public Note(String title, String description)
+    {
+        this.title = title;
+        this.description = description;
     }
 
-    public void deleteNote(String title) {
-        Connection conn=null;
-        PreparedStatement pstmt=null;
-        String sql= "DELETE FROM notes WHERE title=?";
-
-        try {
-            conn= DBConnection.connect();
-            pstmt=conn.prepareStatement(sql);
-
-            pstmt.setString(1, title);
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }finally {
-            try {
-                if(pstmt!=null) pstmt.close();
-                if(conn!=null)  conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+    public String getTitle() {
+        return title;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
 }
