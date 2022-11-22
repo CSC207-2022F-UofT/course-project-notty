@@ -28,7 +28,7 @@ public class ListNotesPanel {
         ListNotesPanel.blocks =blocks;
         for (int i = 0; i< ListNotesPanel.blocks.size(); ++i)
         {
-            addNote( blocks.get(i).getTitle(), blocks.get(i).getDescription() );
+            addNote( blocks.get(i).getTitle(), blocks.get(i).getDescription());
         }
     }
     public static void addNote(String title, String desc)
@@ -49,9 +49,12 @@ public class ListNotesPanel {
         Main.listNotes.getNoteBlockPanel().add(button);
         JButton button1 = new JButton("Delete");
         button1.setVisible(true);
+
+        JButton button2 = new JButton("Label");
+        button2.setVisible(true);
         button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                removeNoteFromView(field,field1,button,button1,title);
+                removeNoteFromView(field,field1,button,button1,button2,title);
                 Main.nNotePanel.setFilledDes(desc);
                 Main.nNotePanel.setFilledTitle(title);
                 Main.listNotes.getPanel().setVisible(false);
@@ -60,17 +63,42 @@ public class ListNotesPanel {
         });
         button1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                removeNoteFromView(field,field1,button,button1,title);
+                removeNoteFromView(field,field1,button,button1,button2,title);
             }
         });
         Main.listNotes.getNoteBlockPanel().add(button1);
+        button2.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                removeNoteFromView(field,field1,button,button1,button2,title);
+                Main.listNotes.getPanel().setVisible(false);
+                Main.lLabelPanel.getPanel().setVisible(true);
+            }
+        });
+        Main.listNotes.getNoteBlockPanel().add(button2);
     }
-    public static void removeNoteFromView(JTextField field, JTextField field1, JButton button, JButton button1, String title)
+
+    public static void addLabel(String label)
+    {
+        JButton button2 = new JButton("Label");
+        button2.setVisible(true);
+        button2.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e) {
+                Main.lLabelPanel.setFilledLabel(label);
+                Main.listNotes.getPanel().setVisible(false);
+                Main.lLabelPanel.getPanel().setVisible(true);
+            }
+        });
+        Main.listNotes.getNoteBlockPanel().add(button2);
+    }
+
+
+    public static void removeNoteFromView(JTextField field, JTextField field1, JButton button, JButton button1, JButton button2, String title)
     {
         Main.listNotes.getNoteBlockPanel().remove(field);
         Main.listNotes.getNoteBlockPanel().remove(field1);
         Main.listNotes.getNoteBlockPanel().remove(button);
         Main.listNotes.getNoteBlockPanel().remove(button1);
+        Main.listNotes.getNoteBlockPanel().remove(button2);
         noteDataAccess.delete(title);
         blocks.removeIf(note -> note.getTitle().equals(title));
         Main.listNotes.getNoteBlockPanel().revalidate();
