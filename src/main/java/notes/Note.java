@@ -1,4 +1,5 @@
 package notes;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Note implements Pinnable{
@@ -12,6 +13,13 @@ public class Note implements Pinnable{
         this.description = description;
         this.isPinned = false;
         this.date = LocalDateTime.now();
+    }
+
+    public Note(String title, String description, boolean isPinned, String dateTime) {
+        this.title = title;
+        this.description = description;
+        this.isPinned = isPinned;
+        this.date = LocalDateTime.parse(dateTime);
     }
 
     public String getTitle() {

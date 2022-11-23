@@ -6,15 +6,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
 
 public class ListNotesPanel {
     public static JPanel panel;
     private JPanel noteBlockPanel;
     private JScrollPane sp;
-    private JButton[] buttons;
-    private int buttonsSize=1;
+    public static JButton[] buttons;
+    private int buttonsSize=2;
     private JLabel[] labels;
     private int labelSize=1;
     public static INoteDataAccess noteDataAccess;
@@ -28,19 +26,20 @@ public class ListNotesPanel {
     }
     public void setBlocks(ArrayList<Note> blocks) {
         ListNotesPanel.blocks = blocks;
-        for (int i = 0; i< ListNotesPanel.blocks.size(); ++i)
+        for (int i = 0; i< ListNotesPanel.blocks.size(); i++)
         {
             addNote( blocks.get(i).getTitle(), blocks.get(i).getDescription(), blocks.get(i).isPinned() );
         }
+
+//        blocks.sort(new Comparator<Note>() {
+//            @Override
+//            public int compare(Note n1, Note n2) {
+//                return n1.getDateTime().compareTo(n2.getDateTime());
+//            }
+//        });
     }
-    public void updatePinnedBlocks() {
+    public static void updatePinnedBlocks() {
         ArrayList<Note> blocks = ListNotesPanel.blocks;
-        blocks.sort(new Comparator<Note>() {
-            @Override
-            public int compare(Note n1, Note n2) {
-                return n1.getDateTime().compareTo(n2.getDateTime());
-            }
-        });
 
         for (Note b : blocks) {
             if (b.isPinned()) {
@@ -49,7 +48,7 @@ public class ListNotesPanel {
             }
         }
     }
-    public static void addNote(String title, String desc, boolean isPinned)
+    public static void addNote(String title, String desc, boolean  isPinned)
     {
         JTextField field = new JTextField();
         field.setText(title);
@@ -69,7 +68,7 @@ public class ListNotesPanel {
         button1.setVisible(true);
         button.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                removeNoteFromView(field,field1,button,button1,title);
+                removeNoteFromView(field,field1,button,button1, buttons[1], title);
                 Main.nNotePanel.setFilledDes(desc);
                 Main.nNotePanel.setFilledTitle(title);
                 Main.listNotes.getPanel().setVisible(false);
@@ -78,7 +77,7 @@ public class ListNotesPanel {
         });
         button1.addActionListener(new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                removeNoteFromView(field,field1,button,button1,title);
+                removeNoteFromView(field,field1,button,button1, buttons[1], title);
             }
         });
         Main.listNotes.getNoteBlockPanel().add(button1);
@@ -95,25 +94,39 @@ public class ListNotesPanel {
         button2.setVisible(true);
         Main.listNotes.getNoteBlockPanel().add(button2);
 
-        button2.addActionListener(new PinUseCase());
+        button2.addActionListener(new PinUseCase() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (button2.getText().equals("Pin")) {
+                    button2.setText("Unpin");
+                    pinUnpinNote(title, true);
+                } else if (button2.getText().equals("Unpin")){
+                    button2.setText("Pin");
+                    pinUnpinNote(title, false);
+                }
+            }
+        });
 
     }
-    public static void removeNoteFromView(JTextField field, JTextField field1, JButton button, JButton button1, String title)
+
+    public static void pinUnpinNote(String title, boolean isPinned){
+        noteDataAccess.pinUnpin(title, isPinned);
+    }
+
+    public static void removeNoteFromView(JTextField field, JTextField field1, JButton button, JButton button1,
+                                          JButton button2, String title)
     {
         Main.listNotes.getNoteBlockPanel().remove(field);
         Main.listNotes.getNoteBlockPanel().remove(field1);
         Main.listNotes.getNoteBlockPanel().remove(button);
         Main.listNotes.getNoteBlockPanel().remove(button1);
+        Main.listNotes.getNoteBlockPanel().remove(button2);
         noteDataAccess.delete(title);
         blocks.removeIf(note -> note.getTitle().equals(title));
         Main.listNotes.getNoteBlockPanel().revalidate();
         Main.listNotes.getNoteBlockPanel().repaint();
     }
 
-    public static void updatePin(String title, boolean isPinned){
-        Main.listNotes.getNoteBlockPanel().revalidate();
-        Main.listNotes.getNoteBlockPanel().repaint();
-    }
     public void init(){
         blocks=new ArrayList<Note>();
         panel=new JPanel();

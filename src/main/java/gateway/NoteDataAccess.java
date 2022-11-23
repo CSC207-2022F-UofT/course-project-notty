@@ -91,14 +91,15 @@ public class NoteDataAccess implements INoteDataAccess{
         Connection conn=null;
         Statement st=null;
         ResultSet rs=null;
-        String sql = "SELECT id, title, description FROM notes";
+        String sql = "SELECT id, title, description, isPinned, dateTime FROM notes";
         try {
             conn=DBConnection.connect();
             st=conn.createStatement();
             rs=st.executeQuery(sql);
 
             while(rs.next()) {
-                blocks.add(new Note(rs.getString("title"), rs.getString("description")));
+                blocks.add(new Note(rs.getString("title"), rs.getString("description"),
+                        rs.getBoolean("isPinned"), rs.getString("dateTime")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -114,20 +115,18 @@ public class NoteDataAccess implements INoteDataAccess{
         return blocks;
     }
 
-    public void pin(Note note) {
+    public void pinUnpin(String note, boolean isPinned) {
         Connection conn=null;
         PreparedStatement pstmt=null;
         String sql= "UPDATE notes SET " +
-                "title = ?," +
-                "isPinned = ?," +
+                "isPinned = ?" +
                 " WHERE title = ?";
 
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1, note.getTitle());
-            pstmt.setBoolean(2, note.pin());
-            pstmt.setString(3, note.getTitle());
+            pstmt.setBoolean(1, isPinned);
+            pstmt.setString(2, note);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
