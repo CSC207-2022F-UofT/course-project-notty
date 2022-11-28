@@ -2,7 +2,7 @@ package notes;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-public class Note implements Pinnable{
+public class Note {
     private String title;
     private String description;
     private boolean isPinned;
@@ -36,19 +36,4 @@ public class Note implements Pinnable{
 
     public String getDateTime() {return this.date.toString();}
 
-    @Override
-    public boolean pin() {
-        if (!isPinned) {
-            this.isPinned = true;
-        }
-        return true;
-    }
-
-    @Override
-    public boolean unpin() {
-        if (isPinned) {
-            this.isPinned = false;
-        }
-        return false;
-    }
 }
