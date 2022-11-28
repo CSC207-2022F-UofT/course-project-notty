@@ -13,31 +13,25 @@ import java.util.Vector;
 public class ListNotesPanel {
     public static JPanel panel;
     private static JPanel noteBlockPanel;
-    private JScrollPane sp;
     public static JButton[] buttons;
-    private int buttonsSize=1;
-    private JLabel[] labels;
-    private int labelSize=1;
-    public static INoteDataAccess noteDataAccess;
+    public INoteDataAccess noteDataAccess;
     public ActionListener actionListener;
-    public static ArrayList<Note> blocks;
+    public ArrayList<Note> blocks;
     public ListNotesPanel(boolean visibility, INoteDataAccess noteDataAccess, ActionListener actionListener){
         this.actionListener = actionListener;
         init();
         panel.setVisible(visibility);
-        ListNotesPanel.noteDataAccess = noteDataAccess;
+        this.noteDataAccess = noteDataAccess;
     }
     public void setBlocks(ArrayList<Note> blocks) {
-        ListNotesPanel.blocks = blocks;
-        for (int i = 0; i< ListNotesPanel.blocks.size(); i++)
-        {
-            addNote(blocks.get(i).getTitle(), blocks.get(i).getDescription(), blocks.get(i).isPinned() );
+        this.blocks = blocks;
+        for (Note block : blocks) {
+            addNote(block.getTitle(), block.getDescription(), block.isPinned());
         }
-
     }
 
-    public static void addNote(String title, String desc, boolean isPinned) {
-        NoteComponent newNote = new NoteComponent(noteBlockPanel, title, desc, isPinned);
+    public void addNote(String title, String desc, boolean isPinned) {
+        NoteComponent newNote = new NoteComponent(this, noteBlockPanel, title, desc, isPinned);
         newNote.createNotePanel();
     }
 
@@ -52,11 +46,13 @@ public class ListNotesPanel {
 
         noteBlockPanel.setVisible(true);
         noteBlockPanel.setOpaque(false);
-        sp = new JScrollPane(noteBlockPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane sp = new JScrollPane(noteBlockPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         sp.setBounds(15, 74, 288, 350);
         panel.add(sp);
+        int buttonsSize = 1;
         buttons=new JButton[buttonsSize];
-        labels=new JLabel[labelSize];
+        int labelSize = 1;
+        JLabel[] labels = new JLabel[labelSize];
         buttons[0]=new JButton("New note");
         panel.add(buttons[0]);
         buttons[0].setSize(400,400);
@@ -67,11 +63,11 @@ public class ListNotesPanel {
     }
 
 
-    public static JPanel getPanel(){
+    public JPanel getPanel(){
         return panel;
     }
 
-    public static JPanel getNoteBlockPanel(){
+    public JPanel getNoteBlockPanel(){
         return noteBlockPanel;
     }
 }
