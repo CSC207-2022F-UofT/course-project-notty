@@ -8,6 +8,8 @@ public class DBConnection {
 
     public DBConnection() {
         this.createTable("notes");
+        this.createUserTable("users");
+        this.createTaskTable("tasks");
     }
 
     public static Connection connect() {
@@ -22,6 +24,28 @@ public class DBConnection {
     }
 
     public void createTable(String tableName) {
+        Connection conn = null;
+        String sql = "CREATE TABLE IF NOT EXISTS " + tableName + "(\n"
+                + "id integer PRIMARY KEY,\n"
+                + "title text NOT NULL,\n"
+                + "description text NOT NULL\n"
+                + ");";
+        try {
+            conn = connect();
+            Statement st = conn.createStatement();
+            st.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            try {
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void createTaskTable(String tableName) {
         Connection conn=null;
         String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
                 + "id integer PRIMARY KEY,\n"
@@ -29,6 +53,7 @@ public class DBConnection {
                 + "description text NOT NULL,\n"
                 + "isPinned integer NOT NULL,\n"
                 + "dateTime text NOT NULL\n"
+                + "date text NOT NULL\n"
                 + ");";
         try {
             conn= connect();
@@ -44,5 +69,29 @@ public class DBConnection {
             }
         }
     }
+
+    public void createUserTable(String tableName) {
+        Connection conn=null;
+        String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
+                + "id integer PRIMARY KEY,\n"
+                + "username text NOT NULL,\n"
+                + "password text NOT NULL\n"
+                + ");";
+        try {
+            conn= connect();
+            Statement st=conn.createStatement();
+            st.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                if(conn!=null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
 
 }
