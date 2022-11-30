@@ -1,25 +1,25 @@
 package gateway;
 
-import tasks.Task;
+import notes.Note;
 
 import java.sql.*;
 import java.util.ArrayList;
 
-public class TaskDataAccess implements ITaskDataAccess {
-    public void create(Task task)
+public class NoteDataAccess implements INoteDataAccess{
+    public void insert(Note note)
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "INSERT INTO tasks(title,dates,category) VALUES(?,?,?)";
+        String sql= "INSERT INTO notes(title, description, isPinned, dateTime) VALUES(?, ?, ?, ?)";
 
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
 
-            pstmt.setString(1, task.getTitle());
-            pstmt.setString(2, task.getDate());
-            pstmt.setString(3, task.getCategory());
-
+            pstmt.setString(1, note.getTitle());
+            pstmt.setString(2, note.getDescription());
+            pstmt.setBoolean(3, note.isPinned());
+            pstmt.setString(4, note.getDateTime());
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -33,17 +33,17 @@ public class TaskDataAccess implements ITaskDataAccess {
             }
         }
     }
-    public void delete(String task)
+    public void delete(String note)
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "DELETE FROM tasks WHERE title=?"; //need to be unique
+        String sql= "DELETE FROM notes WHERE title=?";
 
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
 
-            pstmt.setString(1, task);
+            pstmt.setString(1, note);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -57,22 +57,20 @@ public class TaskDataAccess implements ITaskDataAccess {
             }
         }
     }
-
-
-    public void updateTaskName(Task task, String oldTitle) //this will remove the task, and add the 'edited' task with a new id
+    public void edit(Note note, String oldTitle)
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "UPDATE tasks SET " +
+        String sql= "UPDATE notes SET " +
                 "title = ?," +
-                "date= ?" +
+                "description= ?" +
                 " WHERE title = ?";
 
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1, task.getTitle());
-            pstmt.setString(2, task.getDate());
+            pstmt.setString(1, note.getTitle());
+            pstmt.setString(2, note.getDescription());
             pstmt.setString(3, oldTitle);
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -86,50 +84,22 @@ public class TaskDataAccess implements ITaskDataAccess {
             }
         }
     }
-
-    public void updateCategory(Task task, String oldTitle) //this will remove the task, and add the 'edited' task with a new id
+    public ArrayList<Note> getAll()
     {
-        Connection conn=null;
-        PreparedStatement pstmt=null;
-        String sql= "UPDATE tasks SET " +
-                "title = ?," +
-                "date= ?" +
-                " WHERE title = ?";
-
-        try {
-            conn= DBConnection.connect();
-            pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1, task.getTitle());
-            pstmt.setString(2, task.getDate());
-            pstmt.setString(3, oldTitle);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }finally {
-            try {
-                if(pstmt!=null) pstmt.close();
-                if(conn!=null)  conn.close();
-            } catch (SQLException e) {
-                e.getMessage();
-            }
-        }
-    }
-    public ArrayList<Task> getAll()
-    {
-        ArrayList<Task> blocks=new ArrayList<Task>();
-        ArrayList<Task> notes=null;
+        ArrayList<Note> blocks=new ArrayList<Note>();
+        ArrayList<Note> notes=null;
         Connection conn=null;
         Statement st=null;
         ResultSet rs=null;
-        String sql= "SELECT id, title, dates, category FROM tasks";
+        String sql = "SELECT id, title, description, isPinned, dateTime FROM notes";
         try {
             conn=DBConnection.connect();
             st=conn.createStatement();
             rs=st.executeQuery(sql);
 
             while(rs.next()) {
-                blocks.add(new Task(rs.getString("title"), rs.getString("date"),
-                        rs.getString("category")));
+                blocks.add(new Note(rs.getString("title"), rs.getString("description"),
+                        rs.getBoolean("isPinned"), rs.getString("dateTime")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -143,5 +113,31 @@ public class TaskDataAccess implements ITaskDataAccess {
             }
         }
         return blocks;
+    }
+
+    public void pinUnpin(String note, boolean isPinned) {
+        Connection conn=null;
+        PreparedStatement pstmt=null;
+        String sql= "UPDATE notes SET " +
+                "isPinned = ?" +
+                " WHERE title = ?";
+
+        try {
+            conn= DBConnection.connect();
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setBoolean(1, isPinned);
+            pstmt.setString(2, note);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                if(pstmt!=null) pstmt.close();
+                if(conn!=null)  conn.close();
+            } catch (SQLException e) {
+                e.getMessage();
+            }
+        }
     }
 }
