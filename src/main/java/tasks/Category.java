@@ -11,7 +11,6 @@ public class Category {
     private final int id;
     private static int number = 0;
     private final String title;
-    private Task tasks[];
     private final Date date;
 
     public Category(String title, Date date)
