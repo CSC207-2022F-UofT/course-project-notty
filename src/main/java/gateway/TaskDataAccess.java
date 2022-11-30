@@ -5,12 +5,12 @@ import tasks.Task;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class TaskDataAccess {
+public class TaskDataAccess implements ITaskDataAccess {
     public void create(Task task)
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "INSERT INTO tasks(title,date) VALUES(?,?)";
+        String sql= "INSERT INTO tasks(title,dates,category) VALUES(?,?,?)";
 
         try {
             conn= DBConnection.connect();
@@ -18,6 +18,8 @@ public class TaskDataAccess {
 
             pstmt.setString(1, task.getTitle());
             pstmt.setString(2, task.getDate());
+            pstmt.setString(3, task.getCategory());
+
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -55,13 +57,43 @@ public class TaskDataAccess {
             }
         }
     }
-    public void edit(Task task, String oldTitle) //this will remove the task, and add the 'edited' task with a new id
+
+
+    public void updateTaskName(Task task, String oldTitle) //this will remove the task, and add the 'edited' task with a new id
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
         String sql= "UPDATE tasks SET " +
                 "title = ?," +
-                "date= ?" +
+                "dates = ?" +
+                " WHERE title = ?";
+
+        try {
+            conn= DBConnection.connect();
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setString(1, task.getTitle());
+            pstmt.setString(2, task.getDate());
+            pstmt.setString(3, oldTitle);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                if(pstmt!=null) pstmt.close();
+                if(conn!=null)  conn.close();
+            } catch (SQLException e) {
+                e.getMessage();
+            }
+        }
+    }
+
+    public void updateCategory(Task task, String oldTitle) //this will remove the task, and add the 'edited' task with a new id
+    {
+        Connection conn=null;
+        PreparedStatement pstmt=null;
+        String sql= "UPDATE tasks SET " +
+                "title = ?," +
+                "dates= ?" +
                 " WHERE title = ?";
 
         try {
@@ -89,14 +121,15 @@ public class TaskDataAccess {
         Connection conn=null;
         Statement st=null;
         ResultSet rs=null;
-        String sql= "SELECT id, title, date FROM tasks";
+        String sql= "SELECT id, title, dates, category FROM tasks";
         try {
             conn=DBConnection.connect();
             st=conn.createStatement();
             rs=st.executeQuery(sql);
 
             while(rs.next()) {
-                blocks.add(new Task(rs.getString("title"), rs.getString("date")));
+                blocks.add(new Task(rs.getString("title"), rs.getString("dates"),
+                        rs.getString("category")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

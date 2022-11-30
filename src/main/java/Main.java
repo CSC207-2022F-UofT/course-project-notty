@@ -26,7 +26,8 @@ public class Main {
         TaskDataAccess taskDataAccess = new TaskDataAccess();
         taskDataAccess.create(new Task("hi", "09/09/2020", "math"));
         taskDataAccess.create(new Task("buuuuui", "09/09/2020", "math"));
-        taskDataAccess.delete("hi");
+
+
 
     }
 }
