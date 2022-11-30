@@ -1,7 +1,7 @@
 package tasks;
 
-import notes.ListNotesPanel;
-import notes.Note;
+import tasks.ListTasksPanel;
+import tasks.Task;
 import tasks.CreateTaskPanel;
 import tasks.ListTasksPanel;
 import tasks.Main;

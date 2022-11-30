@@ -1,7 +1,7 @@
 package tasks;
 
-import notes.Main;
-import notes.Note;
+import tasks.Main;
+import tasks.Task;
 
 import javax.swing.*;
 import java.awt.*;
@@ -62,7 +62,7 @@ public class CreateTaskPanel{
         panel.add(label1);
         JLabel label2=new JLabel("Dates");
         panel.add(label2);
-        label2.setBounds(54, 200, 201, 32);
+        label2.setBounds(54, 250, 201, 32);
         label1.setBounds(54, 150, 201, 32);
         addTextField(filledCat,panel, fields, 1, 56, 198, 201, 32);
         addTextField(filledTitle, panel, fields, 0, 56, 113, 201, 32);

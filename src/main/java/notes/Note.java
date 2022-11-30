@@ -1,39 +1,58 @@
 package notes;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+
+import gateway.DBConnection;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class Note {
-    private String title;
-    private String description;
-    private boolean isPinned;
-    private LocalDateTime date;
-    public Note(String title, String description)
-    {
-        this.title = title;
-        this.description = description;
-        this.isPinned = false;
-        this.date = LocalDateTime.now();
+    public void insert(String title, String description) {
+        Connection conn=null;
+        PreparedStatement pstmt=null;
+        String sql= "INSERT INTO notes(title,description) VALUES(?,?)";
+
+        try {
+            conn= DBConnection.connect();
+            pstmt=conn.prepareStatement(sql);
+
+            pstmt.setString(1, title);
+            pstmt.setString(2, description);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                if(pstmt!=null) pstmt.close();
+                if(conn!=null)  conn.close();
+            } catch (SQLException e) {
+                e.getMessage();
+            }
+        }
     }
 
-    public Note(String title, String description, boolean isPinned, String dateTime) {
-        this.title = title;
-        this.description = description;
-        this.isPinned = isPinned;
-        this.date = LocalDateTime.parse(dateTime);
+    public void deleteNote(String title) {
+        Connection conn=null;
+        PreparedStatement pstmt=null;
+        String sql= "DELETE FROM notes WHERE title=?";
+
+        try {
+            conn= DBConnection.connect();
+            pstmt=conn.prepareStatement(sql);
+
+            pstmt.setString(1, title);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                if(pstmt!=null) pstmt.close();
+                if(conn!=null)  conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
     }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public boolean isPinned() {
-        return this.isPinned;
-    }
-
-    public String getDateTime() {return this.date.toString();}
-
 }
