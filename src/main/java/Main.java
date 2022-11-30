@@ -3,7 +3,9 @@ import UseCases.CreateAccountUseCase;
 import entities.Credentials;
 import entities.User;
 import gateway.DBConnection;
+import gateway.TaskDataAccess;
 import gateway.UserManagement;
+import tasks.Task;
 
 public class Main {
     static DBConnection database;
@@ -21,6 +23,10 @@ public class Main {
         CreateAccountController testController = new CreateAccountController("boolean", "12345");
         System.out.println(testController.create());
 
+        TaskDataAccess taskDataAccess = new TaskDataAccess();
+        taskDataAccess.create(new Task("hi", "09/09/2020", "math"));
+        taskDataAccess.create(new Task("buuuuui", "09/09/2020", "math"));
+        taskDataAccess.delete("hi");
 
     }
 }
