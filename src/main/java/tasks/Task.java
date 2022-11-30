@@ -7,14 +7,11 @@ import java.util.ArrayList;
 
 public class Task {
     private String title;
-    private String dates;
-
-    private String category;
-    public Task(String title, String category, String dates)
+    private String date;
+    public Task(String title, String date)
     {
         this.title = title;
-        this.dates = dates;
-        this.category = category;
+        this.date = date;
     }
 
     public String getTitle() {
@@ -22,11 +19,7 @@ public class Task {
     }
 
     public String getDate() {
-        return dates;
-    }
-
-    public String getCategory() {
-        return category;
+        return date;
     }
 
 }

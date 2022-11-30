@@ -14,13 +14,11 @@ public class EditCreateNotePanel{
     public static JPanel panel;
     public static Note block;
     public static JButton[] buttons;
-    public static int buttonSize = 2;
+    public static int buttonSize=2;
     public static JTextField[] fields;
     public static int fieldSize=2;
     String filledTitle = "";
     String filledDes= "";
-
-    String pinUnpinText;
     public void setFilledTitle(String filledTitle) {
         this.filledTitle = filledTitle;
     }
@@ -60,7 +58,6 @@ public class EditCreateNotePanel{
         label1.setBounds(54, 150, 201, 32);
         addTextField(filledDes,panel, fields, 1, 56, 198, 201, 32);
         addTextField(filledTitle, panel, fields, 0, 56, 113, 201, 32);
-
         if(filledTitle.equals("")) {
             addTextButton("Create", panel, buttons, 0, this.actionListener, 55, 400, 92, 33);
             addTextButton("Back", panel, buttons,  1, this.actionListener, 164, 400, 92, 33);
@@ -68,6 +65,7 @@ public class EditCreateNotePanel{
         {
             addTextButton("Edit", panel, buttons, 0, this.actionListener, 55, 400, 92, 33);
             addTextButton("Back", panel, buttons,  1, this.actionListener, 164, 400, 92, 33);
+            buttons[1].setVisible(false);
         }
         filledDes = "";
         filledTitle = "";

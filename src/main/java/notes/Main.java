@@ -30,17 +30,17 @@ public class Main {
         lp.setLayout(null);
         listNotes.setBlocks(noteDataAccess.getAll());
         lp.add(listNotes.getPanel(),1);
-        lp.add(nNotePanel.getPanel(), 2);
+        lp.add(nNotePanel.getPanel(),2);
     }
     public static void instanceInit()
     {
         mainFrame=new JFrame();
         lp=new JLayeredPane();
         noteDataAccess = new NoteDataAccess();
+        editCreateUseCase = new EditCreateUseCase();
         newNoteUseCase = new NewNoteUseCase();
         database=new DBConnection();
         listNotes =new ListNotesPanel(true, noteDataAccess, newNoteUseCase);
-        editCreateUseCase = new EditCreateUseCase(listNotes);
         nNotePanel=new EditCreateNotePanel(false, editCreateUseCase);
     }
     public static void main(String[] args) {
