@@ -65,7 +65,7 @@ public class TaskDataAccess implements ITaskDataAccess {
         PreparedStatement pstmt=null;
         String sql= "UPDATE tasks SET " +
                 "title = ?," +
-                "date= ?" +
+                "dates = ?" +
                 " WHERE title = ?";
 
         try {
@@ -93,7 +93,7 @@ public class TaskDataAccess implements ITaskDataAccess {
         PreparedStatement pstmt=null;
         String sql= "UPDATE tasks SET " +
                 "title = ?," +
-                "date= ?" +
+                "dates= ?" +
                 " WHERE title = ?";
 
         try {
@@ -128,7 +128,7 @@ public class TaskDataAccess implements ITaskDataAccess {
             rs=st.executeQuery(sql);
 
             while(rs.next()) {
-                blocks.add(new Task(rs.getString("title"), rs.getString("date"),
+                blocks.add(new Task(rs.getString("title"), rs.getString("dates"),
                         rs.getString("category")));
             }
         } catch (SQLException e) {
