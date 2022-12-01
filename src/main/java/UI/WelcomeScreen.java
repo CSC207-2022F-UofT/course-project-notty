@@ -21,6 +21,7 @@ public class WelcomeScreen extends JFrame{
 
 
     public WelcomeScreen() {
+        super("Notty");
         init();
 
         SignUpBtn = new JButton("Sign Up");
