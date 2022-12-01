@@ -12,7 +12,7 @@ import java.awt.geom.Rectangle2D;
 import java.util.Objects;
 
 
-public class WelcomeScreen extends JFrame{
+public class WelcomeScreen extends UIScreen{
     private JButton SignUpBtn;
     private JButton LoginBtn;
     private JPanel panel;
@@ -21,8 +21,25 @@ public class WelcomeScreen extends JFrame{
 
 
     public WelcomeScreen() {
-        super("Notty");
+        setTitle("Notty");
         init();
+        this.panel = super.getPanel();
+
+        String path = "/UI/note.png";
+        ImageIcon icon = new ImageIcon(getClass().getResource(path));
+        logo = new JLabel(icon);
+        logo.setAlignmentX(CENTER_ALIGNMENT);
+        logo.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+        this.panel.add(Box.createVerticalGlue());
+        this.panel.add(logo);
+        this.panel.add(Box.createVerticalGlue());
+
+        title = new JLabel("Notty", JLabel.CENTER);
+        title.setFont(new Font("Ravie", Font.BOLD, 48));
+        title.setForeground(Color.white);
+        title.setAlignmentX(CENTER_ALIGNMENT);
+
+        this.panel.add(title);
 
         SignUpBtn = new JButton("Sign Up");
 
@@ -51,61 +68,14 @@ public class WelcomeScreen extends JFrame{
             }
         });
 
-        buttonDesign(SignUpBtn);
-        buttonDesign(LoginBtn);
+        buttonDesign(SignUpBtn, 100, 150);
+        buttonDesign(LoginBtn, 100, 150);
 
-        panel.add(Box.createVerticalGlue());
-        panel.add(SignUpBtn);
-        panel.add(Box.createVerticalGlue());
-        panel.add(LoginBtn);
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(Box.createVerticalGlue());
+        this.panel.add(SignUpBtn);
+        this.panel.add(Box.createVerticalGlue());
+        this.panel.add(LoginBtn);
+        this.panel.add(Box.createVerticalGlue());
     }
 
-    public void init(){
-        setLayout(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //setLocationRelativeTo(null);
-        setSize(340, 500);
-        setResizable(false);
-        setVisible(true);
-
-        panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel,  BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(160, 205, 250));
-        panel.setSize(340, 480);
-        panel.setBorder(new CompoundBorder(
-                new EmptyBorder(20,20, 30, 30),
-                new LineBorder(new Color(157, 92, 242), 7)
-        ));
-        panel.setVisible(true);
-        add(panel);
-
-        String path = "/UI/note.png";
-        ImageIcon icon = new ImageIcon(getClass().getResource(path));
-        logo = new JLabel(icon);
-        logo.setAlignmentX(CENTER_ALIGNMENT);
-        logo.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-        panel.add(Box.createVerticalGlue());
-        panel.add(logo);
-        panel.add(Box.createVerticalGlue());
-
-        title = new JLabel("Notty", JLabel.CENTER);
-        title.setFont(new Font("Ravie", Font.BOLD, 48));
-        title.setForeground(Color.white);
-        title.setAlignmentX(CENTER_ALIGNMENT);
-
-        panel.add(title);
-
-    }
-
-    public void buttonDesign(JButton button){
-        button.setBackground(Color.PINK);
-        button.setAlignmentX(CENTER_ALIGNMENT);
-        button.setMaximumSize(new Dimension(100, 50));
-        button.setBorder(new CompoundBorder(
-                new LineBorder(Color.white, 2),
-                new EmptyBorder(10, 10, 10, 10)
-        ));
-        button.setForeground(Color.white);
-    }
 }

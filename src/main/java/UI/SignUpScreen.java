@@ -7,50 +7,51 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Arrays;
 
-public class SignUpScreen extends JFrame{
-
+public class SignUpScreen extends UIScreen{
     JLabel password1;
     JLabel username1;
     JTextField username;
     JButton SignUpButton;
     JPasswordField Password;
-
     JButton GoBackToWelcome;
+    JPanel panel;
 
 
     public SignUpScreen() {
-        super("Sign Up");
+        setTitle("Sign Up");
+        init();
+        this.panel = super.getPanel();
 
-
-
-        setLayout(null);
-        setSize(600, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-
+        this.panel.add(Box.createVerticalGlue());
         username1 = new JLabel("Username");
-        username1.setBounds(200, 8, 70, 20);
-        add(username1);
+        uLabelDesign(username1);;
+        this.panel.add(username1);
+        this.panel.add(Box.createVerticalGlue());
 
-        username = new JTextField();
-        username.setBounds(200, 27, 210, 40);
-        add(username);
+        username = new JTextField(100);
+        uFieldDesign(username);
+        this.panel.add(username);
+        this.panel.add(Box.createVerticalGlue());
 
         password1 = new JLabel("Password");
-        password1.setBounds(200, 71, 70, 20);
-        add(password1);
+        pLabelDesign(password1);
+        this.panel.add(password1);
+        this.panel.add(Box.createVerticalGlue());
 
         Password = new JPasswordField();
-        Password.setBounds(200, 90, 210, 40);
-        add(Password);
+        pFieldDesign(Password);
+        this.panel.add(Password);
+        this.panel.add(Box.createVerticalGlue());
 
         SignUpButton = new JButton("Sign Up");
-        SignUpButton.setBounds(197, 150, 200, 60);
-        add(SignUpButton);
+        buttonDesign(SignUpButton, 150, 50);
+        this.panel.add(SignUpButton);
+        this.panel.add(Box.createVerticalGlue());
 
         GoBackToWelcome = new JButton("Back to Welcome");
-        GoBackToWelcome.setBounds(197, 220, 200, 60);
-        add(GoBackToWelcome);
+        buttonDesign(GoBackToWelcome, 150, 50);
+        this.panel.add(GoBackToWelcome);
+        this.panel.add(Box.createVerticalGlue());
 
         SignUpButton.addActionListener(new ActionListener(){
 
@@ -64,21 +65,14 @@ public class SignUpScreen extends JFrame{
                     JOptionPane.showMessageDialog(null, "Sign Up Successful, please login to access your Notty");
                 else
                     JOptionPane.showMessageDialog(null, "Username taken, please try again");
-
-
             }
-
-
         });
 
         GoBackToWelcome.addActionListener(new ActionListener(){
-
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 WelcomeScreen frame = new WelcomeScreen();
                 frame.setVisible(true);
-
 
             }
 

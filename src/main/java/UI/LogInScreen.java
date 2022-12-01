@@ -17,7 +17,7 @@ import notes.NewNoteUseCase;
 import notes.Note;
 
 
-public class LogInScreen extends JFrame{
+public class LogInScreen extends UIScreen{
 
     JLabel password1;
     JLabel username1;
@@ -31,39 +31,40 @@ public class LogInScreen extends JFrame{
 
 
     public LogInScreen() {
-        super("Log In");
+        setTitle("LogIn");
         init();
+        this.panel = super.getPanel();
 
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(Box.createVerticalGlue());
         username1 = new JLabel("Username");
         uLabelDesign(username1);;
-        panel.add(username1);
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(username1);
+        this.panel.add(Box.createVerticalGlue());
 
         username = new JTextField(100);
         uFieldDesign(username);
-        panel.add(username);
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(username);
+        this.panel.add(Box.createVerticalGlue());
 
         password1 = new JLabel("Password");
         pLabelDesign(password1);
-        panel.add(password1);
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(password1);
+        this.panel.add(Box.createVerticalGlue());
 
         Password = new JPasswordField();
         pFieldDesign(Password);
-        panel.add(Password);
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(Password);
+        this.panel.add(Box.createVerticalGlue());
 
         LogInButton = new JButton("Login");
-        buttonDesign(LogInButton);
-        panel.add(LogInButton);
-        panel.add(Box.createVerticalGlue());
+        buttonDesign(LogInButton, 150, 50);
+        this.panel.add(LogInButton);
+        this.panel.add(Box.createVerticalGlue());
 
         GoBackToWelcome = new JButton("Back to Welcome");
-        buttonDesign(GoBackToWelcome);
-        panel.add(GoBackToWelcome);
-        panel.add(Box.createVerticalGlue());
+        buttonDesign(GoBackToWelcome, 150, 50);
+        this.panel.add(GoBackToWelcome);
+        this.panel.add(Box.createVerticalGlue());
 
         LogInButton.addActionListener(new ActionListener(){
 
@@ -95,69 +96,4 @@ public class LogInScreen extends JFrame{
         });
     }
 
-    public void init() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(340, 500);
-        setResizable(false);
-        setVisible(true);
-
-        panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        panel.setBackground(new Color(160, 205, 250));
-        panel.setSize(340, 480);
-        panel.setBorder(new CompoundBorder(
-                new EmptyBorder(20, 20, 30, 30),
-                new LineBorder(new Color(157, 92, 242), 7)
-        ));
-        panel.setVisible(true);
-        add(panel);
-    }
-    public void buttonDesign(JButton button){
-        button.setBackground(Color.PINK);
-        button.setAlignmentX(CENTER_ALIGNMENT);
-        button.setMaximumSize(new Dimension(150, 50));
-        button.setBorder(new CompoundBorder(
-                new LineBorder(Color.white, 2),
-                new EmptyBorder(10, 10, 10, 10)
-        ));
-        button.setForeground(Color.white);
-    }
-
-    public void uLabelDesign(JLabel userLabel){
-        userLabel.setAlignmentX(CENTER_ALIGNMENT);
-        userLabel.setForeground(Color.white);
-        String path = "/UI/username.png";
-        ImageIcon icon = new ImageIcon(getClass().getResource(path));
-        Image image = icon.getImage(); // transform it
-        Image newimg = image.getScaledInstance(30, 30,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-        icon = new ImageIcon(newimg);
-        userLabel.setIcon(icon);
-    }
-
-    public void pLabelDesign(JLabel pLabel){
-        pLabel.setAlignmentX(CENTER_ALIGNMENT);
-        pLabel.setForeground(Color.white);
-        String path = "/UI/password.png";
-        ImageIcon icon = new ImageIcon(getClass().getResource(path));
-        Image image = icon.getImage(); // transform it
-        Image newimg = image.getScaledInstance(40, 40,  java.awt.Image.SCALE_SMOOTH); // scale it the smooth way
-        icon = new ImageIcon(newimg);
-        pLabel.setIcon(icon);
-    }
-
-    public void uFieldDesign(JTextField field){
-        field.setPreferredSize(new Dimension(200,30));
-        field.setMaximumSize(new Dimension(200, username.getPreferredSize().height));
-        field.setOpaque(false);
-        field.setBorder(new LineBorder(Color.pink, 2));
-        field.setForeground(Color.white);
-    }
-
-    public void pFieldDesign(JPasswordField field){
-        field.setPreferredSize(new Dimension(200,30));
-        field.setMaximumSize(new Dimension(200, username.getPreferredSize().height));
-        field.setOpaque(false);
-        field.setBorder(new LineBorder(Color.pink, 2));
-        field.setForeground(Color.white);
-    }
 }
