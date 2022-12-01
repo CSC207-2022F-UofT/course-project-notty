@@ -1,25 +1,58 @@
 package notes;
+
 import gateway.DBConnection;
-import javax.swing.*;
-import java.awt.*;
-import java.sql.*;
-import java.util.ArrayList;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class Note {
-    private String title;
-    private String description;
-    public Note(String title, String description)
-    {
-        this.title = title;
-        this.description = description;
+    public void insert(String title, String description) {
+        Connection conn=null;
+        PreparedStatement pstmt=null;
+        String sql= "INSERT INTO notes(title,description) VALUES(?,?)";
+
+        try {
+            conn= DBConnection.connect();
+            pstmt=conn.prepareStatement(sql);
+
+            pstmt.setString(1, title);
+            pstmt.setString(2, description);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                if(pstmt!=null) pstmt.close();
+                if(conn!=null)  conn.close();
+            } catch (SQLException e) {
+                e.getMessage();
+            }
+        }
     }
 
-    public String getTitle() {
-        return title;
-    }
+    public void deleteNote(String title) {
+        Connection conn=null;
+        PreparedStatement pstmt=null;
+        String sql= "DELETE FROM notes WHERE title=?";
 
-    public String getDescription() {
-        return description;
-    }
+        try {
+            conn= DBConnection.connect();
+            pstmt=conn.prepareStatement(sql);
 
+            pstmt.setString(1, title);
+            pstmt.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                if(pstmt!=null) pstmt.close();
+                if(conn!=null)  conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

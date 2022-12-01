@@ -48,9 +48,10 @@ public class DBConnection {
     public void createTaskTable(String tableName) {
         Connection conn=null;
         String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
-                + "id integer PRIMARY KEY,\n"
+                + "id integer PRIMARY KEY, \n"
                 + "title text NOT NULL,\n"
-                + "date text NOT NULL\n"
+                + "dates text NOT NULL, \n"
+                + "category text NOT NULL \n"
                 + ");";
         try {
             conn= connect();
