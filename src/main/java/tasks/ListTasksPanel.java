@@ -55,7 +55,7 @@ public class ListTasksPanel {
         panel.add(sp);
         buttons=new JButton[buttonsSize];
         labels=new JLabel[labelSize];
-        buttons[0]=new JButton("New task");
+        buttons[0]=new JButton("Add task");
         panel.add(buttons[0]);
         buttons[0].setSize(400,400);
         buttons[0].setLayout(null);

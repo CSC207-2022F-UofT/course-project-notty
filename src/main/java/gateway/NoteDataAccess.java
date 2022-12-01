@@ -112,4 +112,31 @@ public class NoteDataAccess implements INoteDataAccess{
         return blocks;
     }
 
+    @Override
+    public void pinUnpin(String note, boolean isPinned) {
+        Connection conn=null;
+        PreparedStatement pstmt=null;
+        String sql= "UPDATE notes SET " +
+                "isPinned = ?" +
+                " WHERE title = ?";
+
+        try {
+            conn= DBConnection.connect();
+            pstmt=conn.prepareStatement(sql);
+            pstmt.setBoolean(1, isPinned);
+            pstmt.setString(2, note);
+
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                if (pstmt != null) pstmt.close();
+                if (conn != null) conn.close();
+            } catch (SQLException e) {
+                e.getMessage();
+            }
+        }
+    }
+
 }
