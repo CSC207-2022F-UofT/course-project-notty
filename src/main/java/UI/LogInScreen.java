@@ -6,6 +6,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import notes.EditCreateNotePanel;
+import notes.EditCreateUseCase;
+import notes.ListNotesPanel;
+import notes.Main;
+import notes.NewNoteUseCase;
+import notes.Note;
 
 
 public class LogInScreen extends JFrame{
@@ -14,6 +20,8 @@ public class LogInScreen extends JFrame{
     JLabel username1;
     JTextField username;
     JButton LogInButton;
+
+    JButton GoBackToWelcome;
     JPasswordField Password;
 
 
@@ -22,7 +30,7 @@ public class LogInScreen extends JFrame{
 
 
 
-        setLayout(new BorderLayout());
+        setLayout(null);
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);
@@ -32,19 +40,33 @@ public class LogInScreen extends JFrame{
         add(username1);
 
         username = new JTextField();
-        username.setBounds(200, 27, 193, 28);
+        username.setBounds(200, 27, 210, 40);
         add(username);
 
         password1 = new JLabel("Password");
-        password1.setBounds(200, 55, 70, 20);
+        password1.setBounds(200, 71, 70, 20);
         add(password1);
 
         Password = new JPasswordField();
-        Password.setBounds(200, 75, 193, 28);
+        Password.setBounds(200, 90, 210, 40);
         add(Password);
 
         LogInButton = new JButton("Login");
-        add(LogInButton,  BorderLayout.CENTER);
+        LogInButton.setBounds(197, 150, 200, 60);
+        add(LogInButton);
+
+        GoBackToWelcome = new JButton("Back to Welcome");
+        GoBackToWelcome.setBounds(197, 220, 200, 60);
+        add(GoBackToWelcome);
+
+
+
+
+
+
+
+       // GoBackToWelcome = new JButton("Back to Welcome Screen");
+        //add(GoBackToWelcome,  BorderLayout.WEST);
 
         LogInButton.addActionListener(new ActionListener(){
 
@@ -54,8 +76,11 @@ public class LogInScreen extends JFrame{
                 LogInController logInController = new LogInController(username.getText(), String.valueOf(Password.getPassword()));
                 boolean result = logInController.create();
 
-                if (result)
-                    JOptionPane.showMessageDialog(null, "Login Successful");
+                if (result) {
+                    // If user was successful in logging in, then the screen should change to the note screen instead.
+                    Main.instanceInit();
+                    Main.init();
+                }
                 else
                     JOptionPane.showMessageDialog(null, "Wrong username and/or password combination- try again!");
 
@@ -63,7 +88,26 @@ public class LogInScreen extends JFrame{
             }
 
 
+
         });
+
+        GoBackToWelcome.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                WelcomeScreen frame = new WelcomeScreen();
+                frame.setVisible(true);
+
+
+            }
+
+        });
+
+
+
+
+
 
 
 
