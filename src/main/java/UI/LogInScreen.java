@@ -15,7 +15,7 @@ import notes.Note;
 
 
 public class LogInScreen extends JFrame{
-
+    public static String usernameLogged;
     JLabel password1;
     JLabel username1;
     JTextField username;
@@ -78,6 +78,8 @@ public class LogInScreen extends JFrame{
 
                 if (result) {
                     // If user was successful in logging in, then the screen should change to the note screen instead.
+                    usernameLogged = username.getText();
+                    dispose();
                     Main.instanceInit();
                     Main.init();
                 }
