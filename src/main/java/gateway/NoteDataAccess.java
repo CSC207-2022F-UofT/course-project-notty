@@ -91,7 +91,7 @@ public class NoteDataAccess implements INoteDataAccess{
         Connection conn=null;
         Statement st=null;
         ResultSet rs=null;
-        String sql= "SELECT id, title, description FROM notes WHERE username="+LogInScreen.usernameLogged;
+        String sql= "SELECT id, title, description FROM notes WHERE username='"+LogInScreen.usernameLogged + "'";
         try {
             conn=DBConnection.connect();
             st=conn.createStatement();

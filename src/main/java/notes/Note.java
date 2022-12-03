@@ -1,5 +1,7 @@
 package notes;
 
+import java.util.Objects;
+
 public class Note {
     public String getTitle() {
         return title;
@@ -23,6 +25,15 @@ public class Note {
     {
         this.title= tile;
         this.description = des;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Note note = (Note) o;
+        return note.title.equals(title) && note.description.equals(description);
     }
 
 }

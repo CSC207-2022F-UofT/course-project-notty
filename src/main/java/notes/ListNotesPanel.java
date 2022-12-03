@@ -12,7 +12,7 @@ public class ListNotesPanel {
     private JPanel noteBlockPanel;
     private JScrollPane sp;
     private JButton[] buttons;
-    private int buttonsSize=1;
+    private int buttonsSize=2;
     private JLabel[] labels;
     private int labelSize=1;
     public static INoteDataAccess noteDataAccess;
@@ -97,6 +97,13 @@ public class ListNotesPanel {
         buttons[0].setVisible(true);
         buttons[0].setBounds(19, 19, 117, 42);
         buttons[0].addActionListener(this.actionListener);
+        buttons[1]=new JButton("Tasks");
+        panel.add(buttons[1]);
+        buttons[1].setSize(400,400);
+        buttons[1].setLayout(null);
+        buttons[1].setVisible(true);
+        buttons[1].setBounds(200, 19, 117, 42);
+        //buttons[1].addActionListener(this.actionListener);
     }
 
     public JPanel getPanel(){
