@@ -45,7 +45,8 @@ public class EditCreateUseCase implements ActionListener {
             EditCreateNotePanel.block=new Note(EditCreateNotePanel.filledTitle, EditCreateNotePanel.filledDes);
             ListNotesPanel.blocks.add(EditCreateNotePanel.block);
             ListNotesPanel.noteDataAccess.insert(EditCreateNotePanel.block);
-            ListNotesPanel.addNote(EditCreateNotePanel.block.getTitle(), EditCreateNotePanel.block.getDescription());
+            ListNotesPanel notesPanel = new ListNotesPanel();
+            notesPanel.addNote(EditCreateNotePanel.block.getTitle(), EditCreateNotePanel.block.getDescription(), EditCreateNotePanel.block.isPinned());
         }
         EditCreateNotePanel.filledTitle="";
         EditCreateNotePanel.filledDes="";

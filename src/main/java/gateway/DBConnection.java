@@ -29,6 +29,8 @@ public class DBConnection {
                 + "id integer PRIMARY KEY,\n"
                 + "title text NOT NULL,\n"
                 + "description text NOT NULL,\n"
+                + "dateTime text NOT NULL,\n"
+                + "isPinned text NOT NULL,\n"
                 + "username text NOT NULL\n"
                 + ");";
         try {

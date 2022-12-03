@@ -12,7 +12,7 @@ import java.util.Vector;
 
 public class ListNotesPanel {
     public static JPanel panel;
-    private JPanel noteBlockPanel;
+    private static JPanel noteBlockPanel;
     private JScrollPane sp;
     private JButton[] buttons;
     private int buttonsSize=2;
@@ -21,13 +21,18 @@ public class ListNotesPanel {
     public static INoteDataAccess noteDataAccess;
 
     public ActionListener actionListener;
-    public ArrayList<Note> blocks;
+    public static ArrayList<Note> blocks;
     public ListNotesPanel(boolean visibility, INoteDataAccess noteDataAccess, ActionListener actionListener){
         this.actionListener = actionListener;
         init();
         panel.setVisible(visibility);
         this.noteDataAccess = noteDataAccess;
     }
+
+    public ListNotesPanel() {
+
+    }
+
     public void setBlocks(ArrayList<Note> blocks) {
         this.blocks = blocks;
         for (Note block : blocks) {
@@ -54,7 +59,6 @@ public class ListNotesPanel {
         JScrollPane sp = new JScrollPane(noteBlockPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         sp.setBounds(15, 74, 288, 350);
         panel.add(sp);
-        int buttonsSize = 1;
         buttons=new JButton[buttonsSize];
         int labelSize = 1;
         JLabel[] labels = new JLabel[labelSize];

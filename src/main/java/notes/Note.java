@@ -39,14 +39,6 @@ public class Note {
         this.description = description;
     }
 
-    public String title;
-    public String description;
-    public Note(String tile, String des)
-    {
-        this.title= tile;
-        this.description = des;
-    }
-
 
     @Override
     public boolean equals(Object o) {
