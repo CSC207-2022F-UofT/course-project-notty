@@ -7,11 +7,14 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.util.ArrayList;
 
 public class ListNotesScreen extends JPanel {
     private final JLayeredPane layeredPane;
     private JPanel noteBlockPanel;
     private JButton newNoteButton;
+    private JPanel pinnedBlocks;
+
     public ListNotesScreen(boolean visibility, JLayeredPane layeredPane){
         this.layeredPane = layeredPane;
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -32,15 +35,19 @@ public class ListNotesScreen extends JPanel {
         noteBlockPanel.setVisible(true);
         noteBlockPanel.setOpaque(false);
 
-
         JScrollPane scrollPane = new JScrollPane(noteBlockPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         scrollPane.setPreferredSize(new Dimension(200,300));
         scrollPane.setMaximumSize(new Dimension(250, scrollPane.getPreferredSize().height));
         scrollPane.setOpaque(false);
         this.add(scrollPane);
         this.add(Box.createVerticalGlue());
-    }
 
+        pinnedBlocks = new JPanel(new GridLayout(0, 1, 10, 10));
+        // pinnedBlocks.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        pinnedBlocks.setAlignmentX(CENTER_ALIGNMENT);
+        pinnedBlocks.setVisible(false);
+        pinnedBlocks.setOpaque(false);
+    }
     public void buttonDesign(JButton button, int width, int height) {
         button.setBackground(Color.PINK);
         button.setAlignmentX(CENTER_ALIGNMENT);
@@ -51,15 +58,19 @@ public class ListNotesScreen extends JPanel {
         ));
         button.setForeground(Color.white);
     }
+
     public void hideScreen(){
         setVisible(false);
     }
+
     public void addNoteBlock(JPanel note, int index){
         noteBlockPanel.add(note, index);
     }
+
     public void deleteNoteBlock(JPanel note){
         noteBlockPanel.remove(note);
     }
+
     public JLayeredPane getLayeredPane(){ return layeredPane;}
 
 }

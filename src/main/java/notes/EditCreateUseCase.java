@@ -18,8 +18,8 @@ public class EditCreateUseCase implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().toString().contains("Create") || e.getSource().toString().contains("Edit")  ){
-            if(!(editCreateNoteScreen.getFilledTitle().isEmpty()) && !(editCreateNoteScreen.getFilledTitle().isEmpty())){
+        if(e.getSource().toString().contains("Create") || e.getSource().toString().contains("Save")  ){
+            if(!(editCreateNoteScreen.getFilledTitle().isEmpty()) && !(editCreateNoteScreen.getFilledDes().isEmpty())){
                 for (Note block : this.blocks) {
                     if (block.getTitle().equals(editCreateNoteScreen.getFilledTitle())) {
                         JOptionPane.showMessageDialog(editCreateNoteScreen, "Please enter a different title!", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -34,6 +34,7 @@ public class EditCreateUseCase implements ActionListener {
                 editCreateNoteScreen.setFilledTitle("");
                 editCreateNoteScreen.setFilledDes("");
                 editCreateNoteScreen.hideScreen();
+
                 listNotesController.addNote(note.getTitle(), note.getDescription(), note.isPinned());
                 listNotesController.getPanel().revalidate();
                 listNotesController.getPanel().repaint();
@@ -49,9 +50,9 @@ public class EditCreateUseCase implements ActionListener {
             editCreateNoteScreen.setFilledDes("");
             editCreateNoteScreen.hideScreen();
 
-            listNotesController.getPanel().setVisible(true);
             listNotesController.getPanel().revalidate();
             listNotesController.getPanel().repaint();
+            listNotesController.getPanel().setVisible(true);
         }
     }
 }

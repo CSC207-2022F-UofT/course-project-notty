@@ -25,10 +25,7 @@ public class EditNoteUseCase implements ActionListener {
         listNotesController.getPanel().setVisible(false);
 
         editCreateNoteScreen = (EditCreateNoteScreen) listNotesController.getPanel().getLayeredPane().getComponent(1);
-        editCreateNoteScreen.setFilledDes(desc);
-        editCreateNoteScreen.setFilledTitle(title);
-        editCreateNoteScreen.showScreen();
-        editCreateNoteScreen.revalidate();
-        editCreateNoteScreen.repaint();
+        editCreateNoteScreen.showScreen(title, desc);
+        //editCreateNoteScreen.showScreen();
     }
 }

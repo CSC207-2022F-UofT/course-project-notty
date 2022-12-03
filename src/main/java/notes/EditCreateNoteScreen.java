@@ -44,7 +44,7 @@ public class EditCreateNoteScreen extends JPanel {
         if(filledTitle.equals("")) {
             addTextButton("Create", buttons, 0, 100, 50);
         } else {
-            addTextButton("Edit", buttons, 0, 100, 50);
+            addTextButton("Save", buttons, 0, 100, 50);
         }
 
         this.add(Box.createVerticalGlue());
@@ -53,6 +53,9 @@ public class EditCreateNoteScreen extends JPanel {
 
         filledDes = "";
         filledTitle = "";
+
+        this.repaint();
+        this.revalidate();
     }
     public void addLabel(String text){
         JLabel label = new JLabel(text);
@@ -89,7 +92,22 @@ public class EditCreateNoteScreen extends JPanel {
         this.add(button[index]);
     }
 
-    public void showScreen() {
+    public void showScreen(String title, String desc) {
+        fields[1].setText(desc);
+        fields[0].setText(title);
+
+        if(fields[0].getText().equals("")) {
+            buttons[0].setText("Create");
+            buttons[1].setText("Back");
+        } else {
+            buttons[0].setText("Save");
+            buttons[1].setVisible(false);
+        }
+
+        filledDes = "";
+        filledTitle = "";
+        revalidate();
+        repaint();
         setVisible(true);
     }
     public void hideScreen(){setVisible(false);}

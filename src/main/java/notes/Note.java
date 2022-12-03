@@ -3,37 +3,36 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class Note {
-    private String title;
-    private String description;
-    private boolean isPinned;
-    private LocalDateTime date;
-    public Note(String title, String description)
-    {
-        this.title = title;
-        this.description = description;
-        this.isPinned = false;
-        this.date = LocalDateTime.now();
+    private String title;               // title of the note
+    private String description;         // description of the note
+    private boolean isPinned;           // whether the not note is pinned ot not
+
+
+    public Note(String title, String description) {
+        this.title = title;                 // sets given title as this note's title
+        this.description = description;     // sets given description as this note's description
+        this.isPinned = false;              // newly created notes must not be pinned so initialized to false
     }
 
-    public Note(String title, String description, boolean isPinned, String dateTime) {
+    public Note(String title, String description, boolean isPinned) {
         this.title = title;
         this.description = description;
+
+        // this constructor takes in a boolean of whether the note is pinned or not
+        // was used mainly if setting up notes stored in the database
         this.isPinned = isPinned;
-        this.date = LocalDateTime.parse(dateTime);
     }
 
     public String getTitle() {
         return title;
-    }
+    }   // returns this note's title
 
     public String getDescription() {
         return description;
-    }
+    }   //return this note's description
 
     public boolean isPinned() {
         return this.isPinned;
-    }
-
-    public String getDateTime() {return this.date.toString();}
+    }       // returns if note is pinned or not
 
 }
