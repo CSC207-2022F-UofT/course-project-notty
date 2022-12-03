@@ -1,5 +1,6 @@
 package gateway;
 
+import UI.LogInScreen;
 import notes.Note;
 
 import java.sql.*;
@@ -10,7 +11,7 @@ public class NoteDataAccess implements INoteDataAccess{
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "INSERT INTO notes(title, description, isPinned, dateTime) VALUES(?, ?, ?, ?)";
+        String sql= "INSERT INTO notes(title, description, isPinned, dateTime, username) VALUES(?, ?, ?, ?, ?)";
 
         try {
             conn= DBConnection.connect();
@@ -20,6 +21,7 @@ public class NoteDataAccess implements INoteDataAccess{
             pstmt.setString(2, note.getDescription());
             pstmt.setBoolean(3, note.isPinned());
             pstmt.setString(4, note.getDateTime());
+            pstmt.setString(5, LogInScreen.usernameLogged);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -90,8 +92,7 @@ public class NoteDataAccess implements INoteDataAccess{
         ArrayList<Note> notes=null;
         Connection conn=null;
         Statement st=null;
-        ResultSet rs=null;
-        String sql = "SELECT id, title, description, isPinned, dateTime FROM notes";
+        ResultSet rs=null;        String sql= "SELECT id, title, description, isPinned, dateTime FROM notes WHERE username='"+LogInScreen.usernameLogged + "'";
         try {
             conn=DBConnection.connect();
             st=conn.createStatement();

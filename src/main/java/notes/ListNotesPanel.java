@@ -13,16 +13,26 @@ import java.util.Vector;
 public class ListNotesPanel {
     public static JPanel panel;
     private static JPanel noteBlockPanel;
-    public static JButton[] buttons;
-    public INoteDataAccess noteDataAccess;
+    private JScrollPane sp;
+    private JButton[] buttons;
+    private int buttonsSize=2;
+    private JLabel[] labels;
+    private int labelSize=1;
+    public static INoteDataAccess noteDataAccess;
+
     public ActionListener actionListener;
-    public ArrayList<Note> blocks;
+    public static ArrayList<Note> blocks;
     public ListNotesPanel(boolean visibility, INoteDataAccess noteDataAccess, ActionListener actionListener){
         this.actionListener = actionListener;
         init();
         panel.setVisible(visibility);
         this.noteDataAccess = noteDataAccess;
     }
+
+    public ListNotesPanel() {
+
+    }
+
     public void setBlocks(ArrayList<Note> blocks) {
         this.blocks = blocks;
         for (Note block : blocks) {
@@ -49,7 +59,6 @@ public class ListNotesPanel {
         JScrollPane sp = new JScrollPane(noteBlockPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         sp.setBounds(15, 74, 288, 350);
         panel.add(sp);
-        int buttonsSize = 1;
         buttons=new JButton[buttonsSize];
         int labelSize = 1;
         JLabel[] labels = new JLabel[labelSize];
@@ -60,6 +69,13 @@ public class ListNotesPanel {
         buttons[0].setVisible(true);
         buttons[0].setBounds(19, 19, 117, 42);
         buttons[0].addActionListener(this.actionListener);
+        buttons[1]=new JButton("Tasks");
+        panel.add(buttons[1]);
+        buttons[1].setSize(400,400);
+        buttons[1].setLayout(null);
+        buttons[1].setVisible(true);
+        buttons[1].setBounds(200, 19, 117, 42);
+        //buttons[1].addActionListener(this.actionListener);
     }
 
 

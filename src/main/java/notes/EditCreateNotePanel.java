@@ -17,9 +17,8 @@ public class EditCreateNotePanel{
     public static int buttonSize = 2;
     public static JTextField[] fields;
     public static int fieldSize=2;
-    String filledTitle = "";
-    String filledDes= "";
-
+    public static String filledTitle = "";
+    public static String filledDes= "";
     String pinUnpinText;
     public void setFilledTitle(String filledTitle) {
         this.filledTitle = filledTitle;
@@ -82,10 +81,10 @@ public class EditCreateNotePanel{
         }else
         {
             buttons[0].setText("Edit");
-            buttons[1].setVisible(false);
+            //buttons[1].setVisible(false);
         }
-        filledDes = "";
-        filledTitle = "";
+//        filledDes = "";
+//        filledTitle = "";
         return panel;
     }
 
