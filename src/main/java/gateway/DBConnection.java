@@ -50,6 +50,9 @@ public class DBConnection {
         String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
                 + "id integer PRIMARY KEY,\n"
                 + "title text NOT NULL,\n"
+                + "description text NOT NULL,\n"
+                + "isPinned integer NOT NULL,\n"
+                + "dateTime text NOT NULL\n"
                 + "date text NOT NULL\n"
                 + ");";
         try {
