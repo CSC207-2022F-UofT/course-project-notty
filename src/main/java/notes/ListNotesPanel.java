@@ -1,14 +1,24 @@
 package notes;
 import gateway.INoteDataAccess;
+import tasks.TasksUI;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Vector;
 
 public class ListNotesPanel {
     public static JPanel panel;
     private static JPanel noteBlockPanel;
-
+    private JScrollPane sp;
+    private JButton[] buttons;
+    private int buttonsSize=2;
+    private JLabel[] labels;
+    private int labelSize=1;
     public static INoteDataAccess noteDataAccess;
 
     public ActionListener actionListener;
@@ -17,7 +27,7 @@ public class ListNotesPanel {
         this.actionListener = actionListener;
         init();
         panel.setVisible(visibility);
-        ListNotesPanel.noteDataAccess = noteDataAccess;
+        this.noteDataAccess = noteDataAccess;
     }
 
     public ListNotesPanel() {
@@ -25,7 +35,7 @@ public class ListNotesPanel {
     }
 
     public void setBlocks(ArrayList<Note> blocks) {
-        ListNotesPanel.blocks = blocks;
+        this.blocks = blocks;
         for (Note block : blocks) {
             addNote(block.getTitle(), block.getDescription(), block.isPinned());
         }
@@ -37,7 +47,7 @@ public class ListNotesPanel {
     }
 
     private void init(){
-        blocks= new ArrayList<>();
+        blocks=new ArrayList<Note>();
         panel=new JPanel();
         panel.setSize(new Dimension(Main.mainWidth, Main.mainHeight));
         panel.setLayout(null);
@@ -50,8 +60,9 @@ public class ListNotesPanel {
         JScrollPane sp = new JScrollPane(noteBlockPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         sp.setBounds(15, 74, 288, 350);
         panel.add(sp);
-        int buttonsSize = 2;
-        JButton[] buttons = new JButton[buttonsSize];
+        buttons=new JButton[buttonsSize];
+        int labelSize = 1;
+        JLabel[] labels = new JLabel[labelSize];
         buttons[0]=new JButton("New note");
         panel.add(buttons[0]);
         buttons[0].setSize(400,400);
@@ -60,6 +71,7 @@ public class ListNotesPanel {
         buttons[0].setBounds(19, 19, 117, 42);
         buttons[0].addActionListener(this.actionListener);
         buttons[1]=new JButton("Tasks");
+        buttons[1].addActionListener(new ListenForTaskButton());
         panel.add(buttons[1]);
         buttons[1].setSize(400,400);
         buttons[1].setLayout(null);
@@ -75,5 +87,13 @@ public class ListNotesPanel {
 
     public JPanel getNoteBlockPanel(){
         return noteBlockPanel;
+    }
+
+    private class ListenForTaskButton implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            SwingUtilities.invokeLater(TasksUI::new);
+            Main.mainFrame.dispose();
+        }
     }
 }

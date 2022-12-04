@@ -1,9 +1,13 @@
 package notes;
 
+import UI.WelcomeScreen;
 import gateway.DBConnection;
 import gateway.NoteDataAccess;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class Main {
     //data access level (connection)
@@ -19,6 +23,9 @@ public class Main {
     public final static int mainHeight = 500;
     static ListNotesPanel listNotes;
     static EditCreateNotePanel nNotePanel;
+
+    static JButton logOutButton;
+
     public static void init()
     {
         mainFrame.setTitle("Notty");
@@ -31,6 +38,25 @@ public class Main {
         listNotes.setBlocks(noteDataAccess.getAll());
         lp.add(listNotes.getPanel(),1);
         lp.add(nNotePanel.getPanel(), 2);
+
+        logOutButton = new JButton("Log Out");
+        mainFrame.add(logOutButton, BorderLayout.SOUTH);
+
+        logOutButton.addActionListener(new ActionListener(){
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                mainFrame.dispose();
+                WelcomeScreen frame = new WelcomeScreen();
+                frame.setVisible(true);
+
+
+
+            }
+
+        });
+
+
     }
     public static void instanceInit()
     {
