@@ -236,13 +236,10 @@ public class TasksUI extends CalendarDataManager{
         toDoSubPanel = new JPanel();
         createBut = new JButton("Create New Category");
         gotoNotes = new JButton("go back to Notes");
-        gotoNotes.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent actionEvent) {
-                mainFrame.dispose();
-                Main.instanceInit();
-                Main.init();
-            }
+        gotoNotes.addActionListener(actionEvent -> {
+            mainFrame.dispose();
+            Main.instanceInit();
+            Main.init();
         });
         createBut.addActionListener(new ListenForCreateCategoryButtons(calYear, (calMonth+1), calDayOfMon));
         toDoSubPanel.add(createBut);
@@ -411,8 +408,8 @@ public class TasksUI extends CalendarDataManager{
             String title = JOptionPane.showInputDialog(parent,
                     "New Category Title:",null);
             if(title != null) {
-                UserCaseCreateCategory userCaseCreateCategory = new UserCaseCreateCategory(title);
-                userCaseCreateCategory.action(this.daily);
+                 UserCaseCreateCategory userCaseCreateCategory = new UserCaseCreateCategory(title);
+                 userCaseCreateCategory.action(this.daily);
             }
             readData();
         }

@@ -30,14 +30,14 @@ public class Main {
 //        CreateAccountController testController = new CreateAccountController("boolean", "12345");
 //        System.out.println(testController.create());
 
-//        CategoryDataAccess categoryDataAccess = new CategoryDataAccess();
-//        categoryDataAccess.createCategory(new Category("Category 1", LocalDate.of(2022, 12, 03)));
-//        categoryDataAccess.createCategory(new Category("Category 2", LocalDate.of(2022, 12, 03)));
-//        categoryDataAccess.createCategory(new Category("Category 3", LocalDate.of(2022, 12, 03)));
+        // CategoryDataAccess categoryDataAccess = new CategoryDataAccess();
+//        CategoryDataAccess.createCategory(new Category("Category 1", LocalDate.of(2022, 12, 03)));
+//        CategoryDataAccess.createCategory(new Category("Category 2", LocalDate.of(2022, 12, 03)));
+//        CategoryDataAccess.createCategory(new Category("Category 3", LocalDate.of(2022, 12, 03)));
 //        categoryDataAccess.deleteCategory(1);
 //        ArrayList<Category> list = categoryDataAccess.getCategories();
 //        for (int i = 0; i<list.size(); i++)
-//        { System.out.println(list.get(i).getTitle()); }
+//        { System.out.println(list.get(i).getUserId()); }
 
 //        TaskDataAccess taskDataAccess = new TaskDataAccess();
 //        taskDataAccess.createTask(new Task("Task 1", 3));

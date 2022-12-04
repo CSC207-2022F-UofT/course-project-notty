@@ -64,7 +64,8 @@ public class DBConnection {
         String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
                 + "id integer PRIMARY KEY,\n"
                 + "title text NOT NULL,\n"
-                + "daily time NOT NULL\n"
+                + "daily time NOT NULL,\n"
+                + "userName text NOT NULL\n"
                 + ");";
         tryDuplMethod(null, sql);
     }
