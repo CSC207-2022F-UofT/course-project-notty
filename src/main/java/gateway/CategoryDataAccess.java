@@ -1,13 +1,13 @@
 package gateway;
 
 import tasks.Category;
-import tasks.Task;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class CategoryDataAccess {
-    public void create(Category category)
+    public static void createCategory(Category category)
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
@@ -16,9 +16,8 @@ public class CategoryDataAccess {
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
-
             pstmt.setString(1, category.getTitle());
-            pstmt.setDate(2, category.getDate());
+            pstmt.setObject(2, category.getDaily());
             // pstmt.setArray(3, (Array) category.getTasks());
 
             pstmt.executeUpdate();
@@ -34,17 +33,16 @@ public class CategoryDataAccess {
         }
     }
 
-    public void delete(String task)
+    public void deleteCategory(int categoryId)
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "DELETE FROM tasks WHERE title=?"; //need to be unique
+        String sql= "DELETE FROM categories WHERE id=?";
 
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
-
-            pstmt.setString(1, task);
+            pstmt.setInt(1, categoryId);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -59,21 +57,19 @@ public class CategoryDataAccess {
         }
     }
 
-    public void edit(Task task, String oldTitle) //this will remove the task, and add the 'edited' task with a new id
+    public void editCategory(int categoryId, String newTitle)
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "UPDATE tasks SET " +
-                "title = ?," +
-                "date= ?" +
-                " WHERE title = ?";
+        String sql= "UPDATE categories SET " +
+                "title = ?" +
+                " WHERE id = ?";
 
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1, task.getTitle());
-            pstmt.setString(2, task.getDate());
-            pstmt.setString(3, oldTitle);
+            pstmt.setString(1, newTitle);
+            pstmt.setInt(2, categoryId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -86,21 +82,24 @@ public class CategoryDataAccess {
             }
         }
     }
-    public ArrayList<Task> getAll()
+    public ArrayList<Category> getCategories()
     {
-        ArrayList<Task> blocks=new ArrayList<Task>();
-        ArrayList<Task> notes=null;
-        Connection conn=null;
-        Statement st=null;
-        ResultSet rs=null;
-        String sql= "SELECT id, title, date FROM tasks";
+        ArrayList<Category> arr =new ArrayList<Category>();
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
+        String sql = "SELECT id, title, daily FROM categories";
         try {
-            conn=DBConnection.connect();
-            st=conn.createStatement();
-            rs=st.executeQuery(sql);
-
+            conn = DBConnection.connect();
+            st = conn.createStatement();
+            rs = st.executeQuery(sql);
             while(rs.next()) {
-                blocks.add(new Task(rs.getString("title"), rs.getDate("daily")));
+                Category temp = new Category();
+                temp.setId(rs.getInt("id"));
+                temp.setTitle(rs.getString("title"));
+                String daily = rs.getString("daily");
+                temp.setDaily(LocalDate.parse(daily));
+                arr.add(temp);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -113,6 +112,6 @@ public class CategoryDataAccess {
                 e.getMessage();
             }
         }
-        return blocks;
+        return arr;
     }
 }

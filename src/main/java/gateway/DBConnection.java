@@ -9,8 +9,8 @@ public class DBConnection {
     public DBConnection() {
         this.createTable("notes");
         this.createUserTable("users");
-        this.createTaskTable("tasks");
         this.createCategoryTable("categories");
+        this.createTaskTable("tasks");
     }
 
     public static Connection connect() {
@@ -49,29 +49,6 @@ public class DBConnection {
         }
     }
 
-    public void createTaskTable(String tableName) {
-        Connection conn=null;
-        String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
-                + "id integer PRIMARY KEY, \n"
-                + "title text NOT NULL,\n"
-                + "dates text NOT NULL, \n"
-                + "category text NOT NULL \n"
-                + ");";
-        try {
-            conn= connect();
-            Statement st=conn.createStatement();
-            st.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }finally {
-            try {
-                if(conn!=null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public void createUserTable(String tableName) {
         Connection conn=null;
         String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
@@ -99,8 +76,30 @@ public class DBConnection {
         String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
                 + "id integer PRIMARY KEY,\n"
                 + "title text NOT NULL,\n"
-                + "daily date NOT NULL,\n"
-                + "tasks set\n"
+                + "daily time NOT NULL\n"
+                + ");";
+        try {
+            conn= connect();
+            Statement st=conn.createStatement();
+            st.execute(sql);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }finally {
+            try {
+                if(conn!=null) conn.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void createTaskTable(String tableName) {
+        Connection conn=null;
+        String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
+                + "id integer PRIMARY KEY, \n"
+                + "title text NOT NULL,\n"
+                + "categoryId integer NOT NULL,\n"
+                + "marked integer NOT NULL\n"
                 + ");";
         try {
             conn= connect();
