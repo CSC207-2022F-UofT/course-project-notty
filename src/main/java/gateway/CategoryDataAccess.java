@@ -1,23 +1,25 @@
 package gateway;
 
-import tasks.Task;
+import tasks.Category;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class TaskDataAccess {
-    public void createTask(Task task)
+public class CategoryDataAccess {
+    public static void createCategory(Category category)
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "INSERT INTO tasks(title, categoryId, marked) VALUES(?,?,?)";
+        String sql= "INSERT INTO categories(title, daily) VALUES(?,?)";
 
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1, task.getTitle());
-            pstmt.setInt(2, task.getCategoryId());
-            pstmt.setInt(3, 0);
+            pstmt.setString(1, category.getTitle());
+            pstmt.setObject(2, category.getDaily());
+            // pstmt.setArray(3, (Array) category.getTasks());
+
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -31,17 +33,16 @@ public class TaskDataAccess {
         }
     }
 
-    public void deleteTask(int taskId)
+    public void deleteCategory(int categoryId)
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "DELETE FROM tasks WHERE id=?";
+        String sql= "DELETE FROM categories WHERE id=?";
 
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
-
-            pstmt.setInt(1, taskId);
+            pstmt.setInt(1, categoryId);
             pstmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -56,20 +57,19 @@ public class TaskDataAccess {
         }
     }
 
-    public void editTask(int taskId, String title, int categoryId)
+    public void editCategory(int categoryId, String newTitle)
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "UPDATE tasks SET " +
-                "title = ?, categoryId = ?" +
+        String sql= "UPDATE categories SET " +
+                "title = ?" +
                 " WHERE id = ?";
 
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
-            pstmt.setString(1, title);
+            pstmt.setString(1, newTitle);
             pstmt.setInt(2, categoryId);
-            pstmt.setInt(3, taskId);
             pstmt.executeUpdate();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -82,20 +82,23 @@ public class TaskDataAccess {
             }
         }
     }
-    public ArrayList<Task> getTasks()
+    public ArrayList<Category> getCategories()
     {
-        ArrayList<Task> arr =new ArrayList<>();
+        ArrayList<Category> arr =new ArrayList<Category>();
         Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
-        String sql = "SELECT id, title, categoryId, marked FROM tasks";
+        String sql = "SELECT id, title, daily FROM categories";
         try {
             conn = DBConnection.connect();
             st = conn.createStatement();
             rs = st.executeQuery(sql);
             while(rs.next()) {
-                Task temp = new Task(rs.getInt("id"), rs.getString("title"),
-                        rs.getInt("categoryId"), rs.getInt("marked"));
+                Category temp = new Category();
+                temp.setId(rs.getInt("id"));
+                temp.setTitle(rs.getString("title"));
+                String daily = rs.getString("daily");
+                temp.setDaily(LocalDate.parse(daily));
                 arr.add(temp);
             }
         } catch (SQLException e) {
@@ -111,30 +114,4 @@ public class TaskDataAccess {
         }
         return arr;
     }
-
-    public void markTask(int taskId, int marked) {
-        Connection conn = null;
-        PreparedStatement pstmt = null;
-        String sql = "UPDATE tasks SET " +
-                " marked = ?" +
-                " WHERE id = ?";
-
-        try {
-            conn = DBConnection.connect();
-            pstmt = conn.prepareStatement(sql);
-            pstmt.setInt(1, marked);
-            pstmt.setInt(2, taskId);
-            pstmt.executeUpdate();
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (pstmt != null) pstmt.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.getMessage();
-            }
-        }
-    }
 }
-
