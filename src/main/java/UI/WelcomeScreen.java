@@ -36,6 +36,7 @@ public class WelcomeScreen extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //this method is run whenever the button is clicked
+                dispose();
                 SignUpScreen frame = new SignUpScreen();
                 frame.setVisible(true);
 
@@ -49,6 +50,7 @@ public class WelcomeScreen extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 //this method is run whenever the button is clicked
+                dispose();
                 LogInScreen frame = new LogInScreen();
                 frame.setVisible(true);
 

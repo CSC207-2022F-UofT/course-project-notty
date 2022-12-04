@@ -100,6 +100,7 @@ public class LogInScreen extends JFrame{
 
                 WelcomeScreen frame = new WelcomeScreen();
                 frame.setVisible(true);
+                dispose();
 
 
             }

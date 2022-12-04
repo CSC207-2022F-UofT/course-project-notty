@@ -78,6 +78,7 @@ public class SignUpScreen extends JFrame{
 
                 WelcomeScreen frame = new WelcomeScreen();
                 frame.setVisible(true);
+                dispose();
 
 
             }
