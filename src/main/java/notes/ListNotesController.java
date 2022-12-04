@@ -33,7 +33,7 @@ public class ListNotesController {
         NoteBlock newNote = new NoteBlock(this, title, desc, isPinned);
         JPanel panel = newNote.createNotePanel();
 
-        listNotesScreen.addNoteBlock(panel,this.blocks.size() - 1, isPinned);
+        listNotesScreen.addNoteBlock(panel,0, isPinned);
     }
 
     public ListNotesScreen getPanel(){

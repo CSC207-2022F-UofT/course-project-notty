@@ -68,7 +68,7 @@ public class ListNotesScreen extends JPanel {
         if (!isPinned){
             noteBlockPanel.add(note, index);
         } else{
-            pinnedBlocks.add(note, 0);
+            pinnedBlocks.add(note, index);
             pinnedBlocks.setPreferredSize(new Dimension(200,220 * pinnedBlocks.getComponents().length));
             pinnedBlocks.setMaximumSize(new Dimension(250, pinnedBlocks.getPreferredSize().height));
         }
