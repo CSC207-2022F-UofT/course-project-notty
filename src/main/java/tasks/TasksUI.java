@@ -1,5 +1,7 @@
 package tasks;
 
+import notes.Main;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -235,6 +237,14 @@ public class TasksUI extends CalendarDataManager{
         toDoSubPanel = new JPanel();
         createBut = new JButton("Create New Category");
         gotoNotes = new JButton("go back to Notes");
+        gotoNotes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+                mainFrame.dispose();
+                Main.instanceInit();
+                Main.init();
+            }
+        });
         createBut.addActionListener(new ListenForCreateCategoryButtons(calYear, (calMonth+1), calDayOfMon));
         toDoSubPanel.add(createBut);
         categoriesPanel.setLayout(new BorderLayout());
