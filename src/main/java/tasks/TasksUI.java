@@ -100,7 +100,7 @@ public class TasksUI extends CalendarDataManager{
     JPanel frameBottomPanel3;
 
     JLabel bottomInfo = new JLabel("Welcome to Task Manager!");
-    JButton gotoNotes = new JButton("go back to Notes");
+    JButton gotoNotes;
     final String[] WEEK_DAY_NAME = { "SUN", "MN", "TUE", "WD", "THR", "FRI", "SAT" };
     final String title = "Task Manager";
 
@@ -234,6 +234,7 @@ public class TasksUI extends CalendarDataManager{
 
         toDoSubPanel = new JPanel();
         createBut = new JButton("Create New Category");
+        gotoNotes = new JButton("go back to Notes");
         createBut.addActionListener(new ListenForCreateCategoryButtons(calYear, (calMonth+1), calDayOfMon));
         toDoSubPanel.add(createBut);
         categoriesPanel.setLayout(new BorderLayout());
