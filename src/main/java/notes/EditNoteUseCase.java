@@ -9,23 +9,22 @@ public class EditNoteUseCase implements ActionListener {
     private final String title;
     private final JPanel panel;
     private final String desc;
-    private EditCreateNoteScreen editCreateNoteScreen;
 
     public EditNoteUseCase(ListNotesController listNotesController, JPanel panel, String title, String desc){
         this.listNotesController = listNotesController;
         this.title = title;
         this.desc = desc;
         this.panel = panel;
-
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         listNotesController.removeNoteFromView(title);
         listNotesController.getPanel().deleteNoteBlock(panel);
         listNotesController.getPanel().setVisible(false);
 
-        editCreateNoteScreen = (EditCreateNoteScreen) listNotesController.getPanel().getLayeredPane().getComponent(1);
+        EditCreateNoteScreen editCreateNoteScreen = new EditCreateNoteScreen(true, listNotesController,
+                listNotesController.getPanel().getLayeredPane());
         editCreateNoteScreen.showScreen(title, desc);
-        //editCreateNoteScreen.showScreen();
     }
 }

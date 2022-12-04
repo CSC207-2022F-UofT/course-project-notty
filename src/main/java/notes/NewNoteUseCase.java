@@ -31,7 +31,6 @@ public class NewNoteUseCase implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         listNotesScreen.hideScreen();
         //editCreateNoteScreen.showScreen();
-        EditCreateNoteScreen editCreateNoteScreen = new EditCreateNoteScreen(true, listNotesController);
-        layeredPane.add(editCreateNoteScreen, 2);
+        EditCreateNoteScreen editCreateNoteScreen = new EditCreateNoteScreen(true, listNotesController, layeredPane);
     }
 }

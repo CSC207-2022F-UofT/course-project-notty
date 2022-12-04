@@ -25,19 +25,20 @@ public class PinUnpinUseCase implements ActionListener, Pinnable {
             pin(title);
             panel.add(pinIcon(), 0);
             listNotesController.getPanel().deleteNoteBlock(panel);
-            listNotesController.getPanel().addNoteBlock(panel, 0);
+            listNotesController.getPanel().addNoteBlock(panel, 0, true);
 
-        } else if (this.button.getText().equals("Unpin")){
+        } else if (this.button.getText().equals("Unpin")) {
             button.setText("Pin");
             unpin(title);
             panel.remove(0);
-            listNotesController.getPanel().deleteNoteBlock(panel);
-            listNotesController.getPanel().addNoteBlock(panel, listNotesController.blocks.size() - 1);
+            listNotesController.getPanel().removeFromPinned(panel);
+            listNotesController.getPanel().addNoteBlock(panel, listNotesController.blocks.size() - 1, false);
         }
-
+        listNotesController.getPanel().setPinnedBlocks();
         listNotesController.getPanel().revalidate();
         listNotesController.getPanel().repaint();
     }
+
 
     @Override
     public void pin(String title) {

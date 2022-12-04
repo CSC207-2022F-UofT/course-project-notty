@@ -1,19 +1,17 @@
 package notes;
 
-import UI.UIScreen;
-
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class ListNotesScreen extends JPanel {
     private final JLayeredPane layeredPane;
-    private JPanel noteBlockPanel;
-    private JButton newNoteButton;
-    private JPanel pinnedBlocks;
+    private final JPanel noteBlockPanel;
+    private final JPanel pinnedBlocks;
 
     public ListNotesScreen(boolean visibility, JLayeredPane layeredPane){
         this.layeredPane = layeredPane;
@@ -23,14 +21,14 @@ public class ListNotesScreen extends JPanel {
         setVisible(visibility);
 
         this.add(Box.createVerticalGlue());
-        newNoteButton = new JButton("New Note");
+        JButton newNoteButton = new JButton("New Note");
         buttonDesign(newNoteButton, 200, 200);
         newNoteButton.addActionListener(new NewNoteUseCase(layeredPane, this));
         this.add(newNoteButton);
         this.add(Box.createVerticalGlue());
 
         noteBlockPanel = new JPanel(new GridLayout(0, 1, 10, 10));
-        noteBlockPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        //noteBlockPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         noteBlockPanel.setAlignmentX(CENTER_ALIGNMENT);
         noteBlockPanel.setVisible(true);
         noteBlockPanel.setOpaque(false);
@@ -42,8 +40,10 @@ public class ListNotesScreen extends JPanel {
         this.add(scrollPane);
         this.add(Box.createVerticalGlue());
 
-        pinnedBlocks = new JPanel(new GridLayout(0, 1, 10, 10));
-        // pinnedBlocks.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        pinnedBlocks = new JPanel(new GridLayout(0, 1, 100, 20));
+        pinnedBlocks.setPreferredSize(new Dimension(200,200 * pinnedBlocks.getComponents().length));
+        pinnedBlocks.setMaximumSize(new Dimension(250, pinnedBlocks.getPreferredSize().height));
+        pinnedBlocks.setBorder(new TitledBorder("Pinned"));
         pinnedBlocks.setAlignmentX(CENTER_ALIGNMENT);
         pinnedBlocks.setVisible(false);
         pinnedBlocks.setOpaque(false);
@@ -63,12 +63,45 @@ public class ListNotesScreen extends JPanel {
         setVisible(false);
     }
 
-    public void addNoteBlock(JPanel note, int index){
-        noteBlockPanel.add(note, index);
+    public void addNoteBlock(JPanel note, int index, boolean isPinned){
+
+        if (!isPinned){
+            noteBlockPanel.add(note, 0);
+        } else{
+            pinnedBlocks.add(note, 0);
+            pinnedBlocks.setPreferredSize(new Dimension(200,220 * pinnedBlocks.getComponents().length));
+            pinnedBlocks.setMaximumSize(new Dimension(250, pinnedBlocks.getPreferredSize().height));
+        }
+    }
+
+//    public int lengthOfBlocks(){
+//        return 2;
+//        if (noteBlockPanel.getComponents().length > 0) {
+//            return noteBlockPanel.getComponents().length - 1;
+//        } else {
+//            return 1;
+//        }
+//    }
+
+    public void setPinnedBlocks(){
+        if (!(Arrays.equals(pinnedBlocks.getComponents(), new Component[]{} ))) {
+            pinnedBlocks.setVisible(true);
+            noteBlockPanel.add(pinnedBlocks, 0);
+        } else {
+            pinnedBlocks.setVisible(false);
+            noteBlockPanel.remove(pinnedBlocks);
+        }
     }
 
     public void deleteNoteBlock(JPanel note){
+        pinnedBlocks.remove(note);
         noteBlockPanel.remove(note);
+        setPinnedBlocks();
+    }
+    public void removeFromPinned(JPanel note){
+        pinnedBlocks.remove(note);
+        pinnedBlocks.revalidate();
+        pinnedBlocks.repaint();
     }
 
     public JLayeredPane getLayeredPane(){ return layeredPane;}

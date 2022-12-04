@@ -15,8 +15,9 @@ public class EditCreateNoteScreen extends JPanel {
     String filledTitle = "";
     String filledDes = "";
     private ActionListener actionListener;
-    public EditCreateNoteScreen(boolean visibility, ListNotesController listNotesController){
+    public EditCreateNoteScreen(boolean visibility, ListNotesController listNotesController, JLayeredPane layeredPane){
         this.actionListener = new EditCreateUseCase(listNotesController, this);
+        layeredPane.add(this, 2);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.WHITE);
@@ -78,8 +79,8 @@ public class EditCreateNoteScreen extends JPanel {
 
         this.add(fields[index]);
     }
-    public void addTextButton(String text, javax.swing.JButton[] button, int index, int width, int height){
-        button[index]=new javax.swing.JButton(text);
+    public void addTextButton(String text, JButton[] button, int index, int width, int height){
+        button[index]=new JButton(text);
         button[index].addActionListener(this.actionListener);
         button[index].setBackground(Color.PINK);
         button[index].setAlignmentX(CENTER_ALIGNMENT);

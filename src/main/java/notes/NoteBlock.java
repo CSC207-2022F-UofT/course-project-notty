@@ -28,9 +28,9 @@ public class NoteBlock extends JPanel {
 
     public void init() {
         // initializes the appearance of individual note block or the main panel for each one
-
-        panel.setPreferredSize(new Dimension(200,200));                         // set dimensions
-        panel.setMaximumSize(new Dimension(200, panel.getPreferredSize().height));
+        panel.setSize(200, 225);
+//        panel.setPreferredSize(new Dimension(200,225));                         // set dimensions
+//        panel.setMaximumSize(new Dimension(200, panel.getPreferredSize().height));
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));                        // set layout
         panel.setBorder(BorderFactory.createLineBorder(Color.black, 3));        // add borders
@@ -85,7 +85,7 @@ public class NoteBlock extends JPanel {
 
         button.setBackground(Color.PINK);
         button.setAlignmentX(CENTER_ALIGNMENT);
-        button.setMaximumSize(new Dimension(100, 40));
+        button.setMaximumSize(new Dimension(80, 40));
         button.setBorder(new CompoundBorder(
                 new LineBorder(Color.white, 2),
                 new EmptyBorder(10, 10, 10, 10)));
