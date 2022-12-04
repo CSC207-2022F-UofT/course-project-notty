@@ -1,5 +1,6 @@
 package notes;
 import gateway.INoteDataAccess;
+import tasks.TasksUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -70,6 +71,7 @@ public class ListNotesPanel {
         buttons[0].setBounds(19, 19, 117, 42);
         buttons[0].addActionListener(this.actionListener);
         buttons[1]=new JButton("Tasks");
+        buttons[1].addActionListener(new ListenForTaskButton());
         panel.add(buttons[1]);
         buttons[1].setSize(400,400);
         buttons[1].setLayout(null);
@@ -85,5 +87,13 @@ public class ListNotesPanel {
 
     public JPanel getNoteBlockPanel(){
         return noteBlockPanel;
+    }
+
+    private class ListenForTaskButton implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            SwingUtilities.invokeLater(TasksUI::new);
+            Main.mainFrame.dispose();
+        }
     }
 }

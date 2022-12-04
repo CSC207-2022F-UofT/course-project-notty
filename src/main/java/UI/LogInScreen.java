@@ -3,6 +3,9 @@ package UI;
 import Controller.LogInController;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +17,7 @@ import notes.NewNoteUseCase;
 import notes.Note;
 
 
-public class LogInScreen extends JFrame{
+public class LogInScreen extends UIScreen{
     public static String usernameLogged;
     JLabel password1;
     JLabel username1;
@@ -24,49 +27,44 @@ public class LogInScreen extends JFrame{
     JButton GoBackToWelcome;
     JPasswordField Password;
 
+    private JPanel panel;
+
 
     public LogInScreen() {
-        super("Log In");
+        setTitle("LogIn");
+        init();
+        this.panel = super.getPanel();
 
-
-
-        setLayout(null);
-        setSize(600, 500);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);
-
+        this.panel.add(Box.createVerticalGlue());
         username1 = new JLabel("Username");
-        username1.setBounds(200, 8, 70, 20);
-        add(username1);
+        uLabelDesign(username1);;
+        this.panel.add(username1);
+        this.panel.add(Box.createVerticalGlue());
 
-        username = new JTextField();
-        username.setBounds(200, 27, 210, 40);
-        add(username);
+        username = new JTextField(100);
+        uFieldDesign(username);
+        this.panel.add(username);
+        this.panel.add(Box.createVerticalGlue());
 
         password1 = new JLabel("Password");
-        password1.setBounds(200, 71, 70, 20);
-        add(password1);
+        pLabelDesign(password1);
+        this.panel.add(password1);
+        this.panel.add(Box.createVerticalGlue());
 
         Password = new JPasswordField();
-        Password.setBounds(200, 90, 210, 40);
-        add(Password);
+        pFieldDesign(Password);
+        this.panel.add(Password);
+        this.panel.add(Box.createVerticalGlue());
 
         LogInButton = new JButton("Login");
-        LogInButton.setBounds(197, 150, 200, 60);
-        add(LogInButton);
+        buttonDesign(LogInButton, 150, 50);
+        this.panel.add(LogInButton);
+        this.panel.add(Box.createVerticalGlue());
 
         GoBackToWelcome = new JButton("Back to Welcome");
-        GoBackToWelcome.setBounds(197, 220, 200, 60);
-        add(GoBackToWelcome);
-
-
-
-
-
-
-
-       // GoBackToWelcome = new JButton("Back to Welcome Screen");
-        //add(GoBackToWelcome,  BorderLayout.WEST);
+        buttonDesign(GoBackToWelcome, 150, 50);
+        this.panel.add(GoBackToWelcome);
+        this.panel.add(Box.createVerticalGlue());
 
         LogInButton.addActionListener(new ActionListener(){
 
@@ -85,11 +83,7 @@ public class LogInScreen extends JFrame{
                 }
                 else
                     JOptionPane.showMessageDialog(null, "Wrong username and/or password combination- try again!");
-
-
             }
-
-
 
         });
 
@@ -97,26 +91,11 @@ public class LogInScreen extends JFrame{
 
             @Override
             public void actionPerformed(ActionEvent e) {
-
                 WelcomeScreen frame = new WelcomeScreen();
                 frame.setVisible(true);
-                dispose();
-
-
             }
 
         });
-
-
-
-
-
-
-
-
-
-
     }
-
 
 }
