@@ -9,4 +9,5 @@ public interface INoteDataAccess {
     void delete(String note);
     void edit(Note note, String oldTitle);
     ArrayList<Note> getAll();
+    void pinUnpin(String note, boolean isPinned);
 }

@@ -5,91 +5,63 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Vector;
 
 public class ListNotesPanel {
     public static JPanel panel;
-    private JPanel noteBlockPanel;
+    private static JPanel noteBlockPanel;
     private JScrollPane sp;
     private JButton[] buttons;
-    private int buttonsSize=1;
+    private int buttonsSize=2;
     private JLabel[] labels;
     private int labelSize=1;
     public static INoteDataAccess noteDataAccess;
+
     public ActionListener actionListener;
     public static ArrayList<Note> blocks;
     public ListNotesPanel(boolean visibility, INoteDataAccess noteDataAccess, ActionListener actionListener){
         this.actionListener = actionListener;
         init();
         panel.setVisible(visibility);
-        ListNotesPanel.noteDataAccess = noteDataAccess;
+        this.noteDataAccess = noteDataAccess;
     }
+
+    public ListNotesPanel() {
+
+    }
+
     public void setBlocks(ArrayList<Note> blocks) {
-        ListNotesPanel.blocks =blocks;
-        for (int i = 0; i< ListNotesPanel.blocks.size(); ++i)
-        {
-            addNote( blocks.get(i).getTitle(), blocks.get(i).getDescription() );
+        this.blocks = blocks;
+        for (Note block : blocks) {
+            addNote(block.getTitle(), block.getDescription(), block.isPinned());
         }
     }
-    public static void addNote(String title, String desc)
-    {
-        JTextField field = new JTextField();
-        field.setText(title);
-        field.setEditable(false);
-        field.setVisible(true);
-        Main.listNotes.getNoteBlockPanel().add(field);
-        JTextField field1 = new JTextField();
-        field1.setText(desc);
-        field1.setEditable(false);
-        field1.setVisible(true);
-        Main.listNotes.getNoteBlockPanel().add(field1);
-        JButton button = new JButton("Edit");
 
-        button.setVisible(true);
-        Main.listNotes.getNoteBlockPanel().add(button);
-        JButton button1 = new JButton("Delete");
-        button1.setVisible(true);
-        button.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                removeNoteFromView(field,field1,button,button1,title);
-                Main.nNotePanel.setFilledDes(desc);
-                Main.nNotePanel.setFilledTitle(title);
-                Main.listNotes.getPanel().setVisible(false);
-                Main.nNotePanel.getPanel().setVisible(true);
-            }
-        });
-        button1.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e) {
-                removeNoteFromView(field,field1,button,button1,title);
-            }
-        });
-        Main.listNotes.getNoteBlockPanel().add(button1);
+    public void addNote(String title, String desc, boolean isPinned) {
+        NoteComponent newNote = new NoteComponent(this, noteBlockPanel, title, desc, isPinned);
+        newNote.createNotePanel();
     }
-    public static void removeNoteFromView(JTextField field, JTextField field1, JButton button, JButton button1, String title)
-    {
-        Main.listNotes.getNoteBlockPanel().remove(field);
-        Main.listNotes.getNoteBlockPanel().remove(field1);
-        Main.listNotes.getNoteBlockPanel().remove(button);
-        Main.listNotes.getNoteBlockPanel().remove(button1);
-        noteDataAccess.delete(title);
-        blocks.removeIf(note -> note.getTitle().equals(title));
-        Main.listNotes.getNoteBlockPanel().revalidate();
-        Main.listNotes.getNoteBlockPanel().repaint();
-    }
-    public void init(){
+
+    private void init(){
         blocks=new ArrayList<Note>();
         panel=new JPanel();
         panel.setSize(new Dimension(Main.mainWidth, Main.mainHeight));
         panel.setLayout(null);
-        noteBlockPanel=new JPanel();
-        noteBlockPanel.setLayout(new BoxLayout(noteBlockPanel, BoxLayout.Y_AXIS));
+
+        noteBlockPanel=new JPanel(new GridLayout(0, 1, 10, 10));
+        noteBlockPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+
         noteBlockPanel.setVisible(true);
         noteBlockPanel.setOpaque(false);
-        sp = new JScrollPane(noteBlockPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        JScrollPane sp = new JScrollPane(noteBlockPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         sp.setBounds(15, 74, 288, 350);
         panel.add(sp);
         buttons=new JButton[buttonsSize];
-        labels=new JLabel[labelSize];
+        int labelSize = 1;
+        JLabel[] labels = new JLabel[labelSize];
         buttons[0]=new JButton("New note");
         panel.add(buttons[0]);
         buttons[0].setSize(400,400);
@@ -97,13 +69,21 @@ public class ListNotesPanel {
         buttons[0].setVisible(true);
         buttons[0].setBounds(19, 19, 117, 42);
         buttons[0].addActionListener(this.actionListener);
+        buttons[1]=new JButton("Tasks");
+        panel.add(buttons[1]);
+        buttons[1].setSize(400,400);
+        buttons[1].setLayout(null);
+        buttons[1].setVisible(true);
+        buttons[1].setBounds(200, 19, 117, 42);
+        //buttons[1].addActionListener(this.actionListener);
     }
 
+
     public JPanel getPanel(){
-        return this.panel;
+        return panel;
     }
 
     public JPanel getNoteBlockPanel(){
-        return this.noteBlockPanel;
+        return noteBlockPanel;
     }
 }
