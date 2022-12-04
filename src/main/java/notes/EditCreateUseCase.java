@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 public class EditCreateUseCase implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
+
         if(e.getSource().toString().contains("Create") || e.getSource().toString().contains("Edit")  ){
             if(!(EditCreateNotePanel.fields[0].getText().isEmpty()) && !(EditCreateNotePanel.fields[1].getText().isEmpty())){
                 for(int i=0;i<ListNotesPanel.blocks.size();i++) {
@@ -29,6 +30,16 @@ public class EditCreateUseCase implements ActionListener {
                 JOptionPane.showMessageDialog(EditCreateNotePanel.panel, "Please fill in all fields!","Warning", JOptionPane.WARNING_MESSAGE);
             }
         }
+        if(!EditCreateNotePanel.filledTitle.equals("")&&e.getSource().toString().contains("Back"))
+        {
+            EditCreateNotePanel.block=new Note(EditCreateNotePanel.filledTitle, EditCreateNotePanel.filledDes);
+            ListNotesPanel.blocks.add(EditCreateNotePanel.block);
+            ListNotesPanel.noteDataAccess.insert(EditCreateNotePanel.block);
+            ListNotesPanel notesPanel = new ListNotesPanel();
+            notesPanel.addNote(EditCreateNotePanel.block.getTitle(), EditCreateNotePanel.block.getDescription(), EditCreateNotePanel.block.isPinned());
+        }
+        EditCreateNotePanel.filledTitle="";
+        EditCreateNotePanel.filledDes="";
         if(e.getSource().equals(EditCreateNotePanel.buttons[1])){
             EditCreateNotePanel.fields[0].setText("");
             EditCreateNotePanel.fields[1].setText("");
