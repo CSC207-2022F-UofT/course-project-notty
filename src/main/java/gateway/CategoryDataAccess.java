@@ -28,17 +28,18 @@ public class CategoryDataAccess {
                 if(pstmt!=null) pstmt.close();
                 if(conn!=null)  conn.close();
             } catch (SQLException e) {
-                e.getMessage();
+                e.printStackTrace();
             }
         }
     }
 
     public void deleteCategory(int categoryId)
     {
-        Connection conn=null;
-        PreparedStatement pstmt=null;
         String sql= "DELETE FROM categories WHERE id=?";
+        DeleteDataAccess(categoryId, null, null, sql);
+    }
 
+    static void DeleteDataAccess(int categoryId, Connection conn, PreparedStatement pstmt, String sql) {
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
@@ -78,13 +79,13 @@ public class CategoryDataAccess {
                 if(pstmt!=null) pstmt.close();
                 if(conn!=null)  conn.close();
             } catch (SQLException e) {
-                e.getMessage();
+                e.printStackTrace();
             }
         }
     }
     public ArrayList<Category> getCategories()
     {
-        ArrayList<Category> arr =new ArrayList<Category>();
+        ArrayList<Category> arr =new ArrayList<>();
         Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
@@ -109,7 +110,7 @@ public class CategoryDataAccess {
                 if(st!=null) st.close();
                 if(conn!=null) conn.close();
             } catch (SQLException e) {
-                e.getMessage();
+                e.printStackTrace();
             }
         }
         return arr;

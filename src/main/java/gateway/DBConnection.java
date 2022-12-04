@@ -1,7 +1,6 @@
 package gateway;
 
 import java.sql.*;
-import java.util.ArrayList;
 
 public class DBConnection {
     private final static String database_url="jdbc:sqlite:notetakingapp.db";
@@ -25,7 +24,6 @@ public class DBConnection {
     }
 
     public void createTable(String tableName) {
-        Connection conn = null;
         String sql = "CREATE TABLE IF NOT EXISTS " + tableName + "(\n"
                 + "id integer PRIMARY KEY,\n"
                 + "title text NOT NULL,\n"
@@ -34,6 +32,10 @@ public class DBConnection {
                 + "isPinned text NOT NULL,\n"
                 + "username text NOT NULL\n"
                 + ");";
+        tryDuplMethod(null, sql);
+    }
+
+    private void tryDuplMethod(Connection conn, String sql) {
         try {
             conn = connect();
             Statement st = conn.createStatement();
@@ -50,70 +52,31 @@ public class DBConnection {
     }
 
     public void createUserTable(String tableName) {
-        Connection conn=null;
         String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
                 + "id integer PRIMARY KEY,\n"
                 + "username text NOT NULL,\n"
                 + "password text NOT NULL\n"
                 + ");";
-        try {
-            conn= connect();
-            Statement st=conn.createStatement();
-            st.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }finally {
-            try {
-                if(conn!=null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        tryDuplMethod(null, sql);
     }
 
     public void createCategoryTable(String tableName) {
-        Connection conn = null;
         String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
                 + "id integer PRIMARY KEY,\n"
                 + "title text NOT NULL,\n"
                 + "daily time NOT NULL\n"
                 + ");";
-        try {
-            conn= connect();
-            Statement st=conn.createStatement();
-            st.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }finally {
-            try {
-                if(conn!=null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        tryDuplMethod(null, sql);
     }
 
     public void createTaskTable(String tableName) {
-        Connection conn=null;
         String sql= "CREATE TABLE IF NOT EXISTS "+tableName+"(\n"
                 + "id integer PRIMARY KEY, \n"
                 + "title text NOT NULL,\n"
                 + "categoryId integer NOT NULL,\n"
                 + "marked integer NOT NULL\n"
                 + ");";
-        try {
-            conn= connect();
-            Statement st=conn.createStatement();
-            st.execute(sql);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }finally {
-            try {
-                if(conn!=null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        tryDuplMethod(null, sql);
     }
 
 
