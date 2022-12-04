@@ -22,10 +22,14 @@ public class WelcomeScreen extends JFrame{
     public WelcomeScreen() {
         super("Welcome to Notty");
 
-        setLayout(new BorderLayout());
+        setLayout(null);
 
 
         SignUpBtn = new JButton("Sign Up");
+        SignUpBtn.setBounds(215, 19, 200, 60);
+
+        LoginBtn = new JButton("Log In");
+        LoginBtn.setBounds(215, 90, 200, 60);
 
         SignUpBtn.addActionListener(new ActionListener(){
 
@@ -38,7 +42,7 @@ public class WelcomeScreen extends JFrame{
             }
         });
 
-        LoginBtn = new JButton("Log In");
+
 
         LoginBtn.addActionListener(new ActionListener(){
 
@@ -53,9 +57,8 @@ public class WelcomeScreen extends JFrame{
         });
 
 
-        add(SignUpBtn, BorderLayout.WEST);
-        add(LoginBtn, BorderLayout.EAST);
-
+        add(SignUpBtn);
+        add(LoginBtn);
         setSize(600, 500);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setVisible(true);

@@ -20,15 +20,7 @@ public class LogInUseCase {
         this.InputPassword = password;
     }
 
-    //public void createUser(String InputUsername, String InputPassword) {
-        //User CheckThisUser = new User(InputUsername, InputPassword);
-        //userManagement.createUser(CheckThisUser);
-    //}
 
-
-    //public void createCredential(String InputUsername, String InputPassword) {
-        //Credentials CheckThisCredential = new Credentials(InputUsername, InputPassword);
-    //}
 
 
     //Check to see if this accounts exists in the database, if so, we would change screen to 'logged in'
