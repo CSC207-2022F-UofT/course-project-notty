@@ -1,31 +1,55 @@
 package notes;
 
+import tasks.TasksUI;
+
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 public class ListNotesScreen extends JPanel {
     private final JLayeredPane layeredPane;
     private final JPanel noteBlockPanel;
     private final JPanel pinnedBlocks;
+    private static JFrame frame = null;
 
-    public ListNotesScreen(boolean visibility, JLayeredPane layeredPane){
-        this.layeredPane = layeredPane;
+    public ListNotesScreen(boolean visibility, JFrame frame){
+        this.frame = frame;
+        this.layeredPane = frame.getLayeredPane();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.WHITE);
         setSize(280,410);
         setVisible(visibility);
+;
+        JPanel buttonPanel = new JPanel(new FlowLayout());
 
-        this.add(Box.createVerticalGlue());
+//        this.add(Box.createVerticalGlue());
         JButton newNoteButton = new JButton("New Note");
-        buttonDesign(newNoteButton, 200, 200);
-        newNoteButton.addActionListener(new NewNoteUseCase(layeredPane, this));
-        this.add(newNoteButton);
-        this.add(Box.createVerticalGlue());
+        buttonDesign(newNoteButton, 100, 200);
+        newNoteButton.setBorder(new CompoundBorder(
+                new LineBorder(Color.white, 7),
+                new EmptyBorder(10, 10, 10, 10)
+
+        ));
+        newNoteButton.addActionListener(new NewNoteUseCase(this.layeredPane, this));
+        buttonPanel.add(newNoteButton);
+//        this.add(Box.createVerticalGlue());
+
+        JButton tasksButton = new JButton("Tasks");
+        buttonDesign(tasksButton, 100, 200);
+        tasksButton.setBorder(new CompoundBorder(
+                new LineBorder(Color.white, 7),
+                new EmptyBorder(10, 10, 10, 10)
+
+        ));
+        tasksButton.addActionListener(new ListenForTaskButton());
+        buttonPanel.add(tasksButton);
+        this.add(buttonPanel);
 
         noteBlockPanel = new JPanel(new GridLayout(0, 1, 10, 10));
         //noteBlockPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -47,6 +71,13 @@ public class ListNotesScreen extends JPanel {
         pinnedBlocks.setAlignmentX(CENTER_ALIGNMENT);
         pinnedBlocks.setVisible(false);
         pinnedBlocks.setOpaque(false);
+    }
+    private static class ListenForTaskButton implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            SwingUtilities.invokeLater(TasksUI::new);
+            frame.dispose();
+        }
     }
     public void buttonDesign(JButton button, int width, int height) {
         button.setBackground(Color.PINK);

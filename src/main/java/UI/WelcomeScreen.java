@@ -59,8 +59,6 @@ public class WelcomeScreen extends UIScreen{
                 dispose();
                 LogInScreen frame = new LogInScreen();
                 frame.setVisible(true);
-
-
             }
         });
 

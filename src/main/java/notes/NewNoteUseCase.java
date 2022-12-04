@@ -28,7 +28,6 @@ public class NewNoteUseCase implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         listNotesScreen.hideScreen();
-        //editCreateNoteScreen.showScreen();
         new EditCreateNoteScreen(true, listNotesController, layeredPane);
     }
 }

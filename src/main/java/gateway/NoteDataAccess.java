@@ -11,7 +11,7 @@ public class NoteDataAccess implements INoteDataAccess{
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "INSERT INTO notes(title, description, isPinne, username) VALUES(?, ?, ?, ?)";
+        String sql= "INSERT INTO notes(title, description, isPinned, username) VALUES(?, ?, ?, ?)";
 
         try {
             conn= DBConnection.connect();
@@ -91,7 +91,7 @@ public class NoteDataAccess implements INoteDataAccess{
         ArrayList<Note> notes=null;
         Connection conn=null;
         Statement st=null;
-        ResultSet rs=null;        String sql= "SELECT id, title, description, isPinned, dateTime FROM notes WHERE username='"+LogInScreen.usernameLogged + "'";
+        ResultSet rs=null;        String sql= "SELECT id, title, description, isPinned FROM notes WHERE username='"+LogInScreen.usernameLogged + "'";
         try {
             conn=DBConnection.connect();
             st=conn.createStatement();

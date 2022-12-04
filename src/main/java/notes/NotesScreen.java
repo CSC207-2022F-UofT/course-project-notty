@@ -24,16 +24,17 @@ public class NotesScreen extends UIScreen {
         panel = super.getPanel();
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setLayout(null);
-        panel.add(layeredPane);
 
-        ListNotesScreen listNotesPanel = new ListNotesScreen(true, layeredPane);
+        ListNotesScreen listNotesPanel = new ListNotesScreen(true, this);
         noteDataAccess = new NoteDataAccess();
         database = new DBConnection();
         ListNotesController listNotesController = new ListNotesController(noteDataAccess, listNotesPanel);
         listNotesController.setBlocks(noteDataAccess.getAll());
         layeredPane.add(listNotesPanel, 1);
+        panel.add(layeredPane);
 
         logOutButton = new JButton("Log Out");
+        buttonDesign(logOutButton, 200, 50);
         panel.add(logOutButton, BorderLayout.SOUTH);
 
         logOutButton.addActionListener(new ActionListener() {
