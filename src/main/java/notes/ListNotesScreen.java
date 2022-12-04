@@ -50,8 +50,8 @@ public class ListNotesScreen extends JPanel {
         buttonPanel.add(tasksButton);
         this.add(buttonPanel);
 
-        noteBlockPanel = new JPanel(new GridLayout(0, 1, 10, 10));
-        //noteBlockPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        noteBlockPanel = new JPanel();
+        noteBlockPanel.setLayout(new BoxLayout(noteBlockPanel, BoxLayout.Y_AXIS));
         noteBlockPanel.setAlignmentX(CENTER_ALIGNMENT);
         noteBlockPanel.setVisible(true);
         noteBlockPanel.setOpaque(false);
@@ -96,7 +96,8 @@ public class ListNotesScreen extends JPanel {
     public void addNoteBlock(JPanel note, int index, boolean isPinned){
 
         if (!isPinned){
-            noteBlockPanel.add(note, index);
+            noteBlockPanel.add(note);
+            noteBlockPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         } else{
             pinnedBlocks.add(note, index);
             pinnedBlocks.setPreferredSize(new Dimension(200,220 * pinnedBlocks.getComponents().length));

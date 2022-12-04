@@ -27,10 +27,10 @@ public class NoteBlock extends JPanel {
 
     public void init() {
         // initializes the appearance of individual note block or the main panel for each one
-        panel.setSize(200, 225);
+        panel.setSize(180, 200);
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));                        // set layout
-        panel.setBorder(BorderFactory.createLineBorder(Color.black, 3));        // add borders
+        panel.setBorder(new LineBorder(Color.black, 3));
 
         panel.setBackground(noteColor());       // set background colors
         bgColor = panel.getBackground();        // stores background color for button panels since it is separate

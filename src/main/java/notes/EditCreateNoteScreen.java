@@ -18,10 +18,11 @@ public class EditCreateNoteScreen extends JPanel {
     public EditCreateNoteScreen(boolean visibility, ListNotesController listNotesController, JLayeredPane layeredPane){
         this.actionListener = new EditCreateUseCase(listNotesController, this);
         layeredPane.add(this, 2);
+        layeredPane.getComponent(0).setVisible(false);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        setBackground(Color.WHITE);
-        setBounds(25, 25, 270, 375);
+        //setBackground(Color.WHITE);
+        setBounds(28, 27, 270, 375);
         setVisible(visibility);
 
         buttons=new JButton[buttonSize];
