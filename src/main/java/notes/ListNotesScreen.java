@@ -16,14 +16,14 @@ public class ListNotesScreen extends JPanel {
     private final JLayeredPane layeredPane;
     private final JPanel noteBlockPanel;
     private final JPanel pinnedBlocks;
-    private static JFrame frame = null;
+    private static JFrame frame;
 
     public ListNotesScreen(boolean visibility, JFrame frame){
         this.frame = frame;
         this.layeredPane = frame.getLayeredPane();
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.WHITE);
-        setSize(280,410);
+        setSize(280, 400);
         setVisible(visibility);
 ;
         JPanel buttonPanel = new JPanel(new FlowLayout());
@@ -38,7 +38,6 @@ public class ListNotesScreen extends JPanel {
         ));
         newNoteButton.addActionListener(new NewNoteUseCase(this.layeredPane, this));
         buttonPanel.add(newNoteButton);
-//        this.add(Box.createVerticalGlue());
 
         JButton tasksButton = new JButton("Tasks");
         buttonDesign(tasksButton, 100, 200);
@@ -58,7 +57,7 @@ public class ListNotesScreen extends JPanel {
         noteBlockPanel.setOpaque(false);
 
         JScrollPane scrollPane = new JScrollPane(noteBlockPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setPreferredSize(new Dimension(200,300));
+        scrollPane.setPreferredSize(new Dimension(200,280));
         scrollPane.setMaximumSize(new Dimension(250, scrollPane.getPreferredSize().height));
         scrollPane.setOpaque(false);
         this.add(scrollPane);

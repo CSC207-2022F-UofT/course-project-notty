@@ -21,7 +21,7 @@ public class EditCreateNoteScreen extends JPanel {
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.WHITE);
-        setSize(272,410);
+        setBounds(25, 25, 270, 375);
         setVisible(visibility);
 
         buttons=new JButton[buttonSize];
@@ -54,15 +54,13 @@ public class EditCreateNoteScreen extends JPanel {
 
         filledDes = "";
         filledTitle = "";
-
-        this.repaint();
-        this.revalidate();
     }
     public void addLabel(String text){
         JLabel label = new JLabel(text);
         label.setAlignmentX(CENTER_ALIGNMENT);
         label.setForeground(new Color(157, 92, 242));
         label.setFont(new Font("Calibri", Font.BOLD, 20));
+        label.setVisible(true);
         this.add(label);
     }
     public void addTextField(String prefilled, JTextField[] fields, int index){
@@ -76,6 +74,7 @@ public class EditCreateNoteScreen extends JPanel {
         ));
         fields[index].setForeground(Color.pink);
         fields[index].setAlignmentX(CENTER_ALIGNMENT);
+        fields[index].setVisible(true);
 
         this.add(fields[index]);
     }
@@ -90,6 +89,7 @@ public class EditCreateNoteScreen extends JPanel {
                 new EmptyBorder(10, 10, 10, 10)
         ));
         button[index].setForeground(Color.white);
+        button[index].setVisible(true);
         this.add(button[index]);
     }
 
@@ -102,7 +102,7 @@ public class EditCreateNoteScreen extends JPanel {
             buttons[1].setText("Back");
         } else {
             buttons[0].setText("Save");
-            buttons[1].setVisible(false);
+            buttons[1].setText("Back");
         }
 
         filledDes = "";

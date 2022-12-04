@@ -24,6 +24,8 @@ public class NotesScreen extends UIScreen {
         panel = super.getPanel();
         JLayeredPane layeredPane = new JLayeredPane();
         layeredPane.setLayout(null);
+        layeredPane.setPreferredSize(new Dimension(280,375));
+        layeredPane.setMaximumSize(new Dimension(280, layeredPane.getPreferredSize().height));
 
         ListNotesScreen listNotesPanel = new ListNotesScreen(true, this);
         noteDataAccess = new NoteDataAccess();
@@ -34,9 +36,8 @@ public class NotesScreen extends UIScreen {
         panel.add(layeredPane);
 
         logOutButton = new JButton("Log Out");
-        buttonDesign(logOutButton, 200, 50);
+        buttonDesign(logOutButton, 270, 20);
         panel.add(logOutButton, BorderLayout.SOUTH);
-
         logOutButton.addActionListener(new ActionListener() {
 
             @Override
