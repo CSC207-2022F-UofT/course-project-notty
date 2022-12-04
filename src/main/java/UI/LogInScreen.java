@@ -4,10 +4,6 @@ import Controller.LogInController;
 import notes.NotesScreen;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -22,44 +18,42 @@ public class LogInScreen extends UIScreen{
     JButton GoBackToWelcome;
     JPasswordField Password;
 
-    private JPanel panel;
-
 
     public LogInScreen() {
         setTitle("LogIn");
         init();
-        this.panel = super.getPanel();
+        JPanel panel = super.getPanel();
 
-        this.panel.add(Box.createVerticalGlue());
+        panel.add(Box.createVerticalGlue());
         username1 = new JLabel("Username");
         uLabelDesign(username1);;
-        this.panel.add(username1);
-        this.panel.add(Box.createVerticalGlue());
+        panel.add(username1);
+        panel.add(Box.createVerticalGlue());
 
         username = new JTextField(100);
         uFieldDesign(username);
-        this.panel.add(username);
-        this.panel.add(Box.createVerticalGlue());
+        panel.add(username);
+        panel.add(Box.createVerticalGlue());
 
         password1 = new JLabel("Password");
         pLabelDesign(password1);
-        this.panel.add(password1);
-        this.panel.add(Box.createVerticalGlue());
+        panel.add(password1);
+        panel.add(Box.createVerticalGlue());
 
         Password = new JPasswordField();
         pFieldDesign(Password);
-        this.panel.add(Password);
-        this.panel.add(Box.createVerticalGlue());
+        panel.add(Password);
+        panel.add(Box.createVerticalGlue());
 
         LogInButton = new JButton("Login");
         buttonDesign(LogInButton, 150, 50);
-        this.panel.add(LogInButton);
-        this.panel.add(Box.createVerticalGlue());
+        panel.add(LogInButton);
+        panel.add(Box.createVerticalGlue());
 
         GoBackToWelcome = new JButton("Back to Welcome");
         buttonDesign(GoBackToWelcome, 150, 50);
-        this.panel.add(GoBackToWelcome);
-        this.panel.add(Box.createVerticalGlue());
+        panel.add(GoBackToWelcome);
+        panel.add(Box.createVerticalGlue());
 
         LogInButton.addActionListener(new ActionListener(){
 
