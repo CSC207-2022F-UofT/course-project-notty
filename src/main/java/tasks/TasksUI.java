@@ -126,12 +126,11 @@ public class TasksUI extends CalendarDataManager{
         mainFrame.setSize(700,400);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setResizable(false);
-        // mainFrame.setIconImage(icon.getImage());
         try{
             UIManager.setLookAndFeel ("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
             SwingUtilities.updateComponentTreeUI(mainFrame) ;
         }catch(Exception e){
-            bottomInfo.setText("ERROR : LookAndFeel setting failed");
+            bottomInfo.setText("Welcome to Task Manager!");
         }
 
         calOpPanel = new JPanel();
@@ -411,8 +410,8 @@ public class TasksUI extends CalendarDataManager{
             String title = JOptionPane.showInputDialog(parent,
                     "New Category Title:",null);
             if(title != null) {
-                UserCaseCreateCategory userCaseCreateCategory = new UserCaseCreateCategory(title);
-                userCaseCreateCategory.action(this.daily);
+                 UserCaseCreateCategory userCaseCreateCategory = new UserCaseCreateCategory(title);
+                 userCaseCreateCategory.action(this.daily);
             }
             readData();
         }

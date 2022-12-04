@@ -1,5 +1,4 @@
 package gateway;
-
 import tasks.Task;
 
 import java.sql.*;
@@ -26,34 +25,15 @@ public class TaskDataAccess {
                 if(pstmt!=null) pstmt.close();
                 if(conn!=null)  conn.close();
             } catch (SQLException e) {
-                e.getMessage();
+                e.printStackTrace();
             }
         }
     }
 
     public void deleteTask(int taskId)
     {
-        Connection conn=null;
-        PreparedStatement pstmt=null;
         String sql= "DELETE FROM tasks WHERE id=?";
-
-        try {
-            conn= DBConnection.connect();
-            pstmt=conn.prepareStatement(sql);
-
-            pstmt.setInt(1, taskId);
-            pstmt.executeUpdate();
-
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }finally {
-            try {
-                if(pstmt!=null) pstmt.close();
-                if(conn!=null)  conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
+        CategoryDataAccess.DeleteDataAccess(taskId, null, null, sql);
     }
 
     public void editTask(int taskId, String title, int categoryId)
@@ -78,7 +58,7 @@ public class TaskDataAccess {
                 if(pstmt!=null) pstmt.close();
                 if(conn!=null)  conn.close();
             } catch (SQLException e) {
-                e.getMessage();
+                e.printStackTrace();
             }
         }
     }
@@ -106,7 +86,7 @@ public class TaskDataAccess {
                 if(st!=null) st.close();
                 if(conn!=null) conn.close();
             } catch (SQLException e) {
-                e.getMessage();
+                e.printStackTrace();
             }
         }
         return arr;
@@ -132,7 +112,7 @@ public class TaskDataAccess {
                 if (pstmt != null) pstmt.close();
                 if (conn != null) conn.close();
             } catch (SQLException e) {
-                e.getMessage();
+                e.printStackTrace();
             }
         }
     }
