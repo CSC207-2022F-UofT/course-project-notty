@@ -6,12 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import notes.EditCreateNotePanel;
-import notes.EditCreateUseCase;
-import notes.ListNotesPanel;
-import notes.Main;
-import notes.NewNoteUseCase;
-import notes.Note;
+
+import notes.App;
+import notes.NotesScreen;
 
 
 public class LogInScreen extends JFrame{
@@ -78,8 +75,7 @@ public class LogInScreen extends JFrame{
 
                 if (result) {
                     // If user was successful in logging in, then the screen should change to the note screen instead.
-                    Main.instanceInit();
-                    Main.init();
+                    new NotesScreen();
                 }
                 else
                     JOptionPane.showMessageDialog(null, "Wrong username and/or password combination- try again!");
