@@ -1,11 +1,9 @@
 package notes;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public class Note {
-    private String title;               // title of the note
-    private String description;         // description of the note
-    private boolean isPinned;           // whether the not note is pinned ot not
+    private final String title;               // title of the note
+    private final String description;         // description of the note
+    private final boolean isPinned;           // whether the not note is pinned ot not
 
 
     public Note(String title, String description) {

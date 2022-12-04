@@ -53,7 +53,7 @@ public class ListNotesScreen extends JPanel {
         button.setAlignmentX(CENTER_ALIGNMENT);
         button.setMaximumSize(new Dimension(width, height));
         button.setBorder(new CompoundBorder(
-                new LineBorder(Color.white, 2),
+                new LineBorder(Color.white, 1),
                 new EmptyBorder(10, 10, 10, 10)
         ));
         button.setForeground(Color.white);
@@ -66,22 +66,13 @@ public class ListNotesScreen extends JPanel {
     public void addNoteBlock(JPanel note, int index, boolean isPinned){
 
         if (!isPinned){
-            noteBlockPanel.add(note, 0);
+            noteBlockPanel.add(note, index);
         } else{
             pinnedBlocks.add(note, 0);
             pinnedBlocks.setPreferredSize(new Dimension(200,220 * pinnedBlocks.getComponents().length));
             pinnedBlocks.setMaximumSize(new Dimension(250, pinnedBlocks.getPreferredSize().height));
         }
     }
-
-//    public int lengthOfBlocks(){
-//        return 2;
-//        if (noteBlockPanel.getComponents().length > 0) {
-//            return noteBlockPanel.getComponents().length - 1;
-//        } else {
-//            return 1;
-//        }
-//    }
 
     public void setPinnedBlocks(){
         if (!(Arrays.equals(pinnedBlocks.getComponents(), new Component[]{} ))) {

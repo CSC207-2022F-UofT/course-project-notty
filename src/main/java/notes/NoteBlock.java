@@ -16,7 +16,6 @@ public class NoteBlock extends JPanel {
     private final ListNotesController listNotesController;
     private final JPanel panel = new JPanel();
     private Color bgColor;
-    private JButton pinButton;
 
     public NoteBlock(ListNotesController listNotesController, String title, String desc, boolean isPinned) {
         this.listNotesController = listNotesController;     // controller for this note
@@ -29,8 +28,6 @@ public class NoteBlock extends JPanel {
     public void init() {
         // initializes the appearance of individual note block or the main panel for each one
         panel.setSize(200, 225);
-//        panel.setPreferredSize(new Dimension(200,225));                         // set dimensions
-//        panel.setMaximumSize(new Dimension(200, panel.getPreferredSize().height));
 
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));                        // set layout
         panel.setBorder(BorderFactory.createLineBorder(Color.black, 3));        // add borders
@@ -66,7 +63,7 @@ public class NoteBlock extends JPanel {
             pinUnpinText = "Pin";               // if not pinned, displays regular "Pin" text
         }
 
-        pinButton = new JButton(pinUnpinText);        // creates pin button
+        JButton pinButton = new JButton(pinUnpinText);        // creates pin button
         buttonDesign(pinButton);
         buttons.add(pinButton);
 
@@ -149,7 +146,7 @@ public class NoteBlock extends JPanel {
 
     public Color noteColor(){
         // picks from 5 colors chosen for the note's background
-        ArrayList<Color> colors = new ArrayList<Color>();
+        ArrayList<Color> colors = new ArrayList<>();
         colors.add(new Color(232, 215, 255));
         colors.add(new Color(255, 211, 232));
         colors.add(new Color(223, 255, 214));
@@ -159,14 +156,6 @@ public class NoteBlock extends JPanel {
 
         return colors.get(new Random().nextInt(4));
     }
-
-    public JButton getPinButton(){return pinButton;};
-
-    public JPanel getPanel() {
-        return panel;
-    }
-
-    public boolean isPinned() {return isPinned;}
 
     public String getTitle() {return title;}
 }

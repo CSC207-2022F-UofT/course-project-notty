@@ -14,7 +14,7 @@ public class EditCreateNoteScreen extends JPanel {
     public static int fieldSize=2;
     String filledTitle = "";
     String filledDes = "";
-    private ActionListener actionListener;
+    private final ActionListener actionListener;
     public EditCreateNoteScreen(boolean visibility, ListNotesController listNotesController, JLayeredPane layeredPane){
         this.actionListener = new EditCreateUseCase(listNotesController, this);
         layeredPane.add(this, 2);

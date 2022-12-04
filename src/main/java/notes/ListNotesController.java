@@ -12,7 +12,7 @@ public class ListNotesController {
     public ListNotesController(INoteDataAccess noteDataAccess, ListNotesScreen listNotesScreen){
         // controls what happens to the list of notes
 
-        this.blocks = new ArrayList<Note>();        // will store all notes in an array
+        this.blocks = new ArrayList<>();        // will store all notes in an array
         this.noteDataAccess = noteDataAccess;       // access to database
         this.listNotesScreen = listNotesScreen;     // access to the UI screen
     }
@@ -28,14 +28,12 @@ public class ListNotesController {
         listNotesScreen.setPinnedBlocks();
     }
 
-    public NoteBlock addNote(String title, String desc, boolean isPinned) {
+    public void addNote(String title, String desc, boolean isPinned) {
         // a note block panel is created and added to the screen
         NoteBlock newNote = new NoteBlock(this, title, desc, isPinned);
         JPanel panel = newNote.createNotePanel();
 
         listNotesScreen.addNoteBlock(panel,this.blocks.size() - 1, isPinned);
-
-        return newNote;
     }
 
     public ListNotesScreen getPanel(){

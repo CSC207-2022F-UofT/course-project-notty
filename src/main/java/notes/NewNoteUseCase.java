@@ -13,12 +13,10 @@ public class NewNoteUseCase implements ActionListener {
     static DBConnection database;
     //data access level (note operations)
     static NoteDataAccess noteDataAccess;
+    private final ListNotesScreen listNotesScreen;
+    private final JLayeredPane layeredPane;
+    private final ListNotesController listNotesController;
 
-
-    private ListNotesScreen listNotesScreen;
-    private EditCreateNoteScreen editCreateNoteScreen;
-    private JLayeredPane layeredPane;
-    private ListNotesController listNotesController;
     public NewNoteUseCase(JLayeredPane layeredPane, ListNotesScreen listNotesScreen) {
         this.layeredPane = layeredPane;
         this.listNotesScreen = listNotesScreen;
@@ -31,6 +29,6 @@ public class NewNoteUseCase implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         listNotesScreen.hideScreen();
         //editCreateNoteScreen.showScreen();
-        EditCreateNoteScreen editCreateNoteScreen = new EditCreateNoteScreen(true, listNotesController, layeredPane);
+        new EditCreateNoteScreen(true, listNotesController, layeredPane);
     }
 }
