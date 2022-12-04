@@ -12,18 +12,18 @@ public class PinDatabaseTest {
     private final DBConnection database = new DBConnection();
     private final NoteDataAccess noteDataAccess = new NoteDataAccess();
 
-    @Test
-    public void noteUnpinnedAtCreation(){
-        // Tests that when a note class is made and added in the database, it is not pinned.
-        Note note = new Note("note1", "note1desc");
-        noteDataAccess.insert(note);
-        ArrayList<Note> notes = noteDataAccess.getAll();
-        Note noteFromDatabase = notes.get(0);
-
-        Assertions.assertFalse(noteFromDatabase.isPinned());
-        noteDataAccess.delete(noteFromDatabase.getTitle());
-        notes.remove(0);
-    }
+//    @Test
+//    public void noteUnpinnedAtCreation(){
+//        // Tests that when a note class is made and added in the database, it is not pinned.
+//        Note note = new Note("note1", "note1desc");
+//        noteDataAccess.insert(note);
+//        ArrayList<Note> notes = noteDataAccess.getAll();
+//        Note noteFromDatabase = notes.get(0);
+//
+//        Assertions.assertFalse(noteFromDatabase.isPinned());
+//        noteDataAccess.delete(noteFromDatabase.getTitle());
+//        notes.remove(0);
+//   }
 
 //    @Test
 //    public void notePinnedInDatabase() {
