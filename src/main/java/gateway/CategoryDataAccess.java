@@ -1,5 +1,6 @@
 package gateway;
 
+import UI.LogInScreen;
 import tasks.Category;
 
 import java.sql.*;
@@ -11,13 +12,14 @@ public class CategoryDataAccess {
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "INSERT INTO categories(title, daily) VALUES(?,?)";
+        String sql= "INSERT INTO categories(title, daily, userName) VALUES(?,?,?)";
 
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
             pstmt.setString(1, category.getTitle());
             pstmt.setObject(2, category.getDaily());
+            pstmt.setString(3, LogInScreen.usernameLogged);
             // pstmt.setArray(3, (Array) category.getTasks());
 
             pstmt.executeUpdate();
@@ -28,17 +30,18 @@ public class CategoryDataAccess {
                 if(pstmt!=null) pstmt.close();
                 if(conn!=null)  conn.close();
             } catch (SQLException e) {
-                e.getMessage();
+                e.printStackTrace();
             }
         }
     }
 
     public void deleteCategory(int categoryId)
     {
-        Connection conn=null;
-        PreparedStatement pstmt=null;
         String sql= "DELETE FROM categories WHERE id=?";
+        DeleteDataAccess(categoryId, null, null, sql);
+    }
 
+    static void DeleteDataAccess(int categoryId, Connection conn, PreparedStatement pstmt, String sql) {
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
@@ -78,17 +81,17 @@ public class CategoryDataAccess {
                 if(pstmt!=null) pstmt.close();
                 if(conn!=null)  conn.close();
             } catch (SQLException e) {
-                e.getMessage();
+                e.printStackTrace();
             }
         }
     }
     public ArrayList<Category> getCategories()
     {
-        ArrayList<Category> arr =new ArrayList<Category>();
+        ArrayList<Category> arr =new ArrayList<>();
         Connection conn = null;
         Statement st = null;
         ResultSet rs = null;
-        String sql = "SELECT id, title, daily FROM categories";
+        String sql = "SELECT id, title, daily, userName FROM categories";
         try {
             conn = DBConnection.connect();
             st = conn.createStatement();
@@ -99,6 +102,7 @@ public class CategoryDataAccess {
                 temp.setTitle(rs.getString("title"));
                 String daily = rs.getString("daily");
                 temp.setDaily(LocalDate.parse(daily));
+                temp.setUserName(rs.getString("userName"));
                 arr.add(temp);
             }
         } catch (SQLException e) {
@@ -109,7 +113,7 @@ public class CategoryDataAccess {
                 if(st!=null) st.close();
                 if(conn!=null) conn.close();
             } catch (SQLException e) {
-                e.getMessage();
+                e.printStackTrace();
             }
         }
         return arr;
