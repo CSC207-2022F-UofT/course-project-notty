@@ -1,25 +1,27 @@
 package tasks;
-import gateway.DBConnection;
-import javax.swing.*;
-import java.awt.*;
-import java.sql.*;
-import java.util.ArrayList;
 
 public class Task {
+    private int id;
     private String title;
-    private String date;
-    public Task(String title, String date)
+    private int categoryId;
+    private int marked;
+    public Task(String title, int categoryId)
     {
         this.title = title;
-        this.date = date;
+        this.categoryId = categoryId;
+    }
+    public Task(int id, String title, int categoryId, int marked)
+    {
+        this.id = id;
+        this.title = title;
+        this.categoryId = categoryId;
+        this.marked = marked;
     }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public String getDate() {
-        return date;
-    }
-
+    public int getId() { return this.id; }
+    public void setId(int id) { this.id = id; }
+    public String getTitle() { return this.title; }
+    public void setTitle(String title) { this.title = title; }
+    public int getCategoryId() { return this.categoryId; }
+    public int getMarked() { return this.marked; }
 }

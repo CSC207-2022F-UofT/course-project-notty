@@ -95,7 +95,7 @@ public class NoteComponent extends JComponent {
 
     public void removeNoteFromView(String title) {
         this.listNotesPanel.noteDataAccess.delete(title);
-        listNotesPanel.blocks.removeIf(note -> note.getTitle().equals(title));
+        ListNotesPanel.blocks.removeIf(note -> note.getTitle().equals(title));
         listNotesPanel.getNoteBlockPanel().revalidate();
     }
 }
