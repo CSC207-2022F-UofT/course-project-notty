@@ -1,23 +1,14 @@
 package notes;
 import gateway.INoteDataAccess;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Vector;
 
 public class ListNotesPanel {
     public static JPanel panel;
     private static JPanel noteBlockPanel;
-    private JScrollPane sp;
-    private JButton[] buttons;
-    private int buttonsSize=2;
-    private JLabel[] labels;
-    private int labelSize=1;
+
     public static INoteDataAccess noteDataAccess;
 
     public ActionListener actionListener;
@@ -26,7 +17,7 @@ public class ListNotesPanel {
         this.actionListener = actionListener;
         init();
         panel.setVisible(visibility);
-        this.noteDataAccess = noteDataAccess;
+        ListNotesPanel.noteDataAccess = noteDataAccess;
     }
 
     public ListNotesPanel() {
@@ -34,7 +25,7 @@ public class ListNotesPanel {
     }
 
     public void setBlocks(ArrayList<Note> blocks) {
-        this.blocks = blocks;
+        ListNotesPanel.blocks = blocks;
         for (Note block : blocks) {
             addNote(block.getTitle(), block.getDescription(), block.isPinned());
         }
@@ -46,7 +37,7 @@ public class ListNotesPanel {
     }
 
     private void init(){
-        blocks=new ArrayList<Note>();
+        blocks= new ArrayList<>();
         panel=new JPanel();
         panel.setSize(new Dimension(Main.mainWidth, Main.mainHeight));
         panel.setLayout(null);
@@ -59,9 +50,8 @@ public class ListNotesPanel {
         JScrollPane sp = new JScrollPane(noteBlockPanel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         sp.setBounds(15, 74, 288, 350);
         panel.add(sp);
-        buttons=new JButton[buttonsSize];
-        int labelSize = 1;
-        JLabel[] labels = new JLabel[labelSize];
+        int buttonsSize = 2;
+        JButton[] buttons = new JButton[buttonsSize];
         buttons[0]=new JButton("New note");
         panel.add(buttons[0]);
         buttons[0].setSize(400,400);
