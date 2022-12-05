@@ -32,7 +32,7 @@ public class ListNotesScreen extends JPanel {
         JButton newNoteButton = new JButton("New Note");
         buttonDesign(newNoteButton, 100, 200);
         newNoteButton.setBorder(new CompoundBorder(
-                new LineBorder(Color.white, 7),
+                new LineBorder(Color.white, 3),
                 new EmptyBorder(10, 10, 10, 10)
 
         ));
@@ -42,12 +42,14 @@ public class ListNotesScreen extends JPanel {
         JButton tasksButton = new JButton("Tasks");
         buttonDesign(tasksButton, 100, 200);
         tasksButton.setBorder(new CompoundBorder(
-                new LineBorder(Color.white, 7),
+                new LineBorder(Color.white, 3),
                 new EmptyBorder(10, 10, 10, 10)
 
         ));
         tasksButton.addActionListener(new ListenForTaskButton());
+        buttonPanel.setBackground(Color.white);
         buttonPanel.add(tasksButton);
+
         this.add(buttonPanel);
 
         noteBlockPanel = new JPanel();
