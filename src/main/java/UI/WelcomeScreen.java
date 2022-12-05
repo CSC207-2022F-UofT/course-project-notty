@@ -1,15 +1,9 @@
 package UI;
 
 import javax.swing.*;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
-import java.util.Objects;
 
 
 public class WelcomeScreen extends UIScreen{
@@ -65,8 +59,6 @@ public class WelcomeScreen extends UIScreen{
                 dispose();
                 LogInScreen frame = new LogInScreen();
                 frame.setVisible(true);
-
-
             }
         });
 
