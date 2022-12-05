@@ -6,54 +6,55 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class EditCreateUseCase implements ActionListener {
-    private final ListNotesController listNotesController;
-    private final EditCreateNoteScreen editCreateNoteScreen;
+    private final ListNotesPanel listNotesPanel;
     private final ArrayList<Note> blocks;
 
-    public EditCreateUseCase(ListNotesController listNotesController, EditCreateNoteScreen editCreateNoteScreen){
-        this.editCreateNoteScreen = editCreateNoteScreen;
-        this.listNotesController = listNotesController;
-        this.blocks = listNotesController.blocks;
-        //this.editCreateNoteScreen.hideLayer();
+    public EditCreateUseCase(ListNotesPanel listNotesPanel){
+        this.listNotesPanel = listNotesPanel;
+        this.blocks = listNotesPanel.blocks;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource().toString().contains("Create") || e.getSource().toString().contains("Save")  ){
-            if(!(editCreateNoteScreen.getFilledTitle().isEmpty()) && !(editCreateNoteScreen.getFilledDes().isEmpty())){
-                for (Note block : this.blocks) {
-                    if (block.getTitle().equals(editCreateNoteScreen.getFilledTitle())) {
-                        JOptionPane.showMessageDialog(editCreateNoteScreen, "Please enter a different title!", "Warning", JOptionPane.WARNING_MESSAGE);
-                        editCreateNoteScreen.setFilledTitle("");
+
+        if(e.getSource().toString().contains("Create") || e.getSource().toString().contains("Edit")  ){
+            if(!(EditCreateNotePanel.fields[0].getText().isEmpty()) && !(EditCreateNotePanel.fields[1].getText().isEmpty())){
+                for(int i=0;i<this.blocks.size();i++) {
+                    if(this.blocks.get(i).getTitle().equals(EditCreateNotePanel.fields[0].getText())) {
+                        JOptionPane.showMessageDialog(EditCreateNotePanel.panel, "Please enter a different title!","Warning", JOptionPane.WARNING_MESSAGE);
+                        EditCreateNotePanel.fields[0].setText("");
                         return;
                     }
                 }
-                Note note = new Note(editCreateNoteScreen.getFilledTitle(), editCreateNoteScreen.getFilledDes());
-                this.blocks.add(note);
-                listNotesController.noteDataAccess.insert(note);
-
-                editCreateNoteScreen.setFilledTitle("");
-                editCreateNoteScreen.setFilledDes("");
-                editCreateNoteScreen.hideScreen();
-
-                listNotesController.addNote(note.getTitle(), note.getDescription(), note.isPinned());
-                listNotesController.getPanel().revalidate();
-                listNotesController.getPanel().repaint();
-                listNotesController.getPanel().setVisible(true);
+                EditCreateNotePanel.block=new Note(EditCreateNotePanel.fields[0].getText(), EditCreateNotePanel.fields[1].getText());
+                this.blocks.add(EditCreateNotePanel.block);
+                this.listNotesPanel.noteDataAccess.insert(EditCreateNotePanel.block);
+                EditCreateNotePanel.fields[0].setText("");
+                EditCreateNotePanel.fields[1].setText("");
+                EditCreateNotePanel.panel.setVisible(false);
+                this.listNotesPanel.addNote(EditCreateNotePanel.block.getTitle(), EditCreateNotePanel.block.getDescription(),
+                        EditCreateNotePanel.block.isPinned());
+                Main.listNotes.getPanel().setVisible(true);
             }
             else{
-                JOptionPane.showMessageDialog(editCreateNoteScreen, "Please fill in all fields!","Warning", JOptionPane.WARNING_MESSAGE);
+                JOptionPane.showMessageDialog(EditCreateNotePanel.panel, "Please fill in all fields!","Warning", JOptionPane.WARNING_MESSAGE);
             }
         }
-
-        if(e.getSource().equals(editCreateNoteScreen.getBackButton())){
-            editCreateNoteScreen.setFilledTitle("");
-            editCreateNoteScreen.setFilledDes("");
-            editCreateNoteScreen.hideScreen();
-
-            listNotesController.getPanel().revalidate();
-            listNotesController.getPanel().repaint();
-            listNotesController.getPanel().setVisible(true);
+        if(!EditCreateNotePanel.filledTitle.equals("")&&e.getSource().toString().contains("Back"))
+        {
+            EditCreateNotePanel.block=new Note(EditCreateNotePanel.filledTitle, EditCreateNotePanel.filledDes);
+            ListNotesPanel.blocks.add(EditCreateNotePanel.block);
+            ListNotesPanel.noteDataAccess.insert(EditCreateNotePanel.block);
+            ListNotesPanel notesPanel = new ListNotesPanel();
+            notesPanel.addNote(EditCreateNotePanel.block.getTitle(), EditCreateNotePanel.block.getDescription(), EditCreateNotePanel.block.isPinned());
+        }
+        EditCreateNotePanel.filledTitle="";
+        EditCreateNotePanel.filledDes="";
+        if(e.getSource().equals(EditCreateNotePanel.buttons[1])){
+            EditCreateNotePanel.fields[0].setText("");
+            EditCreateNotePanel.fields[1].setText("");
+            EditCreateNotePanel.panel.setVisible(false);
+            Main.listNotes.getPanel().setVisible(true);
         }
     }
 }
