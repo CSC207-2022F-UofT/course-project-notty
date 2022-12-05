@@ -83,7 +83,7 @@ public class LogInScreen extends UIScreen{
                     Main.init();
                 }
                 else
-                    JOptionPane.showMessageDialog(null, "Wrong username and/or password combination- try again!");
+                    JOptionPane.showMessageDialog(null, "Wrong username and/or password combination- try again");
             }
 
         });
