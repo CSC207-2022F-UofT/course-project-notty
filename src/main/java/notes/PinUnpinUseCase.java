@@ -1,7 +1,6 @@
 package notes;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,10 +8,13 @@ public class PinUnpinUseCase implements ActionListener, Pinnable {
     private final JPanel panel;
     private final JButton button;
     private final String title;
-    private final ListNotesController listNotesController;
+    private final JPanel listPanel;
+    private final ListNotesPanel listNotesPanel;
 
-    public PinUnpinUseCase(ListNotesController listNotesController, JPanel panel, JButton button, String title){
-        this.listNotesController = listNotesController;
+
+    public PinUnpinUseCase(ListNotesPanel listNotesPanel, JPanel listPanel, JPanel panel, JButton button, String title){
+        this.listNotesPanel = listNotesPanel;
+        this.listPanel = listPanel;
         this.panel = panel;
         this.button = button;
         this.title = title;
@@ -20,47 +22,27 @@ public class PinUnpinUseCase implements ActionListener, Pinnable {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (button.getText().equals("Pin")) {
-            button.setText("Unpin");
+        if (this.button.getText().equals("Pin")) {
+            this.button.setText("Unpin");
             pin(title);
-            panel.add(pinIcon(), 0);
-            listNotesController.getPanel().deleteNoteBlock(panel);
-            listNotesController.getPanel().addNoteBlock(panel, 0, true);
+            this.listPanel.remove(this.panel);
+            this.listPanel.add(this.panel, 0);
 
-        } else if (this.button.getText().equals("Unpin")) {
-            button.setText("Pin");
+        } else if (this.button.getText().equals("Unpin")){
+            this.button.setText("Pin");
             unpin(title);
-            panel.remove(0);
-            listNotesController.getPanel().removeFromPinned(panel);
-            listNotesController.getPanel().addNoteBlock(panel, listNotesController.blocks.size() - 1, false);
+            this.listPanel.remove(this.panel);
+            this.listPanel.add(this.panel, this.listNotesPanel.blocks.size() - 1);
         }
-        listNotesController.getPanel().setPinnedBlocks();
-        listNotesController.getPanel().revalidate();
-        listNotesController.getPanel().repaint();
     }
-
 
     @Override
     public void pin(String title) {
-        listNotesController.noteDataAccess.pinUnpin(title, true);
+        listNotesPanel.noteDataAccess.pinUnpin(title, true);
     }
 
     @Override
     public void unpin(String title){
-        listNotesController.noteDataAccess.pinUnpin(title, false);
-    }
-
-    private JLabel pinIcon(){
-        String path = "/UI/pin.png";
-        ImageIcon icon = new ImageIcon(getClass().getResource(path));
-        Image image = icon.getImage(); // transform it
-        Image newimg = image.getScaledInstance(30, 30, Image.SCALE_AREA_AVERAGING); // scale it the smooth way
-        icon = new ImageIcon(newimg);
-
-        JLabel pinLabel = new JLabel(icon, SwingConstants.RIGHT);
-        pinLabel.setPreferredSize(new Dimension(300,30));
-        pinLabel.setMaximumSize(new Dimension(300, pinLabel.getPreferredSize().height));
-        pinLabel.setBackground(Color.black);
-        return pinLabel;
+        listNotesPanel.noteDataAccess.pinUnpin(title, false);
     }
 }

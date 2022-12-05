@@ -2,8 +2,10 @@ package UI;
 import Controller.CreateAccountController;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class SignUpScreen extends UIScreen{
     JLabel password1;

@@ -11,7 +11,7 @@ public class NoteDataAccess implements INoteDataAccess{
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "INSERT INTO notes(title, description, isPinned, username) VALUES(?, ?, ?, ?)";
+        String sql= "INSERT INTO notes(title, description, isPinned, dateTime, username) VALUES(?, ?, ?, ?, ?)";
 
         try {
             conn= DBConnection.connect();
@@ -20,7 +20,8 @@ public class NoteDataAccess implements INoteDataAccess{
             pstmt.setString(1, note.getTitle());
             pstmt.setString(2, note.getDescription());
             pstmt.setBoolean(3, note.isPinned());
-            pstmt.setString(4, LogInScreen.usernameLogged);
+            pstmt.setString(4, note.getDateTime());
+            pstmt.setString(5, LogInScreen.usernameLogged);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -91,7 +92,7 @@ public class NoteDataAccess implements INoteDataAccess{
         ArrayList<Note> notes=null;
         Connection conn=null;
         Statement st=null;
-        ResultSet rs=null;        String sql= "SELECT id, title, description, isPinned FROM notes WHERE username='"+LogInScreen.usernameLogged + "'";
+        ResultSet rs=null;        String sql= "SELECT id, title, description, isPinned, dateTime FROM notes WHERE username='"+LogInScreen.usernameLogged + "'";
         try {
             conn=DBConnection.connect();
             st=conn.createStatement();
@@ -99,7 +100,7 @@ public class NoteDataAccess implements INoteDataAccess{
 
             while(rs.next()) {
                 blocks.add(new Note(rs.getString("title"), rs.getString("description"),
-                        rs.getBoolean("isPinned")));
+                        rs.getBoolean("isPinned"), rs.getString("dateTime")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

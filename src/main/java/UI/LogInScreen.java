@@ -1,11 +1,20 @@
 package UI;
 
 import Controller.LogInController;
-import notes.NotesScreen;
 
 import javax.swing.*;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import notes.EditCreateNotePanel;
+import notes.EditCreateUseCase;
+import notes.ListNotesPanel;
+import notes.Main;
+import notes.NewNoteUseCase;
+import notes.Note;
 
 
 public class LogInScreen extends UIScreen{
@@ -18,42 +27,44 @@ public class LogInScreen extends UIScreen{
     JButton GoBackToWelcome;
     JPasswordField Password;
 
+    private JPanel panel;
+
 
     public LogInScreen() {
         setTitle("LogIn");
         init();
-        JPanel panel = super.getPanel();
+        this.panel = super.getPanel();
 
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(Box.createVerticalGlue());
         username1 = new JLabel("Username");
         uLabelDesign(username1);;
-        panel.add(username1);
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(username1);
+        this.panel.add(Box.createVerticalGlue());
 
         username = new JTextField(100);
         uFieldDesign(username);
-        panel.add(username);
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(username);
+        this.panel.add(Box.createVerticalGlue());
 
         password1 = new JLabel("Password");
         pLabelDesign(password1);
-        panel.add(password1);
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(password1);
+        this.panel.add(Box.createVerticalGlue());
 
         Password = new JPasswordField();
         pFieldDesign(Password);
-        panel.add(Password);
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(Password);
+        this.panel.add(Box.createVerticalGlue());
 
         LogInButton = new JButton("Login");
         buttonDesign(LogInButton, 150, 50);
-        panel.add(LogInButton);
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(LogInButton);
+        this.panel.add(Box.createVerticalGlue());
 
         GoBackToWelcome = new JButton("Back to Welcome");
         buttonDesign(GoBackToWelcome, 150, 50);
-        panel.add(GoBackToWelcome);
-        panel.add(Box.createVerticalGlue());
+        this.panel.add(GoBackToWelcome);
+        this.panel.add(Box.createVerticalGlue());
 
         LogInButton.addActionListener(new ActionListener(){
 
@@ -67,7 +78,8 @@ public class LogInScreen extends UIScreen{
                     // If user was successful in logging in, then the screen should change to the note screen instead.
                     usernameLogged = username.getText();
                     dispose();
-                    new NotesScreen();
+                    Main.instanceInit();
+                    Main.init();
                 }
                 else
                     JOptionPane.showMessageDialog(null, "Wrong username and/or password combination- try again!");
