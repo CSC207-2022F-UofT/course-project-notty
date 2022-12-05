@@ -1,8 +1,10 @@
 package tasks;
+import UI.LogInScreen;
 import gateway.CategoryDataAccess;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class UserCaseReadCategory {
     private final int year;
@@ -19,8 +21,10 @@ public class UserCaseReadCategory {
         CategoryDataAccess categoryDataAccess = new CategoryDataAccess();
         ArrayList<Category> list = categoryDataAccess.getCategories();
         ArrayList<Category> categoryList = new ArrayList<>();
+        String currentUsername = LogInScreen.usernameLogged;
+
         for (Category category : list) {
-            if (daily.isEqual(category.getDaily())) {
+            if (daily.isEqual(category.getDaily()) && Objects.equals(category.getUserName(),currentUsername)) {
                 categoryList.add(category);
             }
         }
