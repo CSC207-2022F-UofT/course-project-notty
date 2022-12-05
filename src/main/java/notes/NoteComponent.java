@@ -9,6 +9,8 @@ import java.util.Random;
 public class NoteComponent extends JComponent {
     private final String title;
     private final String desc;
+
+    private Item item;
     private final boolean isPinned;
     private final JPanel listNotes;
     private final ListNotesPanel listNotesPanel;
@@ -34,6 +36,7 @@ public class NoteComponent extends JComponent {
         this.desc = desc;
         this.isPinned = isPinned;
         this.listNotes = listNotes;
+        this.item = item;
         init();
     }
 
@@ -51,6 +54,12 @@ public class NoteComponent extends JComponent {
         field1.setEditable(false);
         field1.setVisible(true);
         panel.add(field1);
+
+        JTextField field2 = new JTextField();
+        field2.setText("Add your tag here: " + String.valueOf(item));
+        field2.setEditable(true);
+        field2.setVisible(true);
+        panel.add(field2);
 
         JButton button = new JButton("Edit");
         button.setVisible(true);
@@ -99,3 +108,4 @@ public class NoteComponent extends JComponent {
         listNotesPanel.getNoteBlockPanel().revalidate();
     }
 }
+

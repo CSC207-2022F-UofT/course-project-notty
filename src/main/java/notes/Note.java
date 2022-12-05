@@ -9,6 +9,8 @@ public class Note {
     private String title;
     private String description;
     private boolean isPinned;
+
+    private String item;
     private LocalDateTime date;
     public Note(String title, String description)
     {

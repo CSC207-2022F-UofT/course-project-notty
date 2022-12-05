@@ -26,6 +26,8 @@ public class Main {
 
     static JButton logOutButton;
 
+
+
     public static void init()
     {
         mainFrame.setTitle("Notty");
@@ -50,9 +52,8 @@ public class Main {
                 WelcomeScreen frame = new WelcomeScreen();
                 frame.setVisible(true);
 
-
-
             }
+
 
         });
 

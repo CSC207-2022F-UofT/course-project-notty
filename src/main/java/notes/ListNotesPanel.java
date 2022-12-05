@@ -4,9 +4,8 @@ import tasks.TasksUI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentListener;
+import java.awt.Component;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Vector;
@@ -18,6 +17,7 @@ public class ListNotesPanel {
     private JButton[] buttons;
     private int buttonsSize=2;
     private JLabel[] labels;
+    private JTextField search;
     private int labelSize=1;
     public static INoteDataAccess noteDataAccess;
 
@@ -34,6 +34,9 @@ public class ListNotesPanel {
 
     }
 
+    public static void addNote(String title, String description) {
+    }
+
     public void setBlocks(ArrayList<Note> blocks) {
         this.blocks = blocks;
         for (Note block : blocks) {
@@ -45,6 +48,9 @@ public class ListNotesPanel {
         NoteComponent newNote = new NoteComponent(this, noteBlockPanel, title, desc, isPinned);
         newNote.createNotePanel();
     }
+
+    private EventTags event;
+
 
     private void init(){
         blocks=new ArrayList<Note>();
@@ -63,12 +69,20 @@ public class ListNotesPanel {
         buttons=new JButton[buttonsSize];
         int labelSize = 1;
         JLabel[] labels = new JLabel[labelSize];
+        int JTextFieldSize = 1;
+        JTextField search = new JTextField("Search here");
+        panel.add(search);
+        search.setSize(400,400);
+        search.setLayout(null);
+        search.setVisible(true);
+        search.setBounds(19, 5, 293, 20);
+        search.setVisible(true);
         buttons[0]=new JButton("New note");
         panel.add(buttons[0]);
         buttons[0].setSize(400,400);
         buttons[0].setLayout(null);
         buttons[0].setVisible(true);
-        buttons[0].setBounds(19, 19, 117, 42);
+        buttons[0].setBounds(19, 29, 117, 42);
         buttons[0].addActionListener(this.actionListener);
         buttons[1]=new JButton("Tasks");
         buttons[1].addActionListener(new ListenForTaskButton());
@@ -76,10 +90,10 @@ public class ListNotesPanel {
         buttons[1].setSize(400,400);
         buttons[1].setLayout(null);
         buttons[1].setVisible(true);
-        buttons[1].setBounds(200, 19, 117, 42);
+        buttons[1].setBounds(200, 29, 117, 42);
         //buttons[1].addActionListener(this.actionListener);
-    }
 
+    }
 
     public JPanel getPanel(){
         return panel;
@@ -96,4 +110,5 @@ public class ListNotesPanel {
             Main.mainFrame.dispose();
         }
     }
+
 }
