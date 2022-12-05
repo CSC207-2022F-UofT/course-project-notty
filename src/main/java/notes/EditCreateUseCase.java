@@ -14,6 +14,7 @@ public class EditCreateUseCase implements ActionListener {
         this.editCreateNoteScreen = editCreateNoteScreen;
         this.listNotesController = listNotesController;
         this.blocks = listNotesController.blocks;
+        //this.editCreateNoteScreen.hideLayer();
     }
 
     @Override

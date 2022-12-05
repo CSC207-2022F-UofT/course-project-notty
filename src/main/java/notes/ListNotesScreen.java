@@ -97,7 +97,6 @@ public class ListNotesScreen extends JPanel {
 
         if (!isPinned){
             noteBlockPanel.add(note);
-            noteBlockPanel.add(Box.createRigidArea(new Dimension(0, 20)));
         } else{
             pinnedBlocks.add(note, index);
             pinnedBlocks.setPreferredSize(new Dimension(200,220 * pinnedBlocks.getComponents().length));

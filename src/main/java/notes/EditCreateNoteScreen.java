@@ -12,11 +12,13 @@ public class EditCreateNoteScreen extends JPanel {
     public static int buttonSize = 2;
     public static JTextField[] fields;
     public static int fieldSize=2;
+    private final JLayeredPane layeredPane;
     String filledTitle = "";
     String filledDes = "";
     private final ActionListener actionListener;
     public EditCreateNoteScreen(boolean visibility, ListNotesController listNotesController, JLayeredPane layeredPane){
         this.actionListener = new EditCreateUseCase(listNotesController, this);
+        this.layeredPane = layeredPane;
         layeredPane.add(this, 2);
         layeredPane.getComponent(0).setVisible(false);
 
@@ -133,4 +135,8 @@ public class EditCreateNoteScreen extends JPanel {
         return buttons[1];
     }
 
+//    public void hideLayer() {
+//        layeredPane.getComponent(0).setVisible(false);
+//        layeredPane.getComponent(2).setVisible(true);
+//    }
 }
