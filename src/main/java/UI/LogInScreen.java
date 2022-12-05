@@ -19,6 +19,7 @@ import notes.Note;
 
 public class LogInScreen extends UIScreen{
     public static String usernameLogged;
+    public static String passwordLogged;
     JLabel password1;
     JLabel username1;
     JTextField username;
@@ -75,8 +76,8 @@ public class LogInScreen extends UIScreen{
                 boolean result = logInController.create();
 
                 if (result) {
-                    // If user was successful in logging in, then the screen should change to the note screen instead.
                     usernameLogged = username.getText();
+                    passwordLogged = String.valueOf(Password.getPassword());
                     dispose();
                     Main.instanceInit();
                     Main.init();
@@ -93,6 +94,7 @@ public class LogInScreen extends UIScreen{
             public void actionPerformed(ActionEvent e) {
                 WelcomeScreen frame = new WelcomeScreen();
                 frame.setVisible(true);
+                dispose();
             }
 
         });

@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 public class SignUpScreen extends UIScreen{
+
+    public static String usernameSigned;
+    public static String passwordSigned;
     JLabel password1;
     JLabel username1;
     JTextField username;
@@ -60,6 +63,8 @@ public class SignUpScreen extends UIScreen{
 
                 CreateAccountController createAccountController = new CreateAccountController(username.getText(), String.valueOf(Password.getPassword()));
                 boolean result = createAccountController.create();
+                passwordSigned = String.valueOf(Password.getPassword());
+                usernameSigned = username.getText();
 
                 if (result)
                     JOptionPane.showMessageDialog(null, "Sign Up Successful, please login to access your Notty");
