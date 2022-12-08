@@ -42,6 +42,7 @@ public class NotesScreen extends UIScreen {
         //create the edit create note screen
         EditCreateNoteScreen editCreateNoteScreen = new EditCreateNoteScreen(listNotesController);
         editCreateNoteScreen.setVisible(false);
+        listNotesPanel.setEditCreateScreen(editCreateNoteScreen);
         layeredPane.add(editCreateNoteScreen, 2);
 
         panel.add(layeredPane);

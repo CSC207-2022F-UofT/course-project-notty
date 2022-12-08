@@ -25,6 +25,8 @@ public class EditNoteUseCase implements ActionListener {
         listNotesController.removeNoteFromView(title);
         listNotesController.getPanel().deleteNoteBlock(panel);
         listNotesController.getPanel().getLayeredPane().getComponent(0).setVisible(false);
+
+        listNotesController.getPanel().getEditCreateScreen().showScreen(title, desc);
         listNotesController.getPanel().getLayeredPane().getComponent(1).setVisible(true);
     }
 }

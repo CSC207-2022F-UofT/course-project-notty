@@ -17,7 +17,8 @@ public class ListNotesScreen extends JPanel {
     private final JLayeredPane layeredPane;
     private final JPanel noteBlockPanel;
     private final JPanel pinnedBlocks;
-    private JFrame frame;
+    private final JFrame frame;
+    private EditCreateNoteScreen editCreateScreen;
 
     public ListNotesScreen(boolean visibility, JFrame frame){
         this.frame = frame;
@@ -128,4 +129,11 @@ public class ListNotesScreen extends JPanel {
 
     public JLayeredPane getLayeredPane(){ return layeredPane;}
 
+    public void setEditCreateScreen(EditCreateNoteScreen e){
+        this.editCreateScreen = e;
+    }
+
+    public EditCreateNoteScreen getEditCreateScreen() {
+        return editCreateScreen;
+    }
 }

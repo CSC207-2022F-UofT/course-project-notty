@@ -1,6 +1,6 @@
 package tasks;
 
-import notes.NotesScreen;
+import notes.Screens.NotesScreen;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
