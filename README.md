@@ -1,8 +1,10 @@
-# Project Template
+# How to run Notty
 
-This is a template repository for CSC 207 projects. 
-This repository contains starter code for a gradle project.
-It also contains workflow documents that give instructions on how to manage your Github repository and how to use Github Projects for efficient collaboration.
+1. Clone and open the repository in IntelliJ.
+2. Setup the JDK.
+3. Select amazon/coretto 11 java 11.
+4. In the UI folder, right click on the App class.
+5. Click on Run 'App.main()'
 
 ## Checklist For Your Project
 - [ ] Verify the correct settings for your project repository
