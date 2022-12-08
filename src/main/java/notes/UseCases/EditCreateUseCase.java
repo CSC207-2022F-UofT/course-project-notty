@@ -54,13 +54,21 @@ public class EditCreateUseCase implements ActionListener {
         }
 
         if(e.getSource().equals(editCreateNoteScreen.getBackButton())){
+            Note note = new Note(editCreateNoteScreen.getFilledTitle(), editCreateNoteScreen.getFilledDes());
+            this.blocks.add(note);
+            listNotesController.noteDataAccess.insert(note);
+            listNotesController.addNote(note.getTitle(), note.getDescription(), note.isPinned());
+
             editCreateNoteScreen.setFilledTitle("");
             editCreateNoteScreen.setFilledDes("");
             editCreateNoteScreen.hideScreen();
 
-            listNotesController.getPanel().setVisible(true);
             listNotesController.getPanel().revalidate();
             listNotesController.getPanel().repaint();
+            listNotesController.getPanel().getLayeredPane().getComponent(0).setVisible(true);
+            listNotesController.getPanel().setVisible(true);
+
         }
+
     }
 }
