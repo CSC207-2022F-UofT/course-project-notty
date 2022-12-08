@@ -1,14 +1,12 @@
 package notes;
 
-import java.util.Objects;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 
 public class Note {
     private String title;
-    private String description;
-    private boolean isPinned;
+    private final String description;
+    private final boolean isPinned;
     private LocalDateTime date;
     public Note(String title, String description)
     {
@@ -24,6 +22,16 @@ public class Note {
         this.isPinned = isPinned;
         this.date = LocalDateTime.parse(dateTime);
     }
+
+    public Note(String title, String description, boolean isPinned) {
+        this.title = title;
+        this.description = description;
+
+        // this constructor takes in a boolean of whether the note is pinned or not
+        // was used mainly if setting up notes stored in the database
+        this.isPinned = isPinned;
+    }
+
     public String getTitle() {
         return title;
     }
@@ -35,10 +43,6 @@ public class Note {
     public String getDescription() {
         return description;
     }
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
 
     @Override
     public boolean equals(Object o) {
