@@ -27,7 +27,6 @@ If it is a valid combination, user will be prompted to login with the newly crea
 their new account.
 ![](/Users/dhanyajagannathan/IdeaProjects/course-project-notty_finalone/images/SignUp Screen.png)
 
-
 If the user wishes to log in, they can click login, and they will be prompted to this screen.
 If the credentials they entered are valid, user will be able to login to their account.
 ![](/Users/dhanyajagannathan/IdeaProjects/course-project-notty_finalone/images/Log In Screen.png)
