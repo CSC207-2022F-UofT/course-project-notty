@@ -1,4 +1,5 @@
 See presentation of the product here: [Presentation.pptx](https://utoronto-my.sharepoint.com/:p:/r/personal/kateryna_kondratiuk_mail_utoronto_ca/Documents/Presentation.pptx?d=wdcbf948c4d3c468997be0e8c40a652ca&csf=1&web=1&e=sCBrEO)
+See user story list & product development process: https://docs.google.com/document/d/1WMoYAnK_rc7lyZ81jEHgc-kMHJjea3rPC5QUTU0X9Rc/edit?usp=sharing
 # Specifications
 1. The user is able to create their own account to manage notes and tasks. When the user is authorized, the program allows them to make use of the following features.
 2. Note Taking part includes creating a note, editing, and removing it. Also, user can label and search each note by title or description. Last but no least, we can pin and unpin notes, so that important information is never lost.  
