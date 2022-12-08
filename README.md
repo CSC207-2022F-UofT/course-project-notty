@@ -26,6 +26,7 @@ prompting the user to decide whether they want to log in or sign up into a Notty
 If the user wishes to sign up, they will be prompted to this screen to enter a unique username and password.
 If it is a valid combination, user will be prompted to login with the newly created credentials into
 their new account.
+![image](https://user-images.githubusercontent.com/113145355/206586927-9219442a-596b-48a7-b446-5b2ddbddf12d.png)
 
 
 If the user wishes to log in, they can click login, and they will be prompted to this screen.
