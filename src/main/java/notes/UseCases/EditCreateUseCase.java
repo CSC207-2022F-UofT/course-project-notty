@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class EditCreateUseCase implements ActionListener {
+    // this class is responsible for listening in the screen and determining which buttons are pressed by the user
     private final ListNotesController listNotesController;
     private final EditCreateNoteScreen editCreateNoteScreen;
     private final ArrayList<Note> blocks;
