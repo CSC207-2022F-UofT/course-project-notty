@@ -16,6 +16,7 @@ See user story list & product development process: https://docs.google.com/docum
 
 # UI Capture & Explanations 
 
+
 1) Accounts
 The user will first run App.main() in the UI folder, and this welcome screen will pop up,
 prompting the user to decide whether they want to log in or sign up into a Notty account.
