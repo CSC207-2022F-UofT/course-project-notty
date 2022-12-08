@@ -54,10 +54,12 @@ public class EditCreateUseCase implements ActionListener {
         }
 
         if(e.getSource().equals(editCreateNoteScreen.getBackButton())){
-            Note note = new Note(editCreateNoteScreen.getFilledTitle(), editCreateNoteScreen.getFilledDes());
-            this.blocks.add(note);
-            listNotesController.noteDataAccess.insert(note);
-            listNotesController.addNote(note.getTitle(), note.getDescription(), note.isPinned());
+            if (!(editCreateNoteScreen.getFilledTitle().isEmpty())) {
+                Note note = new Note(editCreateNoteScreen.getFilledTitle(), editCreateNoteScreen.getFilledDes());
+                this.blocks.add(note);
+                listNotesController.noteDataAccess.insert(note);
+                listNotesController.addNote(note.getTitle(), note.getDescription(), note.isPinned());
+            }
 
             editCreateNoteScreen.setFilledTitle("");
             editCreateNoteScreen.setFilledDes("");
