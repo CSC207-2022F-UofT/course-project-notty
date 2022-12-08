@@ -17,25 +17,41 @@ See user story list & product development process: https://docs.google.com/docum
 # UI Capture & Explanations 
 
 
-1) Accounts
+1) Accounts\
 The user will first run App.main() in the UI folder, and this welcome screen will pop up,
 prompting the user to decide whether they want to log in or sign up into a Notty account.
-   ![img.png](img.png)
+![img.png](img.png)
 
 If the user wishes to sign up, they will be prompted to this screen to enter a unique username and password.
 If it is a valid combination, user will be prompted to login with the newly created credentials into
 their new account.
 ![img_1.png](img_1.png)
 
-
 If the user wishes to log in, they can click login, and they will be prompted to this screen.
 If the credentials they entered are valid, user will be able to login to their account.
 ![img_2.png](img_2.png)
 
+2) Notes\
 
-2) Notes 
-
-3) Tasks
+3) Tasks\
+In this section of the program the user is able to work
+with categories
+and tasks on todo lists of each day. 
+![img_2.png](images/Tasks_1.png)\
+By clicking on the 'Tasks' Button of the 
+Notes section, the user is able to move to the
+task management system of the program.
+![img_2.png](images/Tasks_2.png)\
+Below is the description of the UI.
+![img_3.png](images/Tasks_3.png)\
+Each of the Categories/Tasks are buttons.\
+To modify Categories, click on it:
+![img_4.png](images/Tasks_4.png)\
+To modify Tasks, click on it:
+![img_5.png](images/Tasks_5.png)\
+To go back to Notes section, click on 'go back to Notes'
+on the bottom right corner.
+![img_6.png](images/Tasks_6.png)
 
 # Testing 
 We have unit tests for our application to make sure there is no regression during new changes. They cover different parts of our application. Some of them interact with the database and some tests are basic (testing of constructors, getters & setters).
