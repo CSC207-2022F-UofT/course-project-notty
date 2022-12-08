@@ -24,7 +24,6 @@ public class LogInTest {
         Assertions.assertFalse(logUseCase.checkAccount());
     }
 
-
     @Test
     public void LogInCredentialsTrue() {
         LogInScreen.usernameLogged = "kae";
