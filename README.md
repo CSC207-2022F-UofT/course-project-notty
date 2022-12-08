@@ -32,7 +32,6 @@ If the user wishes to log in, they can click login, and they will be prompted to
 If the credentials they entered are valid, user will be able to login to their account.
 ![img_2.png](img_2.png)
 
-   
 
 2) Notes 
 
