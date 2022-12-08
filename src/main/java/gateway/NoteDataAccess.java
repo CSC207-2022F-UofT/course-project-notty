@@ -116,17 +116,18 @@ public class NoteDataAccess implements INoteDataAccess{
     }
 
     public void pinUnpin(String note, boolean isPinned) {
+        // this method takes in the title of the note and sets its isPinned value to what the boolan isPinned specifies
         Connection conn=null;
         PreparedStatement pstmt=null;
         String sql= "UPDATE notes SET " +
-                "isPinned = ?" +
+                "isPinned = ?" +        // gets the isPinned column of the database for the specified title
                 " WHERE title = ?";
 
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
-            pstmt.setBoolean(1, isPinned);
-            pstmt.setString(2, note);
+            pstmt.setBoolean(1, isPinned);  // sets the isPinned column of the database for the specified title
+            pstmt.setString(2, note);       // title of the note for which isPinned is going to be changed
 
             pstmt.executeUpdate();
         } catch (SQLException e) {

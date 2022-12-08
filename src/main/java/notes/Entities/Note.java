@@ -32,5 +32,4 @@ public class Note {
     public boolean isPinned() {
         return this.isPinned;
     }       // returns if note is pinned or not
-
 }

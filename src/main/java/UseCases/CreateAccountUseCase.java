@@ -16,18 +16,7 @@ public class CreateAccountUseCase {
         this.InputPassword = password;
     }
 
-    //public void createUser(String InputUsername, String InputPassword) {
-    //User CheckThisUser = new User(InputUsername, InputPassword);
-    //userManagement.createUser(CheckThisUser);
-    //}
 
-
-    //public void createCredential(String InputUsername, String InputPassword) {
-    //Credentials CheckThisCredential = new Credentials(InputUsername, InputPassword);
-    //}
-
-    // if account with specified username does not exist, we create an account.
-    // We need to merge presenters with this.
     public boolean createAccount() {
         if (!this.checkAccountExists())
         {

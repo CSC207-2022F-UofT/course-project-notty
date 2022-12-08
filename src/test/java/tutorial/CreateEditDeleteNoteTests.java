@@ -2,7 +2,7 @@ package tutorial;
 
 import UI.LogInScreen;
 import gateway.NoteDataAccess;
-import notes.Note;
+import notes.Entities.Note;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
