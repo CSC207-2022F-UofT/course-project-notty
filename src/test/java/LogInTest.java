@@ -1,20 +1,20 @@
-//import UI.LogInScreen;
-//import UI.SignUpScreen;
-//import UI.WelcomeScreen;
-//import entities.User;
-//import entities.Account;
-//import entities.Credentials;
-//import UseCases.CreateAccountUseCase;
-//import UseCases.LogInUseCase;
-//
-//
-//import gateway.NoteDataAccess;
-//import gateway.UserManagement;
-//import notes.Note;
-//import org.junit.jupiter.api.Assertions;
-//import org.junit.jupiter.api.Test;
-//
-//public class LogInTest {
+import UI.LogInScreen;
+import UI.SignUpScreen;
+import UI.WelcomeScreen;
+import entities.User;
+import entities.Account;
+import entities.Credentials;
+import UseCases.CreateAccountUseCase;
+import UseCases.LogInUseCase;
+
+
+import gateway.NoteDataAccess;
+import gateway.UserManagement;
+import notes.Note;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
+public class LogInTest {
 //
 //    @Test
 //    public void LogInCredentialsFalse() {
@@ -34,14 +34,4 @@
 //        LogInUseCase logUseCase = new LogInUseCase(LogInScreen.usernameLogged, LogInScreen.passwordLogged);
 //        Assertions.assertTrue(logUseCase.checkAccount());
 //    }
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//}
-//
+}
