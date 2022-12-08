@@ -1,4 +1,7 @@
-package notes;
+package notes.UseCases;
+
+import notes.ListNotesController;
+import notes.Pinnable;
 
 import javax.swing.*;
 import java.awt.*;

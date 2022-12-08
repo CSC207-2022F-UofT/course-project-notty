@@ -1,4 +1,7 @@
-package notes;
+package notes.Screens;
+
+import notes.ListNotesController;
+import notes.UseCases.EditCreateUseCase;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -12,20 +15,15 @@ public class EditCreateNoteScreen extends JPanel {
     public static int buttonSize = 2;
     public static JTextField[] fields;
     public static int fieldSize=2;
-    private final JLayeredPane layeredPane;
     String filledTitle = "";
     String filledDes = "";
     private final ActionListener actionListener;
-    public EditCreateNoteScreen(boolean visibility, ListNotesController listNotesController, JLayeredPane layeredPane){
+    public EditCreateNoteScreen( ListNotesController listNotesController){
         this.actionListener = new EditCreateUseCase(listNotesController, this);
-        this.layeredPane = layeredPane;
-        layeredPane.add(this, 2);
-        layeredPane.getComponent(0).setVisible(false);
 
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        //setBackground(Color.WHITE);
-        setBounds(28, 27, 270, 375);
-        setVisible(visibility);
+        setBackground(Color.WHITE);
+        setBounds(0, 0, 270, 375);
 
         buttons=new JButton[buttonSize];
         fields=new JTextField[fieldSize];

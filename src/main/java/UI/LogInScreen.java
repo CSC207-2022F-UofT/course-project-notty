@@ -1,7 +1,7 @@
 package UI;
 
 import Controller.LogInController;
-import notes.NotesScreen;
+import notes.Screens.NotesScreen;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;

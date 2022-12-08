@@ -1,5 +1,6 @@
-package notes;
+package notes.Screens;
 
+import notes.UseCases.NewNoteUseCase;
 import tasks.TasksUI;
 
 import javax.swing.*;
@@ -16,7 +17,7 @@ public class ListNotesScreen extends JPanel {
     private final JLayeredPane layeredPane;
     private final JPanel noteBlockPanel;
     private final JPanel pinnedBlocks;
-    private static JFrame frame;
+    private JFrame frame;
 
     public ListNotesScreen(boolean visibility, JFrame frame){
         this.frame = frame;
@@ -24,11 +25,9 @@ public class ListNotesScreen extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         setBackground(Color.WHITE);
         setSize(280, 400);
-        setVisible(visibility);
 ;
         JPanel buttonPanel = new JPanel(new FlowLayout());
 
-//        this.add(Box.createVerticalGlue());
         JButton newNoteButton = new JButton("New Note");
         buttonDesign(newNoteButton, 100, 200);
         newNoteButton.setBorder(new CompoundBorder(
@@ -36,7 +35,7 @@ public class ListNotesScreen extends JPanel {
                 new EmptyBorder(10, 10, 10, 10)
 
         ));
-        newNoteButton.addActionListener(new NewNoteUseCase(this.layeredPane, this));
+        newNoteButton.addActionListener(new NewNoteUseCase(layeredPane, this));
         buttonPanel.add(newNoteButton);
 
         JButton tasksButton = new JButton("Tasks");
@@ -72,8 +71,10 @@ public class ListNotesScreen extends JPanel {
         pinnedBlocks.setAlignmentX(CENTER_ALIGNMENT);
         pinnedBlocks.setVisible(false);
         pinnedBlocks.setOpaque(false);
+
+        setVisible(visibility);
     }
-    private static class ListenForTaskButton implements ActionListener {
+    private class ListenForTaskButton implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             SwingUtilities.invokeLater(TasksUI::new);
@@ -91,9 +92,7 @@ public class ListNotesScreen extends JPanel {
         button.setForeground(Color.white);
     }
 
-    public void hideScreen(){
-        setVisible(false);
-    }
+    public void hideScreen(){setVisible(false);}
 
     public void addNoteBlock(JPanel note, int index, boolean isPinned){
 

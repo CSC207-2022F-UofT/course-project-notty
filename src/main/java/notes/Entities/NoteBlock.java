@@ -1,4 +1,9 @@
-package notes;
+package notes.Entities;
+
+import notes.ListNotesController;
+import notes.UseCases.DeleteNoteUseCase;
+import notes.UseCases.EditNoteUseCase;
+import notes.UseCases.PinUnpinUseCase;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
@@ -91,7 +96,7 @@ public class NoteBlock extends JPanel {
     }
 
     private JPanel buttonLayout(ArrayList<JButton> buttons){
-        // returns a panel for the buttons so they are side by side and not stacked to one another
+        // returns a panel for the buttons, so they are side by side and not stacked to one another
 
         JPanel panel = new JPanel();
         panel.setLayout(new FlowLayout());

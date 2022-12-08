@@ -1,4 +1,7 @@
-package notes;
+package notes.UseCases;
+
+import notes.Screens.EditCreateNoteScreen;
+import notes.ListNotesController;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -21,10 +24,7 @@ public class EditNoteUseCase implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         listNotesController.removeNoteFromView(title);
         listNotesController.getPanel().deleteNoteBlock(panel);
-        listNotesController.getPanel().setVisible(false);
-
-        EditCreateNoteScreen editCreateNoteScreen = new EditCreateNoteScreen(true, listNotesController,
-                listNotesController.getPanel().getLayeredPane());
-        editCreateNoteScreen.showScreen(title, desc);
+        listNotesController.getPanel().getLayeredPane().getComponent(0).setVisible(false);
+        listNotesController.getPanel().getLayeredPane().getComponent(1).setVisible(true);
     }
 }

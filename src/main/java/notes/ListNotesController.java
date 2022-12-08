@@ -1,5 +1,8 @@
 package notes;
 import gateway.INoteDataAccess;
+import notes.Entities.Note;
+import notes.Entities.NoteBlock;
+import notes.Screens.ListNotesScreen;
 
 import javax.swing.*;
 import java.util.ArrayList;

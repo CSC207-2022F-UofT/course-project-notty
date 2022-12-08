@@ -1,6 +1,7 @@
 package notes;
 
 import UI.LogInScreen;
+import notes.Entities.Note;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;

@@ -1,4 +1,8 @@
-package notes;
+package notes.UseCases;
+
+import notes.Screens.EditCreateNoteScreen;
+import notes.ListNotesController;
+import notes.Entities.Note;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -14,7 +18,6 @@ public class EditCreateUseCase implements ActionListener {
         this.editCreateNoteScreen = editCreateNoteScreen;
         this.listNotesController = listNotesController;
         this.blocks = listNotesController.blocks;
-        //this.editCreateNoteScreen.hideLayer();
     }
 
     @Override
@@ -34,12 +37,15 @@ public class EditCreateUseCase implements ActionListener {
 
                 editCreateNoteScreen.setFilledTitle("");
                 editCreateNoteScreen.setFilledDes("");
-                editCreateNoteScreen.hideScreen();
+                listNotesController.getPanel().getLayeredPane().getComponent(1).setVisible(false);
 
                 listNotesController.addNote(note.getTitle(), note.getDescription(), note.isPinned());
                 listNotesController.getPanel().revalidate();
                 listNotesController.getPanel().repaint();
-                listNotesController.getPanel().setVisible(true);
+
+                listNotesController.getPanel().getLayeredPane().getComponent(0).setVisible(true);
+
+
             }
             else{
                 JOptionPane.showMessageDialog(editCreateNoteScreen, "Please fill in all fields!","Warning", JOptionPane.WARNING_MESSAGE);
@@ -51,9 +57,9 @@ public class EditCreateUseCase implements ActionListener {
             editCreateNoteScreen.setFilledDes("");
             editCreateNoteScreen.hideScreen();
 
+            listNotesController.getPanel().setVisible(true);
             listNotesController.getPanel().revalidate();
             listNotesController.getPanel().repaint();
-            listNotesController.getPanel().setVisible(true);
         }
     }
 }

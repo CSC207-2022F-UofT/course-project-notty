@@ -1,6 +1,6 @@
 package gateway;
 
-import notes.Note;
+import notes.Entities.Note;
 
 import java.util.ArrayList;
 
