@@ -21,12 +21,12 @@ See user story list & product development process: https://docs.google.com/docum
 The user will first run App.main() in the UI folder, and this welcome screen will pop up,
 prompting the user to decide whether they want to log in or sign up into a Notty account.
 
-![](/Users/dhanyajagannathan/IdeaProjects/course-project-notty_finalone/images/Screen Shot 2022-12-04 at 11.12.32 PM.png)
+
 
 If the user wishes to sign up, they will be prompted to this screen to enter a unique username and password.
 If it is a valid combination, user will be prompted to login with the newly created credentials into
 their new account.
-![](/Users/dhanyajagannathan/IdeaProjects/course-project-notty_finalone/images/SignUp Screen.png)
+
 
 If the user wishes to log in, they can click login, and they will be prompted to this screen.
 If the credentials they entered are valid, user will be able to login to their account.
