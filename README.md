@@ -1,39 +1,63 @@
-# Project Template
+See presentation of the product here: [Presentation.pptx](https://utoronto-my.sharepoint.com/:p:/r/personal/kateryna_kondratiuk_mail_utoronto_ca/Documents/Presentation.pptx?d=wdcbf948c4d3c468997be0e8c40a652ca&csf=1&web=1&e=sCBrEO)
 
-This is a template repository for CSC 207 projects. 
-This repository contains starter code for a gradle project.
-It also contains workflow documents that give instructions on how to manage your Github repository and how to use Github Projects for efficient collaboration.
+See user story list & product development process: https://docs.google.com/document/d/1WMoYAnK_rc7lyZ81jEHgc-kMHJjea3rPC5QUTU0X9Rc/edit?usp=sharing
+# Specifications
+1. The user is able to create their own account to manage notes and tasks. When the user is authorized, the program allows them to make use of the following features.
+2. Note Taking part includes creating a note, editing, and removing it. Also, user can label and search each note by title or description. Last but no least, we can pin and unpin notes, so that important information is never lost.  
+3. Task Managing includes creating a task, editing, categorizing, marking, and deleting the task. The tasks are shown as a calendar so that users can intuitively figure out how much they have achieved.
+ 
+# How to run Notty
 
-## Checklist For Your Project
-- [ ] Verify the correct settings for your project repository
-- [ ] Set up Github Projects
-- [ ] Create the implementation plan using issues and Github Projects
-- [ ] Create deveopment branches for your features
-- [ ] Use pull requests to merge finished features into main branch
-- [ ] Conduct code reviews
+1. Clone and open the repository in IntelliJ.
+2. Setup the JDK.
+3. Select amazon/coretto 11 java 11.
+4. In the UI folder, right click on the App class.
+5. Click on Run 'App.main()'
 
-**If your team has trouble with any of these steps, please ask on Piazza. For example, with how GitHub Classroom works, your team *may* not have permissions to do some of the first few steps, in which case we'll post alternative instructions as needed.**
+# UI Capture & Explanations 
 
-## Workflow Documents
 
-* Github Workflow: Please refer to the workflow that was introduced in the first lab. You should follow this when working on your code. The following document provides additional details too.
+1) Accounts\
+The user will first run App.main() in the UI folder, and this welcome screen will pop up,
+prompting the user to decide whether they want to log in or sign up into a Notty account.
+![img.png](img.png)
 
-* [Project Planning and Development Guide](project_plan_dev.md): This document helps you to understand how to create and maintain a project plan for your class project. **This document helps you to complete the Implementation Plan Milestone.**
+If the user wishes to sign up, they will be prompted to this screen to enter a unique username and password.
+If it is a valid combination, user will be prompted to login with the newly created credentials into
+their new account.
+![image](https://user-images.githubusercontent.com/113145355/206586927-9219442a-596b-48a7-b446-5b2ddbddf12d.png)
 
-## Gradle Project
-Import this project into your Intellij editor. It should automatically recognise this as a gradle repository.
-The starter code was built using SDK version 11.0.1. Ensure that you are using this version for this project. (You can, of course, change the SDK version as per your requirement if your team has all agreed to use a different version)
+If the user wishes to log in, they can click login, and they will be prompted to this screen.
+If the credentials they entered are valid, user will be able to login to their account.
+![image](https://user-images.githubusercontent.com/113145355/206586744-1bf44e57-83a7-472c-afa3-5f1b08fc865e.png)
 
-You have been provided with two starter files for demonstration: HelloWorld and HelloWorldTest.
 
-You will find HelloWorld in `src/main/java/tutorial` directory. Right click on the HelloWorld file and click on `Run HelloWorld.main()`.
-This should run the program and print on your console.
+2) Notes\
 
-You will find HelloWorldTest in `src/test/java/tutorial` directory. Right click on the HelloWorldTest file and click on `Run HelloWorldTest`.
-All tests should pass. Your team can remove this sample of how testing works once you start adding your project code to the repo.
+3) Tasks\
+In this section of the program the user is able to work
+with categories
+and tasks on todo lists of each day. 
+![img_2.png](images/Tasks_1.png)\
+By clicking on the 'Tasks' Button of the 
+Notes section, the user is able to move to the
+task management system of the program.
+![img_2.png](images/Tasks_2.png)\
+Below is the description of the UI.
+![img_3.png](images/Tasks_3.png)\
+Each of the Categories/Tasks are buttons.\
+To modify Categories, click on it:
+![img_4.png](images/Tasks_4.png)\
+To modify Tasks, click on it:
+![img_5.png](images/Tasks_5.png)\
+To go back to Notes section, click on 'go back to Notes'
+on the bottom right corner.
+![img_6.png](images/Tasks_6.png)
 
-Moving forward, we expect you to maintain this project structure. You *should* use Gradle as the build environment, but it is fine if your team prefers to use something else -- just remove the gradle files and push your preferred project setup. Assuming you stick with Gradle, your source code should go into `src/main/java` (you can keep creating more subdirectories as per your project requirement). Every source class can auto-generate a test file for you. For example, open HelloWorld.java file and click on the `HelloWorld` variable as shown in the image below. You should see an option `Generate` and on clicking this your should see an option `Test`. Clicking on this will generate a JUnit test file for `HelloWorld` class. This was used to generate the `HelloWorldTest`.
+# Testing 
+We have unit tests for our application to make sure there is no regression during new changes. They cover different parts of our application. Some of them interact with the database and some tests are basic (testing of constructors, getters & setters).
+Possible improvement in this area: 
+1) add a separate database for testing
+2) integration & e2e testing  
 
-![image](https://user-images.githubusercontent.com/5333020/196066655-d3c97bf4-fdbd-46b0-b6ae-aeb8dbcf351d.png)
-
-You can create another simple class and try generating a test for this class.
+You can view how to launch tests & examples here: https://www.youtube.com/watch?v=t1-Z-Vs0CwQ

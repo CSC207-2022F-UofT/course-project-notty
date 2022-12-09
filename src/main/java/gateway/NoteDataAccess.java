@@ -1,7 +1,7 @@
 package gateway;
 
 import UI.LogInScreen;
-import notes.Note;
+import notes.Entities.Note;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ public class NoteDataAccess implements INoteDataAccess{
     {
         Connection conn=null;
         PreparedStatement pstmt=null;
-        String sql= "INSERT INTO notes(title, description, isPinned, dateTime, username) VALUES(?, ?, ?, ?, ?)";
+        String sql= "INSERT INTO notes(title, description, isPinned, username) VALUES(?, ?, ?, ?)";
 
         try {
             conn= DBConnection.connect();
@@ -20,8 +20,7 @@ public class NoteDataAccess implements INoteDataAccess{
             pstmt.setString(1, note.getTitle());
             pstmt.setString(2, note.getDescription());
             pstmt.setBoolean(3, note.isPinned());
-            pstmt.setString(4, note.getDateTime());
-            pstmt.setString(5, LogInScreen.usernameLogged);
+            pstmt.setString(4, LogInScreen.usernameLogged);
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
@@ -92,7 +91,7 @@ public class NoteDataAccess implements INoteDataAccess{
         ArrayList<Note> notes=null;
         Connection conn=null;
         Statement st=null;
-        ResultSet rs=null;        String sql= "SELECT id, title, description, isPinned, dateTime FROM notes WHERE username='"+LogInScreen.usernameLogged + "'";
+        ResultSet rs=null;        String sql= "SELECT id, title, description, isPinned FROM notes WHERE username='"+LogInScreen.usernameLogged + "'";
         try {
             conn=DBConnection.connect();
             st=conn.createStatement();
@@ -100,7 +99,7 @@ public class NoteDataAccess implements INoteDataAccess{
 
             while(rs.next()) {
                 blocks.add(new Note(rs.getString("title"), rs.getString("description"),
-                        rs.getBoolean("isPinned"), rs.getString("dateTime")));
+                        rs.getBoolean("isPinned")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -117,17 +116,18 @@ public class NoteDataAccess implements INoteDataAccess{
     }
 
     public void pinUnpin(String note, boolean isPinned) {
+        // this method takes in the title of the note and sets its isPinned value to what the boolan isPinned specifies
         Connection conn=null;
         PreparedStatement pstmt=null;
         String sql= "UPDATE notes SET " +
-                "isPinned = ?" +
+                "isPinned = ?" +        // gets the isPinned column of the database for the specified title
                 " WHERE title = ?";
 
         try {
             conn= DBConnection.connect();
             pstmt=conn.prepareStatement(sql);
-            pstmt.setBoolean(1, isPinned);
-            pstmt.setString(2, note);
+            pstmt.setBoolean(1, isPinned);  // sets the isPinned column of the database for the specified title
+            pstmt.setString(2, note);       // title of the note for which isPinned is going to be changed
 
             pstmt.executeUpdate();
         } catch (SQLException e) {
