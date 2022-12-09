@@ -1,6 +1,7 @@
 package notes;
 
 import UI.LogInScreen;
+import notes.Entities.Note;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class PinDatabaseTest {
 
         Assertions.assertFalse(noteFromDatabase.isPinned());
         noteDataAccess.delete(noteFromDatabase.getTitle());
-    }
+   }
 
     @Test
     public void notePinnedInDatabase() {

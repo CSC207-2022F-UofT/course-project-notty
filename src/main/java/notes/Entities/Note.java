@@ -1,4 +1,4 @@
-package notes;
+package notes.Entities;
 
 public class Note {
     private final String title;               // title of the note

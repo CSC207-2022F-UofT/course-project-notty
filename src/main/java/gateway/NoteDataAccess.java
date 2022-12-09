@@ -1,7 +1,7 @@
 package gateway;
 
 import UI.LogInScreen;
-import notes.Note;
+import notes.Entities.Note;
 
 import java.sql.*;
 import java.util.ArrayList;

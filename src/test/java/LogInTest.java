@@ -10,7 +10,6 @@ import UseCases.LogInUseCase;
 
 import gateway.NoteDataAccess;
 import gateway.UserManagement;
-import notes.Note;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

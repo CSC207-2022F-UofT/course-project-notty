@@ -9,11 +9,7 @@ public class App {
 
     public static void main(String[] args) {
         database=new DBConnection();
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                new WelcomeScreen();
-            }
-        });
+        SwingUtilities.invokeLater(WelcomeScreen::new);
     }
 }
 

@@ -1,5 +1,6 @@
 package notes;
 
+import notes.Entities.Note;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
