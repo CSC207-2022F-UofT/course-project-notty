@@ -33,6 +33,25 @@ If the credentials they entered are valid, user will be able to login to their a
 
 
 2) Notes\
+In this section of the application the user is able to work 
+with notes.
+![img_2.png](images/Note1.png)\
+By clicking on the 'New note' Button of the Notes section,
+the user is moving to the page for creating notes.
+![img_2.png](images/Note2.png)\
+Here, they can create note by adding a title and a description.
+And click on the button 'Save'.
+![img_2.png](images/Note3.png)\
+After it, they return to the previous page and are able to edit the note.
+The editing is the same creating.
+![img_2.png](images/Note4.png)\
+It is also possible to delete notes by clicking at the appropriate button.
+![img_2.png](images/Note5.png)\
+The another feature is pinning notes.
+![img_2.png](images/Note6.png)\
+When the button 'Pin' is clicked, the block has changed the view and the button 'Pin' changed to 'Unpin'.
+To unpin the note, you can click on the 'Unpin'
+![img_2.png](images/Note7.png)\
 
 3) Tasks\
 In this section of the program the user is able to work
