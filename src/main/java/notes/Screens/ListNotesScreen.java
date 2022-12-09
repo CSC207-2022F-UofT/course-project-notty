@@ -28,6 +28,7 @@ public class ListNotesScreen extends JPanel {
 
         JPanel buttonPanel = new JPanel(new FlowLayout());      // creates a panel for buttons, so they are side by side
 
+
         // create a new note button
         JButton newNoteButton = new JButton("New Note");
         buttonDesign(newNoteButton, 100, 200);

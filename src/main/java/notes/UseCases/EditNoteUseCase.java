@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class EditNoteUseCase implements ActionListener {
-    // this clss is responsible for removing a note to be deleted from the view and redirecting the user to the edit screen
+    // this class is responsible for removing a note to be deleted from the view and redirecting the user to the edit screen
     private final ListNotesController listNotesController;
     private final String title;
     private final JPanel panel;
