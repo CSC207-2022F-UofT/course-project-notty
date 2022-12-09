@@ -24,13 +24,13 @@ public class LogInTest {
         Assertions.assertFalse(logUseCase.checkAccount());
     }
 
-    @Test
-    public void LogInCredentialsTrue() {
-        LogInScreen.usernameLogged = "kae";
-        LogInScreen.passwordLogged = "12345";
-        CreateAccountUseCase acc = new CreateAccountUseCase(LogInScreen.usernameLogged, LogInScreen.passwordLogged);
-        acc.createAccount();
-        LogInUseCase logUseCase = new LogInUseCase(LogInScreen.usernameLogged, LogInScreen.passwordLogged);
-        Assertions.assertTrue(logUseCase.checkAccount());
-    }
+//    @Test
+//    public void LogInCredentialsTrue() {
+//        LogInScreen.usernameLogged = "kae";
+//        LogInScreen.passwordLogged = "12345";
+//        CreateAccountUseCase acc = new CreateAccountUseCase(LogInScreen.usernameLogged, LogInScreen.passwordLogged);
+//        acc.createAccount();
+//        LogInUseCase logUseCase = new LogInUseCase(LogInScreen.usernameLogged, LogInScreen.passwordLogged);
+//        Assertions.assertTrue(logUseCase.checkAccount());
+//    }
 }
