@@ -15,23 +15,23 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class LogInTest {
-//
-//    @Test
-//    public void LogInCredentialsFalse() {
-//        LogInScreen.usernameLogged = "kateee";
-//        LogInScreen.passwordLogged = "12345";
-//        LogInUseCase logUseCase = new LogInUseCase(LogInScreen.usernameLogged, LogInScreen.passwordLogged);
-//        Assertions.assertFalse(logUseCase.checkAccount());
-//    }
-//
-//
-//    @Test
-//    public void LogInCredentialsTrue() {
-//        LogInScreen.usernameLogged = "kae";
-//        LogInScreen.passwordLogged = "12345";
-//        CreateAccountUseCase acc = new CreateAccountUseCase(LogInScreen.usernameLogged, LogInScreen.passwordLogged);
-//        acc.createAccount();
-//        LogInUseCase logUseCase = new LogInUseCase(LogInScreen.usernameLogged, LogInScreen.passwordLogged);
-//        Assertions.assertTrue(logUseCase.checkAccount());
-//    }
+
+    @Test
+    public void LogInCredentialsFalse() {
+        LogInScreen.usernameLogged = "kateee";
+        LogInScreen.passwordLogged = "12345";
+        LogInUseCase logUseCase = new LogInUseCase(LogInScreen.usernameLogged, LogInScreen.passwordLogged);
+        Assertions.assertFalse(logUseCase.checkAccount());
+    }
+
+
+    @Test
+    public void LogInCredentialsTrue() {
+        LogInScreen.usernameLogged = "kae";
+        LogInScreen.passwordLogged = "12345";
+        CreateAccountUseCase acc = new CreateAccountUseCase(LogInScreen.usernameLogged, LogInScreen.passwordLogged);
+        acc.createAccount();
+        LogInUseCase logUseCase = new LogInUseCase(LogInScreen.usernameLogged, LogInScreen.passwordLogged);
+        Assertions.assertTrue(logUseCase.checkAccount());
+    }
 }
